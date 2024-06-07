@@ -124,11 +124,23 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <div class="col-2">
+                                 <img src="{{ captcha_src() }}" alt="captcha" class="captcha-img" data-refresh-config="default">
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="posisi" placeholder="Captcha" required>
+                            </div>
+                        </div>
+
+                       
                     
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Save</button>
+                        <button type="submit" class="btn btn-info">Simpan</button>
                         
                     </div>
                     <!-- /.card-footer -->
