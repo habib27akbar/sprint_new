@@ -35,14 +35,14 @@
                         <h5>Akun Pelanggan</h5>
                         <hr style="border:1px solid blue;">
                         <div class="form-group row">
-                            <label for="id_perusahaan" class="col-sm-2 col-form-label">ID Perusahaan</label>
-                            <div class="col-sm-10">
+                            <label for="id_perusahaan" class="col-sm-3 col-form-label">ID Perusahaan</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" onclick="checkID()" id="id_perusahaan" placeholder="ID Perusahaan" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Jenis Badan Usaha</label>
-                            <div class="col-sm-10">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Jenis Badan Usaha</label>
+                            <div class="col-sm-9">
                                 <select name="jenis_badan_usaha" class="form-control" required>
                                     <option value="">--</option>
                                     <option value="UD">UD</option>
@@ -58,15 +58,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="nama_perusahaan" class="col-sm-2 col-form-label">Nama Perusahaan Produsen</label>
-                            <div class="col-sm-10">
+                            <label for="nama_perusahaan" class="col-sm-3 col-form-label">Nama Perusahaan Produsen</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="nama_perusahaan" placeholder="Nama Perusahaan Produsen" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="ln_dn" class="col-sm-2 col-form-label">Jenis Produsen</label>
-                            <div class="col-sm-10">
+                            <label for="ln_dn" class="col-sm-3 col-form-label">Jenis Produsen</label>
+                            <div class="col-sm-9">
                                 <select name="ln_dn" class="form-control" required>
                                     <option value="">--</option>
                                     <option value="LN">Luar Negeri</option>
@@ -113,7 +113,7 @@
                         <div class="form-group row">
                             <label for="nama" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-4">
-                                <div class="input-group mb-3">
+                                <div class="input-group">
                                     <input id="inputPassword" type="password" name="password" autocomplete="on" class="form-control" placeholder="Password" required>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -129,7 +129,7 @@
                         <div class="form-group row">
                             <div class="col-2">
                                  <img src="{{ captcha_src() }}" alt="captcha" class="captcha-img" data-refresh-config="default">
-                                 <i id="refresh-captcha" class="fas fa-sync-alt"></i>
+                                 <i style="margin-left: 10px;" id="refresh-captcha" class="fas fa-sync-alt"></i>
                                  
                             </div>
                             
