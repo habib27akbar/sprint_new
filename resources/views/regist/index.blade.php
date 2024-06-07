@@ -124,10 +124,13 @@
                                 </div>
                             </div>
                         </div>
+                        
 
                         <div class="form-group row">
                             <div class="col-2">
                                  <img src="{{ captcha_src() }}" alt="captcha" class="captcha-img" data-refresh-config="default">
+                                 <i id="refresh-captcha" class="fas fa-sync-alt"></i>
+                                 
                             </div>
                             
                             <div class="col-sm-4">
@@ -218,5 +221,11 @@
                 z.className = "fas fa-eye";
             }
         }
+
+        document.getElementById('refresh-captcha').onclick = function(e) {
+            e.preventDefault();
+            var captchaImage = document.querySelector('.captcha-img');
+            captchaImage.src = 'http://localhost/sprint_new/captcha?rnd=' + Math.random();
+        };
     </script>
   @endsection
