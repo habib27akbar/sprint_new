@@ -14,7 +14,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
-  <!------------------------ Favicon ----------------------------->
+  <!------------------------ Favicon ------------------------------>
 	<link rel="icon" href="{{ asset('new-kemenperin.ico') }}">
 	
 	<!-------------------------------------------------------------------->
