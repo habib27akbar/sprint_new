@@ -109,6 +109,16 @@
                                 <input type="email" class="form-control" id="posisi" placeholder="Email" required>
                             </div>
                         </div>
+                        <br/>
+                        <h5>Registrasi User</h5>
+                        <hr style="border:1px solid blue;">
+
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-2 col-form-label">Username</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="nama" class="col-sm-2 col-form-label">Password</label>
