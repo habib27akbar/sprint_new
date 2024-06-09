@@ -36,10 +36,16 @@
                 <b>PBF</b>
             </div> -->
             <div class="card-body">
-                @include('include.admin.alert')
+               
                 <p class="login-box-msg">Sign in to start your session</p>
 
                 <form action="{{ route('authenticate') }}" method="POST">
+                    @include('include.admin.alert')
+                    @if ($errors->has('captcha'))
+                        <div class="alert alert-danger">
+                            Captcha Salah !
+                        </div>
+                    @endif
                     @csrf
                     <div class="input-group mb-3">
                         <input id="first" type="text" name="kode_pengguna" class="form-control" placeholder="Username" required>
