@@ -6,7 +6,7 @@
         <img src="{{ asset('img/logo-391-kemenperin-ri.png') }}" alt="SPRINT" style="width:50%;">
       </center>
       
-      {{-- <span class="brand-text font-weight-light">BKN</span> --}}
+     
     </a>
 
     <!-- Sidebar -->

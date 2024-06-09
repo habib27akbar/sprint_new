@@ -17,9 +17,9 @@ use App\Http\Controllers\RegistController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Auth::routes();
 
@@ -33,5 +33,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('captcha', 'CaptchaController@showCaptcha');
 Route::resource('regist', RegistController::class);
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });;
