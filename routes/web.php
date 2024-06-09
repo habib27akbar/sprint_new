@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegistController;
 
 /*
@@ -16,8 +18,11 @@ use App\Http\Controllers\RegistController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Auth::routes();
+
 
 Route::get('/login', [AuthController::class, 'form_login'])->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('authenticate');
@@ -27,3 +32,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('captcha', 'CaptchaController@showCaptcha');
 Route::resource('regist', RegistController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});;

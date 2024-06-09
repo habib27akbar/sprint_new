@@ -16,12 +16,18 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('kode_pengguna', 'password_pengguna');
+
+        $request->validate([
+
+            'captcha' => 'required|captcha'
+        ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/home');
         }
+
 
         return back()->with('alert-danger', 'Login Failed!');
     }
@@ -35,11 +41,12 @@ class AuthController extends Controller
     {
 
         $user = Pengguna::create([
-            'id_unit_kerja' => $request->id_unit_kerja,
+            'id_unit_kerja' => 1,
             'kode_pengguna' => $request->kode_pengguna,
             'nama_pengguna' => $request->nama_pengguna,
             'email' => $request->email,
             'password_pengguna' => Hash::make($request->password_pengguna),
+            'status' => 1
         ]);
 
         Auth::login($user);

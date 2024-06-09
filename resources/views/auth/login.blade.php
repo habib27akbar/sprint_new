@@ -42,11 +42,11 @@
                 <form action="{{ route('authenticate') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input id="first" type="username" name="user" class="form-control" placeholder="Username" required>
+                        <input id="first" type="text" name="kode_pengguna" class="form-control" placeholder="Username" required>
 
                     </div>
                     <div class="input-group mb-3">
-                        <input id="inputPassword" type="password" name="password" autocomplete="on" class="form-control" placeholder="Password" required>
+                        <input id="inputPassword" type="password" name="password_pengguna" autocomplete="on" class="form-control" placeholder="Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i onclick="myFunction()" id="iconPassword" class="fas fa-eye"></i>

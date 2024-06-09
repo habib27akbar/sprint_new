@@ -27,7 +27,7 @@
      <form action="{{ route('register') }}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Full name">
+          <input type="text" class="form-control" name="nama_pengguna" placeholder="Full name">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="username" placeholder="Username For Log In">
+          <input type="text" class="form-control" name="kode_pengguna" placeholder="Username For Log In">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" name="password_pengguna" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
