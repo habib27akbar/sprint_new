@@ -64,9 +64,9 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            {{-- <div class="icheck-primary">
-                               <a href="forgot-password.html">Lupa Password ?</a>
-                            </div> --}}
+                            
+                               <a href="{{ route('login') }}" class="btn btn-default">Kembali</a>
+                            
                         </div>
                         <!-- /.col -->
                         
