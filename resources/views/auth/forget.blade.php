@@ -39,7 +39,7 @@
                
                 <p class="login-box-msg">Lupa Password</p>
 
-                <form action="{{ route('authenticate') }}" method="POST">
+                <form action="#" method="POST">
                     @include('include.admin.alert')
                     @if ($errors->has('captcha'))
                         <div class="alert alert-danger">
@@ -48,7 +48,7 @@
                     @endif
                     @csrf
                     <div class="input-group mb-3">
-                        <input id="first" type="text" name="kode_pengguna" class="form-control" placeholder="Email Admin" required>
+                        <input id="first" type="text" name="email" class="form-control" placeholder="Email Admin" required>
 
                     </div>
                     
@@ -63,11 +63,11 @@
                         
                     </div>
                     <div class="row">
-                        {{-- <div class="col-8">
-                            <div class="icheck-primary">
+                        <div class="col-8">
+                            {{-- <div class="icheck-primary">
                                <a href="forgot-password.html">Lupa Password ?</a>
-                            </div>
-                        </div> --}}
+                            </div> --}}
+                        </div>
                         <!-- /.col -->
                         
                         <div class="col-4">
