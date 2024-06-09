@@ -27,6 +27,7 @@ Auth::routes();
 Route::get('/login', [AuthController::class, 'form_login'])->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('authenticate');
 Route::get('/register', [AuthController::class, 'form_regist']);
+Route::get('/forget', [AuthController::class, 'forget'])->name('forget');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

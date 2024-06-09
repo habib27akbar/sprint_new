@@ -37,7 +37,7 @@
             </div> -->
             <div class="card-body">
                
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Lupa Password</p>
 
                 <form action="{{ route('authenticate') }}" method="POST">
                     @include('include.admin.alert')
@@ -48,18 +48,10 @@
                     @endif
                     @csrf
                     <div class="input-group mb-3">
-                        <input id="first" type="text" name="kode_pengguna" class="form-control" placeholder="Username" required>
+                        <input id="first" type="text" name="kode_pengguna" class="form-control" placeholder="Email Admin" required>
 
                     </div>
-                    <div class="input-group mb-3">
-                        <input id="inputPassword" type="password" name="password" autocomplete="on" class="form-control" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <i onclick="myFunction()" id="iconPassword" class="fas fa-eye"></i>
-                                <!-- <span class="fas fa-lock"></span> -->
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             
@@ -71,16 +63,16 @@
                         
                     </div>
                     <div class="row">
-                        <div class="col-8">
+                        {{-- <div class="col-8">
                             <div class="icheck-primary">
-                               <a href="{{ route('forget') }}">Lupa Password ?</a>
+                               <a href="forgot-password.html">Lupa Password ?</a>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- /.col -->
                         
                         <div class="col-4">
                             
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Simpan</button>
                         </div>
                         <!-- /.col -->
                     </div>
