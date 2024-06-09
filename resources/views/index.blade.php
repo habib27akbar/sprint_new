@@ -123,8 +123,11 @@
           
         </div>
       </div><!-- /.container-fluid -->
+      
     </section>
     <!-- /.content -->
+    <!-- /.content-wrapper -->
+    
   @endsection
   @section('js')
   <!-- DataTables  & Plugins -->

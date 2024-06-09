@@ -28,6 +28,7 @@
          <div class="content-wrapper">
             @yield('content')
          </div>
+         @include('include.admin.footer')
     </div>
     <!-- ./wrapper -->
 

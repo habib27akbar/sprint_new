@@ -17,7 +17,7 @@ class CreateMstPengguna extends Migration
             $table->id();
             $table->integer('id_unit_kerja');
             $table->string('kode_pengguna');
-            $table->string('password_pengguna');
+            $table->string('password');
             $table->string('nama_pengguna');
             $table->string('email')->nullable();
             $table->string('nip')->nullable();
