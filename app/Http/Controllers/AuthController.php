@@ -16,16 +16,17 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('kode_pengguna', 'password_pengguna');
+        $credentials = $request->only('kode_pengguna', 'password');
 
         $request->validate([
 
             'captcha' => 'required|captcha'
         ]);
 
-        dd($credentials);
+
 
         if (Auth::attempt($credentials)) {
+            //dd($credentials);
             $request->session()->regenerate();
             return redirect()->intended('/home');
         }
@@ -47,7 +48,7 @@ class AuthController extends Controller
             'kode_pengguna' => $request->kode_pengguna,
             'nama_pengguna' => $request->nama_pengguna,
             'email' => $request->email,
-            'password_pengguna' => Hash::make($request->password_pengguna),
+            'password' => Hash::make($request->password),
             'status' => 1
         ]);
 
