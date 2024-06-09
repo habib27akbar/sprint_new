@@ -148,6 +148,19 @@
                             </div>
                         </div>
 
+                        <br/>
+                        <h5>Status Registrasi</h5>
+                        <hr style="border:1px solid blue;">
+                        <table class="table stripted-table">
+                            <tr>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Tanggal Selesai</th>
+                                <th>Status</th>
+                                <th>Catatan</th>
+                            </tr>
+                            
+                        </table>
+
                        
                     
                     </div>
