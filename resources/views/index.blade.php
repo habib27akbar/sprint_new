@@ -102,20 +102,7 @@
                 
                @include('include.admin.alert')
               
-               <br/><br/>
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th style="width: 20%">No</th>
-                    <th>Detail Berita</th>
-                    
-                  </tr>
-                  </thead>
-                  <tbody>
-                   
-                    
-                  </tbody>
-                </table>
+               
 
               </div>
             </div>
