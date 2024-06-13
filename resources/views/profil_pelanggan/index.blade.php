@@ -356,6 +356,18 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Negara</label>
+                                <div class="col-sm-8">
+                                    <select name="" class="form-control select2" id="">
+                                      <option value=""></option>
+                                        @foreach ($country as $p)
+                                          <option value="{{ $p['id_country'] }}">{{ $p['country_name'] }}</option>                                          
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
                           Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.

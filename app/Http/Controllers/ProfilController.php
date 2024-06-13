@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class ProfilController extends Controller
     public function index()
     {
         $provinsi = Provinsi::all();
-        return view('profil_pelanggan.index', compact('provinsi'));
+        $country = Country::all();
+        return view('profil_pelanggan.index', compact('provinsi', 'country'));
     }
 
     /**
