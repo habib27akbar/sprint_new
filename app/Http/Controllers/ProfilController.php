@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 
 class ProfilController extends Controller
@@ -13,8 +14,8 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        //
-        return view('profil_pelanggan.index');
+        $provinsi = Provinsi::all();
+        return view('profil_pelanggan.index', compact('provinsi'));
     }
 
     /**
