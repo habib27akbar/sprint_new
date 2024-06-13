@@ -16,7 +16,7 @@ class KlienController extends Controller
     public function getData(Request $request)
     {
         if ($request->ajax()) {
-            $data = Klien::select('*')->orderBy('nama_perusahaan', 'ASC');
+            $data = Klien::select('*');
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
