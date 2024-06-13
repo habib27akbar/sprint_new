@@ -38,7 +38,15 @@ Route::resource('regist', RegistController::class);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::resource('/profil-pelanggan', ProfilController::class);
+    Route::resource('/profil-pelanggan', ProfilController::class, ['names' => [
+        'index' => 'profil-pelanggan.index',
+        'create' => 'profil-pelanggan.create',
+        'store' => 'profil-pelanggan.store',
+        'show' => 'profil-pelanggan.show',
+        'edit' => 'profil-pelanggan.edit',
+        'update' => 'profil-pelanggan.update',
+        'destroy' => 'profil-pelanggan.destroy'
+    ]]);
     Route::get('data-klien', [KlienController::class, 'index'])->name('data_klien');
     Route::get('data-klien/getData', [KlienController::class, 'getData'])->name('data-klien.getData');
     Route::get('/unique-values', [KlienController::class, 'getUniqueValues'])->name('data-klien.getUniqueValues');

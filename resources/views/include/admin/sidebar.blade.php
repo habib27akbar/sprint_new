@@ -45,7 +45,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
+            <a href="{{ route('profil-pelanggan.index') }}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profil Pelanggan
