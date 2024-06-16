@@ -446,7 +446,278 @@
 
                         </div>
                         <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
-                          Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                            <h5>Direktur</h5>
+                            <hr style="border:1px solid blue;">
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nama">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Kewarganegaraan</label>
+                                <div class="col-sm-8">
+                                    <select name="" class="form-control select2" id="">
+                                      <option value=""></option>
+                                        @foreach ($country as $p)
+                                          <option value="{{ $p['id_country'] }}">{{ $p['country_name'] }}</option>                                          
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Alamat">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Telepon</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nomor Telepon">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                            <br/>
+                            <h5>Wakil Manajemen</h5>
+                            <hr style="border:1px solid blue;">
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nama">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Kewarganegaraan</label>
+                                <div class="col-sm-8">
+                                    <select name="" class="form-control select2" id="">
+                                      <option value=""></option>
+                                        @foreach ($country as $p)
+                                          <option value="{{ $p['id_country'] }}">{{ $p['country_name'] }}</option>                                          
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Alamat">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Telepon</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nomor Telepon">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jabatan</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Jabatan">
+                                </div>
+                            </div>
+
+
+                            <br/>
+                            <h5>Penghubung</h5>
+                            <hr style="border:1px solid blue;">
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nama">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Kewarganegaraan</label>
+                                <div class="col-sm-8">
+                                    <select name="" class="form-control select2" id="">
+                                      <option value=""></option>
+                                        @foreach ($country as $p)
+                                          <option value="{{ $p['id_country'] }}">{{ $p['country_name'] }}</option>                                          
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Alamat">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Telepon</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nomor Telepon">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jabatan</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Jabatan">
+                                </div>
+                            </div>
+
+                            <br/>
+                            <h5>Alamat Koresponden</h5>
+                            <hr style="border:1px solid blue;">
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nama">
+                                </div>
+                            </div>
+                            
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Alamat">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Telepon</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Nomor Telepon">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+
+
+                            <br/>
+                            <h5>Teknis Produksi</h5>
+                            <hr style="border:1px solid blue;">
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alur Proses Produksi</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Peta Proses Bisnis</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Denah Lokasi Usaha</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Daftar Peralatan Produksi</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Daftar Peralatan Inspeksi</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jumlah Tahapan Proses</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Jumlah Tahapan Proses">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jumlah Shift Per Hari</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Jumlah Shift Per Hari">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Kapasitas Produksi Per Hari</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Kapasitas Produksi Per Hari">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Line Produksi</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Line Produksi">
+                                </div>
+                            </div>
+                            
+                            <br/>
+                            <h5>Sub Kontrak</h5>
+                            <hr style="border:1px solid blue;">
+                            <div class="form-group row">
+                                <label for="nama_perusahaan" class="col-sm-4 col-form-label">Total Proses Sub-Kontrak</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Total Proses Sub-Kontrak">
+                                </div>
+                            </div>
+
+                            
+                            <table id="subKontrak" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 9%;">Action</th>
+                                        <th>Proses Sub-Kontrak</th>
+                                        <th>Nama Perusahaan Sub-Kontrak</th>
+                                        <th>Alamat Perusahaan Sub-Kontrak</th>
+                                        <th>Persentase Proses Sub-Kontrak</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr>
+                                        <td>
+
+                                            <a onclick="createSubKontrak()" class="btn btn-success"><i class="fas fa-plus"></i></a>
+                                        </td>
+                                        <td colspan="4"></td>
+
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
                         </div>
                         <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
                           Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
@@ -680,6 +951,32 @@
     }
 
     function deleteRowKBLI(btn) {
+        var row = btn.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+
+
+    function createSubKontrak() {
+        var table = document.getElementById("subKontrak");
+        var tbodyRowCount = table.tBodies[0].rows.length;
+        var row = table.insertRow(tbodyRowCount);
+        
+        var cell1L = row.insertCell(0);
+        var cell2L = row.insertCell(1);
+        var cell3L = row.insertCell(2);
+        var cell4L = row.insertCell(3);
+        var cell5L = row.insertCell(4);
+       
+
+        cell1L.innerHTML = "<button type='button' value='Delete' onclick='deleteRowSubKontrak(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
+        cell2L.innerHTML = '<input type="text" name="data_post[KodeKBLI][]" class="form-control">';
+        cell3L.innerHTML = '<input type="text" name="data_post[NamaKBLI][]" class="form-control">';
+        cell4L.innerHTML = '<input type="text" name="data_post[LokasiUsaha][]" class="form-control">';
+        cell5L.innerHTML = '<input type="text" name="data_post[Presentase][]" class="form-control">';
+            
+    }
+
+    function deleteRowSubKontrak(btn) {
         var row = btn.parentNode.parentNode;
         row.parentNode.removeChild(row);
     }
