@@ -134,7 +134,7 @@
          document.getElementById('refresh-captcha').onclick = function(e) {
             e.preventDefault();
             var captchaImage = document.querySelector('.captcha-img');
-            captchaImage.src = 'http://localhost/sprint_new/captcha?rnd=' + Math.random();
+            captchaImage.src = '{{ url("/captcha?rnd='+Math.random()+'") }}'
         };
     </script>
 

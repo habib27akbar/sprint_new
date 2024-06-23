@@ -32,20 +32,18 @@
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
-            <!-- <div class="card-header text-center">
-                <b>PBF</b>
-            </div> -->
+            
             <div class="card-body">
                
                 <p class="login-box-msg">Lupa Password</p>
-
+                @include('include.admin.alert')
+                @if ($errors->has('captcha'))
+                    <div class="alert alert-danger">
+                        Captcha Salah !
+                    </div>
+                @endif
                 <form action="#" method="POST">
-                    @include('include.admin.alert')
-                    @if ($errors->has('captcha'))
-                        <div class="alert alert-danger">
-                            Captcha Salah !
-                        </div>
-                    @endif
+                    
                     @csrf
                     <div class="input-group mb-3">
                         <input id="first" type="text" name="email" class="form-control" placeholder="Email Admin" required>
@@ -126,7 +124,7 @@
          document.getElementById('refresh-captcha').onclick = function(e) {
             e.preventDefault();
             var captchaImage = document.querySelector('.captcha-img');
-            captchaImage.src = 'http://localhost/sprint_new/captcha?rnd=' + Math.random();
+            captchaImage.src = '{{ url("/captcha?rnd='+Math.random()+'") }}'
         };
     </script>
 
