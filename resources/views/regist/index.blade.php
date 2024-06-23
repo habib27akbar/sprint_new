@@ -29,7 +29,13 @@
               <div class="card-body">
                 
                @include('include.admin.alert')
-                <form class="form-horizontal">
+                @if ($errors->has('captcha'))
+                    <div class="alert alert-danger">
+                        Captcha Salah !
+                    </div>
+                @endif
+                <form class="form-horizontal" action="{{ route('regist.store') }}" method="POST">
+                    @csrf
                     <div class="card-body">
                         
                         <h5>Akun Pelanggan</h5>
@@ -37,22 +43,22 @@
                         <div class="form-group row">
                             <label for="id_perusahaan" class="col-sm-3 col-form-label">ID Perusahaan</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" onclick="checkID()" id="id_perusahaan" placeholder="ID Perusahaan" required>
+                                <input type="text" class="form-control" onclick="checkID()" onkeyup="checkListKlien(this.value)" name="id_perusahaan" id="id_perusahaan" placeholder="ID Perusahaan" value="{{ old('id_perusahaan') }}" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Jenis Badan Usaha</label>
                             <div class="col-sm-9">
-                                <select name="jenis_badan_usaha" class="form-control" required>
+                                <select name="jenis_badan_usaha" id="jenis_badan_usaha" class="form-control" required>
                                     <option value="">--</option>
-                                    <option value="UD">UD</option>
-                                    <option value="Fa">Fa</option>
-                                    <option value="CV">CV</option>
-                                    <option value="Koperasi">Koperasi</option>
-                                    <option value="PJ">PJ</option>
-                                    <option value="Perum">Perum</option>
-                                    <option value="PT">PT</option>
-                                    <option value="Yayasan">Yayasan</option>
+                                    <option {{ old('jenis_badan_usaha') == 'UD' ? 'selected' : '' }} value="UD">UD</option>
+                                    <option {{ old('jenis_badan_usaha') == 'Fa' ? 'selected' : '' }} value="Fa">Fa</option>
+                                    <option {{ old('jenis_badan_usaha') == 'CV' ? 'selected' : '' }} value="CV">CV</option>
+                                    <option {{ old('jenis_badan_usaha') == 'Koperasi' ? 'selected' : '' }} value="Koperasi">Koperasi</option>
+                                    <option {{ old('jenis_badan_usaha') == 'PJ' ? 'selected' : '' }} value="PJ">PJ</option>
+                                    <option {{ old('jenis_badan_usaha') == 'Perum' ? 'selected' : '' }} value="Perum">Perum</option>
+                                    <option {{ old('jenis_badan_usaha') == 'PT' ? 'selected' : '' }} value="PT">PT</option>
+                                    <option {{ old('jenis_badan_usaha') == 'Yayasan' ? 'selected' : '' }} value="Yayasan">Yayasan</option>
                                 </select>
                             </div>
                         </div>
@@ -60,17 +66,18 @@
                         <div class="form-group row">
                             <label for="nama_perusahaan" class="col-sm-3 col-form-label">Nama Perusahaan Produsen</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nama_perusahaan" placeholder="Nama Perusahaan Produsen" required>
+                                <input type="text" class="form-control" name="nama_perusahaan" id="nama_perusahaan" placeholder="Nama Perusahaan Produsen" value="{{ old('nama_perusahaan') }}" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="ln_dn" class="col-sm-3 col-form-label">Jenis Produsen</label>
                             <div class="col-sm-9">
-                                <select name="ln_dn" class="form-control" required>
+                                <select name="ln_dn" id="ln_dn" class="form-control" required>
                                     <option value="">--</option>
-                                    <option value="LN">Luar Negeri</option>
-                                    <option value="DN">Dalam Negeri</option>
+                                    <option {{ old('ln_dn') == 'LN' ? 'selected' : '' }} value="LN">Luar Negeri</option>
+                                    <option {{ old('ln_dn') == 'DN' ? 'selected' : '' }} value="DN">Dalam Negeri</option>
+                                    <option {{ old('ln_dn') == 'DK' ? 'selected' : '' }} value="DK">Dalam Kota</option>
                                 </select>
                             </div>
                         </div>
@@ -80,24 +87,24 @@
                         <div class="form-group row">
                             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nama" placeholder="Nama" required>
+                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="{{ old('nama') }}" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="nama" class="col-sm-2 col-form-label">Posisi</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="posisi" placeholder="Posisi" required>
+                                <input type="text" class="form-control" name="posisi" id="posisi" placeholder="Posisi" value="{{ old('posisi') }}" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Perusahaan</label>
                             <div class="col-sm-4">
-                                <select name="jenis_badan_usaha" class="form-control" required>
+                                <select name="perusahaan" id="perusahaan" class="form-control" required>
                                     <option value="">--</option>
-                                    <option value="Produsen">Produsen</option>
-                                    <option value="Penanggung Jawab">Penanggung Jawab</option>
+                                    <option {{ old('perusahaan') == 'Produsen' ? 'selected' : '' }} value="Produsen">Produsen</option>
+                                    <option {{ old('perusahaan') == 'Penanggung Jawab' ? 'selected' : '' }} value="Penanggung Jawab">Penanggung Jawab</option>
                                     
                                 </select>
                             </div>
@@ -106,7 +113,7 @@
                         <div class="form-group row">
                             <label for="nama" class="col-sm-2 col-form-label">Email Admin</label>
                             <div class="col-sm-4">
-                                <input type="email" class="form-control" id="posisi" placeholder="Email" required>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ old('email') }}" required>
                             </div>
                         </div>
                         <br/>
@@ -116,7 +123,7 @@
                         <div class="form-group row">
                             <label for="username" class="col-sm-2 col-form-label">Username</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="{{ old('username') }}" required>
                             </div>
                         </div>
 
@@ -151,7 +158,7 @@
                         <br/>
                         <h5>Status Registrasi</h5>
                         <hr style="border:1px solid blue;">
-                        <table class="table stripted-table">
+                        <table id="statusRegistrasi" class="table stripted-table">
                             <tr>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Tanggal Selesai</th>
@@ -210,6 +217,32 @@
   @section('js')
   
     <script>
+        function formatDateTimeStringIndonesia(dateString) {
+            // Konversi string ke objek Date
+            const date = new Date(dateString);
+            
+            // Pastikan konversi ke objek Date berhasil
+            if (isNaN(date)) {
+                throw new Error("Invalid date string format");
+            }
+
+            // Opsi format tanggal
+            const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+            // Opsi format waktu
+            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+
+            // Format tanggal dan waktu
+            const formattedDate = new Intl.DateTimeFormat('id-ID', optionsDate).format(date);
+            const formattedTime = new Intl.DateTimeFormat('id-ID', optionsTime).format(date);
+
+            // Gabungkan format tanggal dan waktu
+            return `${formattedDate} ${formattedTime}`;
+        }
+
+        window.addEventListener('load', () => {
+            // Kosongkan local storage
+            localStorage.clear();
+        });
         function checkID() {
            //localStorage.setItem('modalShown', 'false');
            if (!localStorage.getItem('confirmWA')) {
@@ -248,7 +281,80 @@
         document.getElementById('refresh-captcha').onclick = function(e) {
             e.preventDefault();
             var captchaImage = document.querySelector('.captcha-img');
-            captchaImage.src = 'http://localhost/sprint_new/captcha?rnd=' + Math.random();
+            captchaImage.src = '{{ url("/captcha?rnd='+Math.random()+'") }}'
         };
+
+        function checkListKlien(value) {
+            $.ajax({
+                method: 'GET',
+                url: '{{url("get-klien")}}',
+                data:{
+                        
+                    id_perusahaan: value,
+                },
+                success: function(data) {
+                    //console.log(data);
+                    var dataKlien = data.data;
+                    var fromData = data.from_data;
+                    var registData = data.data_regist;
+                    if (dataKlien.length > 0) {
+                        if (fromData == 'klien') {
+                            $("#ln_dn").val(dataKlien[0].jenis_produsen).change();
+                        }else{
+                            $("#ln_dn").val(dataKlien[0].ln_dn).change();
+                            document.getElementsByName("nama")[0].value = dataKlien[0].nama;
+                            document.getElementsByName("posisi")[0].value = dataKlien[0].posisi;
+                            $("#perusahaan").val(dataKlien[0].perusahaan).change();
+                            document.getElementsByName("email")[0].value = dataKlien[0].email;
+                            document.getElementsByName("username")[0].value = dataKlien[0].username;
+                            if (registData.length > 0) {
+                                var table;
+                                table = '';
+                                table += '<table id="statusRegistrasi" class="table stripted-table">';
+                                table += '<th>Tanggal Pengajuan</th>';
+                                table += '<th>Tanggal Selesai</th>';
+                                table += '<th>Status</th>';
+                                table += '<th>Catatan</th>';
+                                for (let index = 0; index < registData.length; index++) {
+                                    //const element = array[index];
+                                    var tanggalSelesai = '';
+                                    var tanggalPengajuan = '';
+                                    if (registData[index].tanggal_selesai) {
+                                        tanggalSelesai = formatDateTimeStringIndonesia(registData[index].tanggal_selesai)
+                                    }
+
+                                    if (registData[index].tanggal_pengajuan) {
+                                        tanggalPengajuan = formatDateTimeStringIndonesia(registData[index].tanggal_pengajuan)
+                                    }
+                                    var catatan = '';
+                                    if (registData[index].catatan != null) {
+                                        catatan = registData[index].catatan;
+                                    }
+                                    var status = '';
+                                    if (registData[index].status == 0) {
+                                        status = 'Menunggu Verifikasi';
+                                    }
+                                    //console.log(catatan);
+                                    table += '<tr>';
+                                    table += '<td>'+tanggalPengajuan+'</td>';
+                                    table += '<td>'+tanggalSelesai+'</td>';
+                                    table += '<td>'+status+'</td>';
+                                    table += '<td>'+catatan+'</td>';
+                                    table += '</tr>';
+                                }
+                                table += '</table>'
+                                document.getElementById("statusRegistrasi").innerHTML = table;
+                            }
+                            
+                        }
+                        document.getElementsByName("nama_perusahaan")[0].value = dataKlien[0].nama_perusahaan;
+                        $("#jenis_badan_usaha").val(dataKlien[0].jenis_badan_usaha).change();
+
+                    }
+                    //$("#id_kabupaten_kota").html(data);
+                }
+
+            });
+        }
     </script>
   @endsection

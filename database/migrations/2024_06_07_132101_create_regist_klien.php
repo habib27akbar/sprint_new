@@ -18,7 +18,7 @@ class CreateRegistKlien extends Migration
             $table->string('id_perusahaan', 25);
             $table->string('jenis_badan_usaha', 10);
             $table->string('nama_perusahaan', 100);
-            $table->string('jenis_produsen', 20);
+            $table->string('ln_dn', 20);
             $table->string('nama', 150);
             $table->string('posisi', 100);
             $table->string('perusahaan', 30);

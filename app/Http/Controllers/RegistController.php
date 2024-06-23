@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RegistKlien;
+use App\Models\RegistStatus;
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegistController extends Controller
 {
@@ -34,7 +38,43 @@ class RegistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeData = [
+            'id_perusahaan' => $request->input('id_perusahaan'),
+            'jenis_badan_usaha' => $request->input('jenis_badan_usaha'),
+            'nama_perusahaan' => $request->input('nama_perusahaan'),
+            'ln_dn' => $request->input('ln_dn'),
+            'nama' => $request->input('nama'),
+            'posisi' => $request->input('posisi'),
+            'perusahaan' => $request->input('perusahaan'),
+            'email' => $request->input('email'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+        ];
+
+
+        RegistKlien::create($storeData);
+
+        $postStatus = [
+            'id_pelanggan' => $request->input('id_perusahaan'),
+            'tanggal_pengajuan' => date('Y-m-d H:i:s'),
+            'status' => 0,
+        ];
+
+        RegistStatus::create($postStatus);
+
+        $post = [
+            'kode_pengguna' => $request->input('username'),
+            'password' => Hash::make($request->input('password')),
+            'nama_pengguna' => $request->input('nama_perusahaan'),
+            'email' => $request->input('email'),
+            'id_perusahaan' => $request->input('id_perusahaan'),
+            'id_unit_kerja' => 99,
+            'status' => 1
+        ];
+
+        Pengguna::create($post);
+
+        return redirect('regist')->with('alert-success', 'Success Tambah Data')->withInput();
     }
 
     /**

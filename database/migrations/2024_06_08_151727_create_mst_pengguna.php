@@ -20,6 +20,7 @@ class CreateMstPengguna extends Migration
             $table->string('password');
             $table->string('nama_pengguna');
             $table->string('email')->nullable();
+            $table->string('id_perusahaan')->nullable();
             $table->string('nip')->nullable();
             $table->string('nomor_handphone')->nullable();
             $table->integer('status');

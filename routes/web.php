@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -35,6 +36,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('captcha', 'CaptchaController@showCaptcha');
 Route::resource('regist', RegistController::class);
+Route::get('get-klien', [AjaxController::class, 'get_klien'])->name('get_klien');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -52,4 +54,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/unique-values', [KlienController::class, 'getUniqueValues'])->name('data-klien.getUniqueValues');
     //Route::get('data-klien/getUniqueValues', [KlienController::class, 'getUniqueValues'])->name('data-klien.getUniqueValues');
     //Route::get('/unique-values', [KlienController::class, 'getUniqueValues'])->name('data-klien.getUniqueValues');
+
 });;
