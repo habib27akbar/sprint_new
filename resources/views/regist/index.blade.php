@@ -155,7 +155,7 @@
                             </div>
                         </div>
 
-                        <br/>
+                        {{-- <br/>
                         <h5>Status Registrasi</h5>
                         <hr style="border:1px solid blue;">
                         <table id="statusRegistrasi" class="table stripted-table">
@@ -166,7 +166,7 @@
                                 <th>Catatan</th>
                             </tr>
                             
-                        </table>
+                        </table> --}}
 
                        
                     
@@ -307,7 +307,10 @@
                             $("#perusahaan").val(dataKlien[0].perusahaan).change();
                             document.getElementsByName("email")[0].value = dataKlien[0].email;
                             document.getElementsByName("username")[0].value = dataKlien[0].username;
-                            if (registData.length > 0) {
+                            if (
+                                false
+                                //registData.length > 0
+                            ) {
                                 var table;
                                 table = '';
                                 table += '<table id="statusRegistrasi" class="table stripted-table">';
