@@ -34,7 +34,7 @@
                         Captcha Salah !
                     </div>
                 @endif
-                <form class="form-horizontal" action="{{ route('regist.store') }}" method="POST">
+                <form class="form-horizontal" action="{{ route('regist') }}" method="POST">
                     @csrf
                     <div class="card-body">
                         
@@ -151,7 +151,7 @@
                             </div>
                             
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="posisi" placeholder="Captcha" required>
+                                <input type="text" class="form-control" id="captcha" name="captcha" placeholder="Captcha" required>
                             </div>
                         </div>
 

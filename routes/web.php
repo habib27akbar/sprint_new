@@ -33,9 +33,10 @@ Route::get('/register', [AuthController::class, 'form_regist']);
 Route::get('/forget', [AuthController::class, 'forget'])->name('forget');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::post('/forget-password', [AuthController::class, 'forget_password'])->name('forget_password');
 Route::get('captcha', 'CaptchaController@showCaptcha');
 Route::resource('regist', RegistController::class);
+Route::post('regist', [RegistController::class, 'store'])->name('regist');
 Route::get('get-klien', [AjaxController::class, 'get_klien'])->name('get_klien');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');

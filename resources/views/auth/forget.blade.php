@@ -42,7 +42,7 @@
                         Captcha Salah !
                     </div>
                 @endif
-                <form action="#" method="POST">
+                <form action="{{ route('forget_password') }}" method="POST">
                     
                     @csrf
                     <div class="input-group mb-3">

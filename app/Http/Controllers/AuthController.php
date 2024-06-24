@@ -45,6 +45,10 @@ class AuthController extends Controller
         return view('auth.forget');
     }
 
+    public function forget_password()
+    {
+    }
+
     public function register(Request $request)
     {
 

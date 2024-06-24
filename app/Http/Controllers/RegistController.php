@@ -38,6 +38,11 @@ class RegistController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+
+            'captcha' => 'required|captcha'
+        ]);
+
         $storeData = [
             'id_perusahaan' => $request->input('id_perusahaan'),
             'jenis_badan_usaha' => $request->input('jenis_badan_usaha'),
