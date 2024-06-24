@@ -27,8 +27,10 @@
               </div> --}}
               
               <div class="card-body">
-                
-               @include('include.admin.alert')
+                <div id="alertSuccess" style="display: none;" class="alert alert-success">
+                    Perusahaan sudah terdaftar, silahkan login <a href="{{ route('login') }}">Klik disini</a>
+                </div>
+                @include('include.admin.alert')
                 @if ($errors->has('captcha'))
                     <div class="alert alert-danger">
                         Captcha Salah !
@@ -173,7 +175,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button id="btnSave" type="submit" class="btn btn-info">Simpan</button>
                         
                     </div>
                     <!-- /.card-footer -->
@@ -297,10 +299,15 @@
                     var dataKlien = data.data;
                     var fromData = data.from_data;
                     var registData = data.data_regist;
+                    $("#btnSave").show();
+                    $("#alertSuccess").hide();
                     if (dataKlien.length > 0) {
                         if (fromData == 'klien') {
                             $("#ln_dn").val(dataKlien[0].jenis_produsen).change();
                         }else{
+                            $("#btnSave").hide();
+                            $("#alertSuccess").show();
+                            
                             $("#ln_dn").val(dataKlien[0].ln_dn).change();
                             document.getElementsByName("nama")[0].value = dataKlien[0].nama;
                             document.getElementsByName("posisi")[0].value = dataKlien[0].posisi;
