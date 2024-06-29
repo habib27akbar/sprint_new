@@ -33,70 +33,7 @@
             <div class="card">
                 
               <div class="card-header">
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>8</h3>
-                                <p style="font-size: 23px;">LOKASI</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-map-marker"></i>
-                            </div>
-                                <p style="margin-left: 10px; font-size:12px;">Jumlah LOKASI pada kegiatan ini</p>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>8</h3>
-
-                                <p style="font-size: 23px;">PENGAWAS</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <p style="margin-left: 10px; font-size:12px;">Jumlah PENGAWAS pada kegiatan ini</p>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>8</h3>
-
-                                <p style="font-size: 23px;">KOORDINATOR</p>
-                                
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                                <p style="margin-left: 10px; font-size:12px;">Jumlah KOORDINATOR pada kegiatan ini</p>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>65</h3>
-
-                                <p style="font-size: 23px;">TEKNISI</p>
-                                
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-wrench"></i>
-                            </div>
-                                <p style="margin-left: 10px; font-size:12px;">Jumlah TEKNISI pada kegiatan ini</p>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                </div>
-                <h4 class="card-title">Berita Terkini</h4>
+              
               </div>
               <div class="card-body">
                 

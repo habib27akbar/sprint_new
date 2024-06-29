@@ -79,7 +79,7 @@ class RegistController extends Controller
 
         Pengguna::create($post);
 
-        return redirect('regist')->with('alert-success', 'Success Tambah Data')->withInput();
+        return redirect('regist')->with('alert-success', 'Registrasi Berhasil')->withInput();
     }
 
     /**

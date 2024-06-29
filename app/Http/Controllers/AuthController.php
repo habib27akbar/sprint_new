@@ -28,6 +28,17 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             //dd($credentials);
             $request->session()->regenerate();
+
+            // Retrieve the authenticated user
+            $user = Auth::user();
+
+            // Retrieve the id_perusahaan associated with the authenticated user
+            $idPerusahaan = $user->id_perusahaan; // Adjust this line according to your user model
+
+            // Store id_perusahaan in the session
+            $request->session()->put('id_perusahaan', $idPerusahaan);
+
+
             return redirect()->intended('/home');
         }
 
