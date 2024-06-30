@@ -122,7 +122,7 @@
           { data: 'id_perusahaan', name: 'id_perusahaan' },
           { data: 'jenis_badan_usaha', name: 'jenis_badan_usaha' },
           { data: 'nama_perusahaan', name: 'nama_perusahaan' },
-          { data: 'jenis_produsen', name: 'jenis_produsen' },
+          { data: 'ln_dn', name: 'ln_dn' },
           { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
         createdRow: function(row, data, dataIndex) {
