@@ -33,13 +33,13 @@ class ProfilController extends Controller
         $pedoman_sertifikasi = PedomanSertifikasi::where('id_perusahaan', Session::get('id_perusahaan'))->get();
         $sppt_sni = SPPTSNI::where('id_perusahaan', Session::get('id_perusahaan'))->get();
         $getData = true;
-        //dd($klien);
-        if (isset($klien)) {
+        //var_dump($klien);
+        if ($klien->isEmpty()) {
             //echo "a";
             $getData = false;
             $klien = RegistKlien::where('id_perusahaan', Session::get('id_perusahaan'))->get();
         }
-        //dd($klien);
+        //dd($getData);
         $country = Country::all();
         return view('profil_pelanggan.index', compact('provinsi', 'country', 'klien', 'getData', 'kbli', 'proses_sub_kontrak', 'transportasi', 'struktur_organisasi', 'pedoman_sertifikasi', 'sppt_sni'));
     }

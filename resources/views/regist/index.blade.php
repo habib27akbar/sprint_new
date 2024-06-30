@@ -52,7 +52,7 @@
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Jenis Badan Usaha</label>
                             <div class="col-sm-9">
                                 <select name="jenis_badan_usaha" id="jenis_badan_usaha" class="form-control" required>
-                                    <option value="">--</option>
+                                    <option value="-">--</option>
                                     <option {{ old('jenis_badan_usaha') == 'UD' ? 'selected' : '' }} value="UD">UD</option>
                                     <option {{ old('jenis_badan_usaha') == 'Fa' ? 'selected' : '' }} value="Fa">Fa</option>
                                     <option {{ old('jenis_badan_usaha') == 'CV' ? 'selected' : '' }} value="CV">CV</option>
@@ -76,7 +76,7 @@
                             <label for="ln_dn" class="col-sm-3 col-form-label">Jenis Produsen</label>
                             <div class="col-sm-9">
                                 <select name="ln_dn" id="ln_dn" class="form-control" required>
-                                    <option value="">--</option>
+                                    <option value="-">--</option>
                                     <option {{ old('ln_dn') == 'LN' ? 'selected' : '' }} value="LN">Luar Negeri</option>
                                     <option {{ old('ln_dn') == 'DN' ? 'selected' : '' }} value="DN">Dalam Negeri</option>
                                     <option {{ old('ln_dn') == 'DK' ? 'selected' : '' }} value="DK">Dalam Kota</option>
@@ -360,6 +360,15 @@
                         document.getElementsByName("nama_perusahaan")[0].value = dataKlien[0].nama_perusahaan;
                         $("#jenis_badan_usaha").val(dataKlien[0].jenis_badan_usaha).change();
 
+                    }else{
+                            $("#ln_dn").val('-').change();
+                            document.getElementsByName("nama")[0].value = '';
+                            document.getElementsByName("posisi")[0].value = '';
+                            $("#perusahaan").val('-').change();
+                            document.getElementsByName("email")[0].value = '';
+                            document.getElementsByName("nama_perusahaan")[0].value = '';
+                            document.getElementsByName("username")[0].value = '';
+                            $("#jenis_badan_usaha").val('-').change();
                     }
                     //$("#id_kabupaten_kota").html(data);
                 }
