@@ -51,7 +51,7 @@ class RegistController extends Controller
             'nama' => $request->input('nama'),
             'posisi' => $request->input('posisi'),
             'perusahaan' => $request->input('perusahaan'),
-            'email' => $request->input('email'),
+            'email_regist' => $request->input('email'),
             'username' => $request->input('username'),
             'password' => $request->input('password'),
         ];

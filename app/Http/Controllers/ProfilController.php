@@ -26,13 +26,22 @@ class ProfilController extends Controller
     {
         $provinsi = Provinsi::all();
         $klien = Klien::where('id_perusahaan', Session::get('id_perusahaan'))->get();
-        if (empty($klien)) {
-            echo "a";
+        $kbli = KBLI::where('id_perusahaan', Session::get('id_perusahaan'))->get();
+        $proses_sub_kontrak = ProsesSubKontrak::where('id_perusahaan', Session::get('id_perusahaan'))->get();
+        $transportasi = Transportasi::where('id_perusahaan', Session::get('id_perusahaan'))->get();
+        $struktur_organisasi = StrukturOrganisasi::where('id_perusahaan', Session::get('id_perusahaan'))->get();
+        $pedoman_sertifikasi = PedomanSertifikasi::where('id_perusahaan', Session::get('id_perusahaan'))->get();
+        $sppt_sni = SPPTSNI::where('id_perusahaan', Session::get('id_perusahaan'))->get();
+        $getData = true;
+        //dd($klien);
+        if (isset($klien)) {
+            //echo "a";
+            $getData = false;
             $klien = RegistKlien::where('id_perusahaan', Session::get('id_perusahaan'))->get();
         }
         //dd($klien);
         $country = Country::all();
-        return view('profil_pelanggan.index', compact('provinsi', 'country', 'klien'));
+        return view('profil_pelanggan.index', compact('provinsi', 'country', 'klien', 'getData', 'kbli', 'proses_sub_kontrak', 'transportasi', 'struktur_organisasi', 'pedoman_sertifikasi', 'sppt_sni'));
     }
 
     /**
@@ -56,7 +65,7 @@ class ProfilController extends Controller
         $id_perusahaan = Session::get('id_perusahaan');
         $klien = Klien::where('id_perusahaan', $id_perusahaan)->get();
         $id = '';
-        if ($klien) {
+        if (isset($klien)) {
             $id = $klien[0]['id'];
         }
 
@@ -324,160 +333,170 @@ class ProfilController extends Controller
         ];
         if ($id) {
             Klien::where('id', $id)->update($storeData);
-            return redirect('profil-pelanggan')->with('alert-success', 'Success Update Data');
         } else {
             Klien::create($storeData);
-            return redirect('profil-pelanggan')->with('alert-success', 'Success Tambah Data');
-        }
-
-        $kbli = KBLI::where('id_perusahaan', $id_perusahaan)->get();
-        if (count($kbli)) {
-            foreach ($kbli as $k) {
-                KBLI::findOrFail($k['id'])->delete();
-            }
-        }
-
-        $fieldNames = array("kode_kbli", "nama_kbli", "lokasi_usaha", "tipe");
-        for ($i = 0; $i < count($_POST['data_post'][$fieldNames[0]]); $i++) {
-            if (!empty($_POST['data_post']['kode_kbli'][$i]) or !empty($_POST['data_post']['nama_kbli'][$i]) or !empty($_POST['data_post']['lokasi_usaha'][$i])) {
-                $storeKBLI = [
-                    'id_perusahaan' => $id_perusahaan,
-                    'kode_kbli' => $_POST['data_post']['kode_kbli'][$i],
-                    'nama_kbli' => $_POST['data_post']['nama_kbli'][$i],
-                    'lokasi_usaha' => $_POST['data_post']['lokasi_usaha'][$i],
-                    'tipe' => $_POST['data_post']['tipe'][$i],
-                ];
-
-                KBLI::create($storeKBLI);
-            }
+            //return redirect('profil-pelanggan')->with('alert-success', 'Success Tambah Data');
         }
 
 
-        $proses_sub_kontrak = ProsesSubKontrak::where('id_perusahaan', $id_perusahaan)->get();
-        if (count($proses_sub_kontrak)) {
-            foreach ($proses_sub_kontrak as $s) {
-                ProsesSubKontrak::findOrFail($s['id'])->delete();
-            }
-        }
-
-        $fieldPost = array("proses_sub_kontrak", "nama_perusahaan", "alamat_perusahaan", "persentase");
-        for ($i = 0; $i < count($_POST['data_post'][$fieldPost[0]]); $i++) {
-            if (!empty($_POST['data_post']['proses_sub_kontrak'][$i]) or !empty($_POST['data_post']['nama_perusahaan'][$i]) or !empty($_POST['data_post']['alamat_perusahaan'][$i])) {
-                $storeSub = [
-                    'id_perusahaan' => $id_perusahaan,
-                    'proses_sub_kontrak' => $_POST['data_post']['proses_sub_kontrak'][$i],
-                    'nama_perusahaan' => $_POST['data_post']['nama_perusahaan'][$i],
-                    'alamat_perusahaan' => $_POST['data_post']['alamat_perusahaan'][$i],
-                    'persentase' => $_POST['data_post']['persentase'][$i],
-                ];
-
-                ProsesSubKontrak::create($storeSub);
-            }
-        }
-
-        $transportasi = Transportasi::where('id_perusahaan', $id_perusahaan)->get();
-        if (count($transportasi)) {
-            foreach ($transportasi as $st) {
-                Transportasi::findOrFail($st['id'])->delete();
-            }
-        }
-
-        $fieldPost = array("asal", "tujuan", "rute", "moda", "jarak_tempuh", "waktu");
-        for ($i = 0; $i < count($_POST['data_post'][$fieldPost[0]]); $i++) {
-            if (!empty($_POST['data_post']['asal'][$i]) or !empty($_POST['data_post']['tujuan'][$i]) or !empty($_POST['data_post']['rute'][$i]) or !empty($_POST['data_post']['moda'][$i]) or !empty($_POST['data_post']['jarak_tempuh'][$i]) or !empty($_POST['data_post']['waktu'][$i])) {
-                $storeSub = [
-                    'id_perusahaan' => $id_perusahaan,
-                    'asal' => $_POST['data_post']['asal'][$i],
-                    'tujuan' => $_POST['data_post']['tujuan'][$i],
-                    'rute' => $_POST['data_post']['rute'][$i],
-                    'moda' => $_POST['data_post']['moda'][$i],
-                    'jarak_tempuh' => $_POST['data_post']['jarak_tempuh'][$i],
-                    'waktu' => $_POST['data_post']['waktu'][$i],
-                ];
-
-                Transportasi::create($storeSub);
-            }
-        }
-
-        $struktur_organisasi = StrukturOrganisasi::where('id_perusahaan', $id_perusahaan)->get();
-        if (count($struktur_organisasi)) {
-            foreach ($struktur_organisasi as $st) {
-                StrukturOrganisasi::findOrFail($st['id'])->delete();
-            }
-        }
-
-        $fieldPost = array("nama_divisi", "tanggung_jawab", "jumlah_personil");
-        for ($i = 0; $i < count($_POST['data_post'][$fieldPost[0]]); $i++) {
-            if (!empty($_POST['data_post']['nama_divisi'][$i]) or !empty($_POST['data_post']['tanggung_jawab'][$i]) or !empty($_POST['data_post']['jumlah_personil'][$i])) {
-                $storeSub = [
-                    'id_perusahaan' => $id_perusahaan,
-                    'nama_divisi' => $_POST['data_post']['nama_divisi'][$i],
-                    'tanggung_jawab' => $_POST['data_post']['tanggung_jawab'][$i],
-                    'jumlah_personil' => $_POST['data_post']['jumlah_personil'][$i]
-                ];
-
-                StrukturOrganisasi::create($storeSub);
-            }
-        }
-
-        $pedoman_sertifikasi = PedomanSertifikasi::where('id_perusahaan', $id_perusahaan)->get();
-        if (count($pedoman_sertifikasi)) {
-            foreach ($pedoman_sertifikasi as $st) {
-                PedomanSertifikasi::findOrFail($st['id'])->delete();
-            }
-        }
-
-        $fieldPost = array("jenis_sistem_manajemen", "versi_standar_sistem", "lembaga_sertifikasi", "nomor_sertifikat", "masa_berlaku", "logo_sertifikat", "ruang_lingkup", "penerapan", "nama_konsultan", "tahun_konsultan", "sertifikat", "sertifikat_old");
-        for ($i = 0; $i < count($_POST['data_post'][$fieldPost[0]]); $i++) {
-            if (!empty($_POST['data_post']['jenis_sistem_manajemen'][$i]) or !empty($_POST['data_post']['versi_standar_sistem'][$i]) or !empty($_POST['data_post']['lembaga_sertifikasi'][$i]) or !empty($_POST['data_post']['nomor_sertifikat'][$i]) or !empty($_POST['data_post']['masa_berlaku'][$i]) or !empty($_POST['data_post']['logo_sertifikat'][$i]) or !empty($_POST['data_post']['ruang_lingkup'][$i]) or !empty($_POST['data_post']['penerapan'][$i]) or !empty($_POST['data_post']['nama_konsultan'][$i]) or !empty($_POST['data_post']['tahun_konsultan'][$i])) {
-
-                $nama_sertifikat = '';
-                if ($_FILES['data_post']['sertifikat'][$i]) {
-                    $sertifikat = $_FILES['data_post']['sertifikat'][$i];
-                    $nama_sertifikat = 'se-' . uniqid() . '-' . $sertifikat->getClientOriginalName();
-                    $sertifikat->move(public_path($dir), $nama_sertifikat);
+        if (isset($_POST['data_post'])) {
+            $kbli = KBLI::where('id_perusahaan', $id_perusahaan)->get();
+            if (count($kbli)) {
+                foreach ($kbli as $k) {
+                    KBLI::findOrFail($k['id'])->delete();
                 }
+            }
+            $fieldNames = array("kode_kbli", "nama_kbli", "lokasi_usaha", "tipe");
+            for ($i = 0; $i < count($_POST['data_post'][$fieldNames[0]]); $i++) {
+                if (!empty($_POST['data_post']['kode_kbli'][$i]) or !empty($_POST['data_post']['nama_kbli'][$i]) or !empty($_POST['data_post']['lokasi_usaha'][$i])) {
+                    $storeKBLI = [
+                        'id_perusahaan' => $id_perusahaan,
+                        'kode_kbli' => $_POST['data_post']['kode_kbli'][$i],
+                        'nama_kbli' => $_POST['data_post']['nama_kbli'][$i],
+                        'lokasi_usaha' => $_POST['data_post']['lokasi_usaha'][$i],
+                        'tipe' => $_POST['data_post']['tipe'][$i],
+                    ];
 
-                $storeSub = [
-                    'id_perusahaan' => $id_perusahaan,
-                    'jenis_sistem_manajemen' => $_POST['data_post']['jenis_sistem_manajemen'][$i],
-                    'versi_standar_sistem' => $_POST['data_post']['versi_standar_sistem'][$i],
-                    'lembaga_sertifikasi' => $_POST['data_post']['lembaga_sertifikasi'][$i],
-                    'nomor_sertifikat' => $_POST['data_post']['nomor_sertifikat'][$i],
-                    'masa_berlaku' => $_POST['data_post']['masa_berlaku'][$i],
-                    'logo_sertifikat' => $_POST['data_post']['logo_sertifikat'][$i],
-                    'ruang_lingkup' => $_POST['data_post']['ruang_lingkup'][$i],
-                    'penerapan' => $_POST['data_post']['penerapan'][$i],
-                    'nama_konsultan' => $_POST['data_post']['nama_konsultan'][$i],
-                    'tahun_konsultan' => $_POST['data_post']['tahun_konsultan'][$i],
-                    'sertifikat' => $nama_sertifikat
-
-                ];
-
-                PedomanSertifikasi::create($storeSub);
+                    KBLI::create($storeKBLI);
+                }
             }
         }
 
-        $sppt_sni = SPPTSNI::where('id_perusahaan', $id_perusahaan)->get();
-        if (count($sppt_sni)) {
-            foreach ($sppt_sni as $st) {
-                SPPTSNI::findOrFail($st['id'])->delete();
+        if (isset($_POST['post_sub'])) {
+            $proses_sub_kontrak = ProsesSubKontrak::where('id_perusahaan', $id_perusahaan)->get();
+            if (count($proses_sub_kontrak)) {
+                foreach ($proses_sub_kontrak as $s) {
+                    ProsesSubKontrak::findOrFail($s['id'])->delete();
+                }
+            }
+
+            $fieldPost = array("proses_sub_kontrak", "nama_perusahaan", "alamat_perusahaan", "persentase");
+            for ($i = 0; $i < count($_POST['post_sub'][$fieldPost[0]]); $i++) {
+                if (!empty($_POST['post_sub']['proses_sub_kontrak'][$i]) or !empty($_POST['post_sub']['nama_perusahaan'][$i]) or !empty($_POST['post_sub']['alamat_perusahaan'][$i])) {
+                    $storeSub = [
+                        'id_perusahaan' => $id_perusahaan,
+                        'proses_sub_kontrak' => $_POST['post_sub']['proses_sub_kontrak'][$i],
+                        'nama_perusahaan' => $_POST['post_sub']['nama_perusahaan'][$i],
+                        'alamat_perusahaan' => $_POST['post_sub']['alamat_perusahaan'][$i],
+                        'persentase' => $_POST['post_sub']['persentase'][$i],
+                    ];
+
+                    ProsesSubKontrak::create($storeSub);
+                }
+            }
+        }
+        if (isset($_POST['post_trans'])) {
+            $transportasi = Transportasi::where('id_perusahaan', $id_perusahaan)->get();
+            if (count($transportasi)) {
+                foreach ($transportasi as $st) {
+                    Transportasi::findOrFail($st['id'])->delete();
+                }
+            }
+
+            $fieldPost = array("asal", "tujuan", "rute", "moda", "jarak_tempuh", "waktu");
+            for ($i = 0; $i < count($_POST['post_trans'][$fieldPost[0]]); $i++) {
+                if (!empty($_POST['post_trans']['asal'][$i]) or !empty($_POST['post_trans']['tujuan'][$i]) or !empty($_POST['post_trans']['rute'][$i]) or !empty($_POST['post_trans']['moda'][$i]) or !empty($_POST['post_trans']['jarak_tempuh'][$i]) or !empty($_POST['post_trans']['waktu'][$i])) {
+                    $storeSub = [
+                        'id_perusahaan' => $id_perusahaan,
+                        'asal' => $_POST['post_trans']['asal'][$i],
+                        'tujuan' => $_POST['post_trans']['tujuan'][$i],
+                        'rute' => $_POST['post_trans']['rute'][$i],
+                        'moda' => $_POST['post_trans']['moda'][$i],
+                        'jarak_tempuh' => $_POST['post_trans']['jarak_tempuh'][$i],
+                        'waktu' => $_POST['post_trans']['waktu'][$i],
+                    ];
+
+                    Transportasi::create($storeSub);
+                }
+            }
+        }
+        if (isset($_POST['post_struktur'])) {
+            $struktur_organisasi = StrukturOrganisasi::where('id_perusahaan', $id_perusahaan)->get();
+            if (count($struktur_organisasi)) {
+                foreach ($struktur_organisasi as $st) {
+                    StrukturOrganisasi::findOrFail($st['id'])->delete();
+                }
+            }
+
+            $fieldPost = array("nama_divisi", "tanggung_jawab", "jumlah_personil");
+            for ($i = 0; $i < count($_POST['post_struktur'][$fieldPost[0]]); $i++) {
+                if (!empty($_POST['post_struktur']['nama_divisi'][$i]) or !empty($_POST['post_struktur']['tanggung_jawab'][$i]) or !empty($_POST['post_struktur']['jumlah_personil'][$i])) {
+                    $storeSub = [
+                        'id_perusahaan' => $id_perusahaan,
+                        'nama_divisi' => $_POST['post_struktur']['nama_divisi'][$i],
+                        'tanggung_jawab' => $_POST['post_struktur']['tanggung_jawab'][$i],
+                        'jumlah_personil' => $_POST['post_struktur']['jumlah_personil'][$i]
+                    ];
+
+                    StrukturOrganisasi::create($storeSub);
+                }
+            }
+        }
+        if (isset($_POST['post_pedoman'])) {
+            $pedoman_sertifikasi = PedomanSertifikasi::where('id_perusahaan', $id_perusahaan)->get();
+            if (count($pedoman_sertifikasi)) {
+                foreach ($pedoman_sertifikasi as $st) {
+                    PedomanSertifikasi::findOrFail($st['id'])->delete();
+                }
+            }
+
+            $fieldPost = array("jenis_sistem_manajemen", "versi_standar_sistem", "lembaga_sertifikasi", "nomor_sertifikat", "masa_berlaku", "logo_sertifikat", "ruang_lingkup", "penerapan", "nama_konsultan", "tahun_konsultan", "sertifikat", "sertifikat_old");
+            for ($i = 0; $i < count($_POST['post_pedoman'][$fieldPost[0]]); $i++) {
+                if (!empty($_POST['post_pedoman']['jenis_sistem_manajemen'][$i]) or !empty($_POST['post_pedoman']['versi_standar_sistem'][$i]) or !empty($_POST['post_pedoman']['lembaga_sertifikasi'][$i]) or !empty($_POST['post_pedoman']['nomor_sertifikat'][$i]) or !empty($_POST['post_pedoman']['masa_berlaku'][$i]) or !empty($_POST['post_pedoman']['logo_sertifikat'][$i]) or !empty($_POST['post_pedoman']['ruang_lingkup'][$i]) or !empty($_POST['post_pedoman']['penerapan'][$i]) or !empty($_POST['post_pedoman']['nama_konsultan'][$i]) or !empty($_POST['post_pedoman']['tahun_konsultan'][$i])) {
+                    //dd($request->file('post_pedoman')['sertifikat'][$i]);
+                    $nama_sertifikat = $_POST['post_pedoman']['sertifikat_old'][$i];
+                    if ($request->file('post_pedoman')['sertifikat'][$i]) {
+                        $sertifikat = $request->file('post_pedoman')['sertifikat'][$i];
+                        $nama_sertifikat = 'se-' . uniqid() . '-' . $sertifikat->getClientOriginalName();
+                        $sertifikat->move(public_path($dir), $nama_sertifikat);
+                    }
+
+                    $storeSub = [
+                        'id_perusahaan' => $id_perusahaan,
+                        'jenis_sistem_manajemen' => $_POST['post_pedoman']['jenis_sistem_manajemen'][$i],
+                        'versi_standar_sistem' => $_POST['post_pedoman']['versi_standar_sistem'][$i],
+                        'lembaga_sertifikasi' => $_POST['post_pedoman']['lembaga_sertifikasi'][$i],
+                        'nomor_sertifikat' => $_POST['post_pedoman']['nomor_sertifikat'][$i],
+                        'masa_berlaku' => $_POST['post_pedoman']['masa_berlaku'][$i],
+                        'logo_sertifikat' => $_POST['post_pedoman']['logo_sertifikat'][$i],
+                        'ruang_lingkup' => $_POST['post_pedoman']['ruang_lingkup'][$i],
+                        'penerapan' => $_POST['post_pedoman']['penerapan'][$i],
+                        'nama_konsultan' => $_POST['post_pedoman']['nama_konsultan'][$i],
+                        'tahun_konsultan' => $_POST['post_pedoman']['tahun_konsultan'][$i],
+                        'sertifikat' => $nama_sertifikat
+
+                    ];
+
+                    PedomanSertifikasi::create($storeSub);
+                }
             }
         }
 
-        $fieldPost = array("nomor_sertifikat", "masa_berlaku");
-        for ($i = 0; $i < count($_POST['data_post'][$fieldPost[0]]); $i++) {
-            if (!empty($_POST['data_post']['nomor_sertifikat'][$i]) or !empty($_POST['data_post']['masa_berlaku'][$i])) {
-                $storeSub = [
-                    'id_perusahaan' => $id_perusahaan,
-                    'nomor_sertifikat' => $_POST['data_post']['nomor_sertifikat'][$i],
-                    'masa_berlaku' => $_POST['data_post']['masa_berlaku'][$i]
-                ];
+        if (isset($_POST['post_sppt'])) {
+            $sppt_sni = SPPTSNI::where('id_perusahaan', $id_perusahaan)->get();
+            if (count($sppt_sni)) {
+                foreach ($sppt_sni as $st) {
+                    SPPTSNI::findOrFail($st['id'])->delete();
+                }
+            }
 
-                SPPTSNI::create($storeSub);
+            $fieldPost = array("nomor_sertifikat", "masa_berlaku");
+            for ($i = 0; $i < count($_POST['post_sppt'][$fieldPost[0]]); $i++) {
+                if (!empty($_POST['post_sppt']['nomor_sertifikat'][$i]) or !empty($_POST['post_sppt']['masa_berlaku'][$i])) {
+                    $storeSub = [
+                        'id_perusahaan' => $id_perusahaan,
+                        'nomor_sertifikat' => $_POST['post_sppt']['nomor_sertifikat'][$i],
+                        'masa_berlaku' => $_POST['post_sppt']['masa_berlaku'][$i]
+                    ];
+
+                    SPPTSNI::create($storeSub);
+                }
             }
         }
+
+        return redirect('profil-pelanggan')->with('alert-success', 'Success Update Data');
     }
+
 
     /**
      * Display the specified resource.

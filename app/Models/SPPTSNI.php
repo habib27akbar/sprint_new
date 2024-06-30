@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SPPTSNI extends Model
 {
     use HasFactory;
+    protected $table = 'sppt_sni';
+    protected $guarded = ['id'];
 }

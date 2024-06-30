@@ -73,6 +73,7 @@
                                             aria-selected="false">Perusahaan Penanggung Jawab (Untuk Produsen Luar Negeri)</a>
                                     </li>
                                 </ul>
+                                
                                 <div class="tab-content" id="custom-tabs-one-tabContent">
                                     <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-home-tab">
@@ -133,7 +134,7 @@
                                             <div class="col-sm-7">
                                                 <input type="file" name="salinan_akta_pendirian_perusahaan" onchange="validateFile()"
                                                     id="salinanAktaPendirianPerusahaan" class="form-control">
-                                                <input type="hidden" name="salinan_akta_pendirian_perusahaan_old" value="{{ count($klien) ? $klien[0]['salinan_akta_pendirian_perusahaan'] : '' }}">
+                                                <input type="hidden" name="salinan_akta_pendirian_perusahaan_old" value="{{ $getData ? $klien[0]['salinan_akta_pendirian_perusahaan'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertSalinanExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -154,7 +155,7 @@
                                             <div class="col-sm-7">
                                                 <input type="file" name="salinan_akta_pendirian_perusahaan_tersumpah" onchange="validateFileTersumpah()"
                                                     id="salinanAktaPendirianPerusahaanTersumpah" class="form-control">
-                                                <input type="hidden" name="salinan_akta_pendirian_perusahaan_tersumpah_old" value="{{ count($klien) ? $klien[0]['salinan_akta_pendirian_perusahaan_tersumpah'] : '' }}">
+                                                <input type="hidden" name="salinan_akta_pendirian_perusahaan_tersumpah_old" value="{{ $getData ? $klien[0]['salinan_akta_pendirian_perusahaan_tersumpah'] : '' }}">
                                                 <div style="margin-top:10px; display: none;"
                                                     id="alertSalinanExtentionTersumpah"
                                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -174,7 +175,7 @@
                                                 Notaris</label>
                                             <div class="col-sm-7">
                                                 
-                                                <input type="text" name="nama_notaris_akta_pendiri" class="form-control" value="{{ count($klien) ? $klien[0]['nama_notaris_akta_pendiri'] : '' }}" placeholder="Nama Notaris">
+                                                <input type="text" name="nama_notaris_akta_pendiri" class="form-control" value="{{ $getData ? $klien[0]['nama_notaris_akta_pendiri'] : '' }}" placeholder="Nama Notaris">
                                             </div>
                                         </div>
 
@@ -182,7 +183,7 @@
                                             <label for="nama_perusahaan" class="col-sm-5 col-form-label">Kedudukan
                                                 Notaris</label>
                                             <div class="col-sm-7">
-                                                <input type="text" name="kedudukan_notaris_akta_pendiri" value="{{ count($klien) ? $klien[0]['kedudukan_notaris_akta_pendiri'] : '' }}" class="form-control"
+                                                <input type="text" name="kedudukan_notaris_akta_pendiri" value="{{ $getData ? $klien[0]['kedudukan_notaris_akta_pendiri'] : '' }}" class="form-control"
                                                     placeholder="Kedudukan Notaris">
                                             </div>
                                         </div>
@@ -191,7 +192,7 @@
                                             <label for="nama_perusahaan" class="col-sm-5 col-form-label">Tanggal Akta
                                                 Pendirian Perusahaan</label>
                                             <div class="col-sm-7">
-                                                <input type="date" name="tanggal_akta_pendiri" value="{{ count($klien) ? $klien[0]['tanggal_akta_pendiri'] : '' }}" class="form-control">
+                                                <input type="date" name="tanggal_akta_pendiri" value="{{ $getData ? $klien[0]['tanggal_akta_pendiri'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
@@ -199,7 +200,7 @@
                                             <label for="nama_perusahaan" class="col-sm-5 col-form-label">Nomor Akta
                                                 Pendirian Perusahaan</label>
                                             <div class="col-sm-7">
-                                                <input type="text" name="nomor_akta_pendiri" value="{{ count($klien) ? $klien[0]['nomor_akta_pendiri'] : '' }}" class="form-control"
+                                                <input type="text" name="nomor_akta_pendiri" value="{{ $getData ? $klien[0]['nomor_akta_pendiri'] : '' }}" class="form-control"
                                                     placeholder="Nomor Akta Pendirian Perusahaan">
                                             </div>
                                         </div>
@@ -213,7 +214,7 @@
                                             <div class="col-sm-7">
                                                 <input type="file" name="salinan_akta_perubahan_perusahaan" onchange="validateFilePerubahan()"
                                                     id="salinanAktaPerubahanPendirianPerusahaan" class="form-control">
-                                                <input type="hidden" name="salinan_akta_perubahan_perusahaan_old" value="{{ count($klien) ? $klien[0]['salinan_akta_perubahan_perusahaan'] : '' }}">
+                                                <input type="hidden" name="salinan_akta_perubahan_perusahaan_old" value="{{ $getData ? $klien[0]['salinan_akta_perubahan_perusahaan'] : '' }}">
                                                 <div style="margin-top:10px; display: none;"
                                                     id="alertSalinanExtentionPerubahan"
                                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -236,7 +237,7 @@
                                                 <input type="file" name="salinan_akta_perubahan_perusahaan_tersumpah" onchange="validateFilePerubahanTersumpah()"
                                                     id="salinanAktaPerubahanPendirianPerusahaanTersumpah"
                                                     class="form-control">
-                                                <input type="hidden" name="salinan_akta_perubahan_perusahaan_tersumpah_old" value="{{ count($klien) ? $klien[0]['salinan_akta_perubahan_perusahaan_tersumpah'] : '' }}">
+                                                <input type="hidden" name="salinan_akta_perubahan_perusahaan_tersumpah_old" value="{{ $getData ? $klien[0]['salinan_akta_perubahan_perusahaan_tersumpah'] : '' }}">
                                                 <div style="margin-top:10px; display: none;"
                                                     id="alertSalinanExtentionTersumpahPerubahan"
                                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -256,7 +257,7 @@
                                             <label for="nama_perusahaan" class="col-sm-5 col-form-label">Nama
                                                 Notaris</label>
                                             <div class="col-sm-7">
-                                                <input type="text" name="nama_notaris" class="form-control" value="{{ count($klien) ? $klien[0]['nama_notaris'] : '' }}" placeholder="Nama Notaris">
+                                                <input type="text" name="nama_notaris" class="form-control" value="{{ $getData ? $klien[0]['nama_notaris'] : '' }}" placeholder="Nama Notaris">
                                             </div>
                                         </div>
 
@@ -265,7 +266,7 @@
                                                 Notaris</label>
                                             <div class="col-sm-7">
                                                 <input type="text" name="kedudukan_notaris" class="form-control"
-                                                    placeholder="Kedudukan Notaris" value="{{ count($klien) ? $klien[0]['nama_notaris'] : '' }}">
+                                                    placeholder="Kedudukan Notaris" value="{{ $getData ? $klien[0]['nama_notaris'] : '' }}">
                                             </div>
                                         </div>
 
@@ -273,7 +274,7 @@
                                             <label for="nama_perusahaan" class="col-sm-5 col-form-label">Tanggal Akta
                                                 Pendirian Perusahaan</label>
                                             <div class="col-sm-7">
-                                                <input type="date" name="tanggal" class="form-control" value="{{ count($klien) ? $klien[0]['tanggal'] : '' }}">
+                                                <input type="date" name="tanggal" class="form-control" value="{{ $getData ? $klien[0]['tanggal'] : '' }}">
                                             </div>
                                         </div>
 
@@ -281,7 +282,7 @@
                                             <label for="nama_perusahaan" class="col-sm-5 col-form-label">Nomor Akta
                                                 Pendirian Perusahaan</label>
                                             <div class="col-sm-7">
-                                                <input type="text" name="nomor_akta" class="form-control" value="{{ count($klien) ? $klien[0]['nomor_akta'] : '' }}"
+                                                <input type="text" name="nomor_akta" class="form-control" value="{{ $getData ? $klien[0]['nomor_akta'] : '' }}"
                                                     placeholder="Nomor Akta Pendirian Perusahaan">
                                             </div>
                                         </div>
@@ -296,7 +297,7 @@
                                             <div class="col-sm-7">
                                                 <input type="file" name="salinan_izin_industri" onchange="validateFileIndustri()"
                                                     id="salinanIzinIndustri" class="form-control">
-                                                <input type="hidden" name="salinan_izin_industri_old" value="{{ count($klien) ? $klien[0]['salinan_izin_industri'] : '' }}">
+                                                <input type="hidden" name="salinan_izin_industri_old" value="{{ $getData ? $klien[0]['salinan_izin_industri'] : '' }}">
                                                 <div style="margin-top:10px; display: none;"
                                                     id="alertSalinanExtentionIndustri"
                                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -317,7 +318,7 @@
                                             <div class="col-sm-7">
                                                 <input type="file" name="salinan_izin_industri_tersumpah" onchange="validateFileIndustriTersumpah()"
                                                     id="salinanIzinIndustriTersumpah" class="form-control">
-                                                <input type="hidden" name="salinan_izin_industri_tersumpah_old" value="{{ count($klien) ? $klien[0]['salinan_izin_industri_tersumpah'] : '' }}">
+                                                <input type="hidden" name="salinan_izin_industri_tersumpah_old" value="{{ $getData ? $klien[0]['salinan_izin_industri_tersumpah'] : '' }}">
                                                 <div style="margin-top:10px; display: none;"
                                                     id="alertSalinanExtentionIndustriTersumpah"
                                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -338,7 +339,7 @@
                                                 Berusaha</label>
                                             <div class="col-sm-7">
                                                 <input type="text" name="NIB" class="form-control"
-                                                    placeholder="Nomor Induk Berusaha" value="{{ count($klien) ? $klien[0]['NIB'] : '' }}">
+                                                    placeholder="Nomor Induk Berusaha" value="{{ $getData ? $klien[0]['NIB'] : '' }}">
                                             </div>
                                         </div>
 
@@ -347,7 +348,7 @@
                                                 NIB</label>
                                             <div class="col-sm-7">
                                                 <input type="text" name="instansi_penerbit" class="form-control"
-                                                    placeholder="Instansi Penerbit NIB">
+                                                    placeholder="Instansi Penerbit NIB" value="{{ $getData ? $klien[0]['instansi_penerbit'] : '' }}">
                                             </div>
                                         </div>
 
@@ -357,9 +358,9 @@
                                             <div class="col-sm-7">
                                                 <select name="jenis_angka_pengenal_importir" class="form-control">
                                                     <option value="">--</option>
-                                                    <option value="Angka Pengenal Importir-Produsen">Angka Pengenal
+                                                    <option {{ $getData && $klien[0]['jenis_angka_pengenal_importir'] == 'Angka Pengenal Importir-Produsen' ? 'selected' : '' }} value="Angka Pengenal Importir-Produsen">Angka Pengenal
                                                         Importir-Produsen</option>
-                                                    <option value="Angka Pengenal Importir-Umum">Angka Pengenal
+                                                    <option  {{ $getData && $klien[0]['jenis_angka_pengenal_importir'] == 'Angka Pengenal Importir-Umum' ? 'selected' : '' }} value="Angka Pengenal Importir-Umum">Angka Pengenal
                                                         Importir-Umum</option>
                                                 </select>
                                             </div>
@@ -371,8 +372,8 @@
                                             <div class="col-sm-7">
                                                 <select name="status_penanaman_modal" class="form-control">
                                                     <option value="">--</option>
-                                                    <option value="Penanaman Modal Asing">Penanaman Modal Asing</option>
-                                                    <option value="Penanaman Dalam Negeri">Penanaman Dalam Negeri</option>
+                                                    <option {{ $getData && $klien[0]['status_penanaman_modal'] == 'Penanaman Modal Asing' ? 'selected' : '' }} value="Penanaman Modal Asing">Penanaman Modal Asing</option>
+                                                    <option {{ $getData && $klien[0]['status_penanaman_modal'] == 'Penanaman Dalam Negeri' ? 'selected' : '' }} value="Penanaman Dalam Negeri">Penanaman Dalam Negeri</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -390,6 +391,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($kbli as $kl)
+                                                    @if ($kl->tipe == 1)
+                                                        <tr>
+                                                            <td><button type="button" value="Delete" onclick="deleteKBLI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>
+                                                            <td><input type="text" name="data_post[kode_kbli][]" value="{{ $kl->kode_kbli }}" class="form-control"></td>
+                                                            <td><input type="text" name="data_post[nama_kbli][]" value="{{ $kl->nama_kbli }}" class="form-control"></td>
+                                                            <td><input type="text" name="data_post[lokasi_usaha][]" value="{{ $kl->lokasi_usaha }}" class="form-control"><input type="hidden" name="data_post[tipe][]" value="1" class="form-control"></td>
+                                                        </tr> 
+                                                    @endif                                                   
+                                                @endforeach
 
                                                 <tr>
                                                     <td>
@@ -412,7 +423,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 NPWP</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_npwp" class="form-control" placeholder="Nomor NPWP">
+                                                <input type="text" name="nomor_npwp" value="{{ $getData ? $klien[0]['nomor_npwp'] : '' }}" class="form-control" placeholder="Nomor NPWP">
                                             </div>
                                         </div>
 
@@ -422,6 +433,7 @@
                                             <div class="col-sm-8">
                                                 <input type="file" name="salinan_npwp" class="form-control" onchange="salinanNPWP()"
                                                     id="salinanNPWP">
+                                                <input type="hidden" name="salinan_npwp_old" value="{{ $getData ? $klien[0]['salinan_npwp'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="salinanNPWPExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa .JPG/
@@ -443,7 +455,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat" class="form-control" placeholder="Alamat Kantor">
+                                                <input type="text" name="alamat" class="form-control" value="{{ $getData ? $klien[0]['alamat'] : '' }}" placeholder="Alamat Kantor">
                                             </div>
                                         </div>
 
@@ -453,7 +465,7 @@
                                                 <select name="provinsi" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($provinsi as $p)
-                                                        <option value="{{ $p['name'] }}">{{ $p['name'] }}</option>
+                                                        <option {{ $getData && $klien[0]['provinsi'] == $p['name'] ? 'selected' : '' }} value="{{ $p['name'] }}">{{ $p['name'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -465,7 +477,7 @@
                                                 <select name="negara" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($country as $p)
-                                                        <option value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
+                                                        <option {{ $getData && $klien[0]['negara'] == $p['country_name'] ? 'selected' : '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -475,7 +487,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Website</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="website" class="form-control" placeholder="Website">
+                                                <input type="text" name="website" class="form-control" placeholder="Website" value="{{ $getData ? $klien[0]['website'] : '' }}">
                                             </div>
                                         </div>
 
@@ -483,14 +495,14 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon" class="form-control" value="{{ $getData ? $klien[0]['nomor_telepon'] : '' }}" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email" class="form-control" placeholder="Email">
+                                                <input type="text" name="email" class="form-control" value="{{ $getData ? $klien[0]['email'] : '' }}" placeholder="Email">
                                             </div>
                                         </div>
 
@@ -500,7 +512,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat_pabrik" class="form-control" placeholder="Alamat Pabrik">
+                                                <input type="text" name="alamat_pabrik" class="form-control" value="{{ $getData ? $klien[0]['alamat_pabrik'] : '' }}" placeholder="Alamat Pabrik">
                                             </div>
                                         </div>
 
@@ -510,7 +522,7 @@
                                                 <select name="provinsi_pabrik" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($provinsi as $p)
-                                                        <option value="{{ $p['name'] }}">{{ $p['name'] }}</option>
+                                                        <option {{ $getData && $klien[0]['provinsi_pabrik'] == $p['name'] ? 'selected' : '' }} value="{{ $p['name'] }}">{{ $p['name'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -522,7 +534,7 @@
                                                 <select name="negara_pabrik" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($country as $p)
-                                                        <option value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
+                                                        <option {{ $getData && $klien[0]['negara_pabrik'] == $p['country_name'] ? 'selected' : '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -532,7 +544,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Website</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="website_pabrik" class="form-control" placeholder="Website">
+                                                <input type="text" name="website_pabrik" class="form-control" value="{{ $getData ? $klien[0]['website_pabrik'] : '' }}" placeholder="Website">
                                             </div>
                                         </div>
 
@@ -540,14 +552,14 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon_pabrik" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon_pabrik" class="form-control" value="{{ $getData ? $klien[0]['nomor_telepon_pabrik'] : '' }}" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email_pabrik" class="form-control" placeholder="Email">
+                                                <input type="text" name="email_pabrik" class="form-control" value="{{ $getData ? $klien[0]['email_pabrik'] : '' }}" placeholder="Email">
                                             </div>
                                         </div>
                                     </div>
@@ -559,7 +571,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nama_direktur" class="form-control" placeholder="Nama">
+                                                <input type="text" name="nama_direktur" value="{{ $getData ? $klien[0]['nama_direktur'] : '' }}" class="form-control" placeholder="Nama">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -569,7 +581,7 @@
                                                 <select name="negara_direktur" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($country as $p)
-                                                        <option value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
+                                                        <option {{ $getData && $klien[0]['negara_direktur'] == $p['country_name'] ? 'selected' : '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -579,7 +591,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat_direktur" class="form-control" placeholder="Alamat">
+                                                <input type="text" name="alamat_direktur" class="form-control" value="{{ $getData ? $klien[0]['alamat_direktur'] : '' }}" placeholder="Alamat">
                                             </div>
                                         </div>
 
@@ -587,14 +599,14 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon_direktur" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon_direktur" value="{{ $getData ? $klien[0]['nomor_telepon_direktur'] : '' }}" class="form-control" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email_direktur" class="form-control" placeholder="Email">
+                                                <input type="text" name="email_direktur" value="{{ $getData ? $klien[0]['email_direktur'] : '' }}" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
                                         <br />
@@ -603,7 +615,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nama_sm" class="form-control" placeholder="Nama">
+                                                <input type="text" name="nama_sm" value="{{ $getData ? $klien[0]['nama_sm'] : '' }}" class="form-control" placeholder="Nama">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -613,7 +625,7 @@
                                                 <select name="negara_sm" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($country as $p)
-                                                        <option value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
+                                                        <option {{ $getData && $klien[0]['negara_sm'] == $p['country_name'] ? 'selected' : '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -623,7 +635,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat_sm" class="form-control" placeholder="Alamat">
+                                                <input type="text" name="alamat_sm" value="{{ $getData ? $klien[0]['alamat_sm'] : '' }}" class="form-control" placeholder="Alamat">
                                             </div>
                                         </div>
 
@@ -631,21 +643,21 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon_sm" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon_sm" value="{{ $getData ? $klien[0]['nomor_telepon_sm'] : '' }}" class="form-control" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email_sm" class="form-control" placeholder="Email">
+                                                <input type="text" name="email_sm" value="{{ $getData ? $klien[0]['email_sm'] : '' }}" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jabatan</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="jabatan_sm" class="form-control" placeholder="Jabatan">
+                                                <input type="text" name="jabatan_sm" value="{{ $getData ? $klien[0]['jabatan_sm'] : '' }}" class="form-control" placeholder="Jabatan">
                                             </div>
                                         </div>
 
@@ -656,7 +668,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nama_penghubung" class="form-control" placeholder="Nama">
+                                                <input type="text" name="nama_penghubung" value="{{ $getData ? $klien[0]['nama_penghubung'] : '' }}" class="form-control" placeholder="Nama">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -666,7 +678,7 @@
                                                 <select name="negara_penghubung" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($country as $p)
-                                                        <option value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
+                                                        <option {{ $getData && $klien[0]['negara_penghubung'] == $p['country_name'] ? 'selected' : '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -676,7 +688,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat_penghubung" class="form-control" placeholder="Alamat">
+                                                <input type="text" name="alamat_penghubung" value="{{ $getData ? $klien[0]['alamat_penghubung'] : '' }}" class="form-control" placeholder="Alamat">
                                             </div>
                                         </div>
 
@@ -684,21 +696,21 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon_penghubung" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon_penghubung" value="{{ $getData ? $klien[0]['nomor_telepon_penghubung'] : '' }}" class="form-control" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email_penghubung" class="form-control" placeholder="Email">
+                                                <input type="text" name="email_penghubung" value="{{ $getData ? $klien[0]['email_penghubung'] : '' }}" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jabatan</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="jabatan_penghubung" class="form-control" placeholder="Jabatan">
+                                                <input type="text" name="jabatan_penghubung" value="{{ $getData ? $klien[0]['jabatan_penghubung'] : '' }}" class="form-control" placeholder="Jabatan">
                                             </div>
                                         </div>
 
@@ -708,7 +720,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nama_koresponden" class="form-control" placeholder="Nama">
+                                                <input type="text" name="nama_koresponden" value="{{ $getData ? $klien[0]['nama_koresponden'] : '' }}" class="form-control" placeholder="Nama">
                                             </div>
                                         </div>
 
@@ -716,7 +728,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat_koresponden" class="form-control" placeholder="Alamat">
+                                                <input type="text" name="alamat_koresponden" value="{{ $getData ? $klien[0]['alamat_koresponden'] : '' }}" class="form-control" placeholder="Alamat">
                                             </div>
                                         </div>
 
@@ -724,14 +736,14 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon_koresponden" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon_koresponden" value="{{ $getData ? $klien[0]['nomor_telepon_koresponden'] : '' }}" class="form-control" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email_koresponden" class="form-control" placeholder="Email">
+                                                <input type="text" name="email_koresponden" value="{{ $getData ? $klien[0]['email_koresponden'] : '' }}" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
 
@@ -748,6 +760,7 @@
                                                 Produksi</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="alur_proses_produksi" onchange="validateFileAlurProd()" id="alurProsesProd" class="form-control">
+                                                <input type="hidden" name="alur_proses_produksi_old" value="{{ $getData ? $klien[0]['alur_proses_produksi'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertAlurProdExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -766,6 +779,7 @@
                                                 Bisnis</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="peta_proses_bisnis" onchange="validFilePeta()" id="petaProses" class="form-control">
+                                                <input type="hidden" name="peta_proses_bisnis_old" value="{{ $getData ? $klien[0]['peta_proses_bisnis'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertPetaProsesExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -784,6 +798,7 @@
                                                 Usaha</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="denah_lokasi_usaha" onchange="validFileDenah()" id="denahLokasi" class="form-control">
+                                                <input type="hidden" name="denah_lokasi_usaha_old" value="{{ $getData ? $klien[0]['denah_lokasi_usaha'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertPetaDenahExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -802,6 +817,7 @@
                                                 Produksi</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="daftar_peralatan_produksi" onchange="validFileDaftarProd()" id="daftarPeralatanProd" class="form-control">
+                                                <input type="hidden" name="daftar_peralatan_produksi_old" value="{{ $getData ? $klien[0]['daftar_peralatan_produksi'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertdaftarPeralatanProdExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -820,6 +836,7 @@
                                                 Inspeksi</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="daftar_peralatan_inspeksi" onchange="validDaftarPeralatan()" id="daftarPeralatanIns" class="form-control">
+                                                <input type="hidden" name="daftar_peralatan_inspeksi_old" value="{{ $getData ? $klien[0]['daftar_peralatan_inspeksi'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertdaftarPeralatanInsExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -837,7 +854,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jumlah Tahapan
                                                 Proses</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="jumlah_tahapan_proses" class="form-control"
+                                                <input type="text" name="jumlah_tahapan_proses" value="{{ $getData ? $klien[0]['jumlah_tahapan_proses'] : '' }}" class="form-control"
                                                     placeholder="Jumlah Tahapan Proses">
                                             </div>
                                         </div>
@@ -846,7 +863,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jumlah Shift Per
                                                 Hari</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="jumlah_shift_per_hari" class="form-control"
+                                                <input type="text" name="jumlah_shift_per_hari" value="{{ $getData ? $klien[0]['jumlah_shift_per_hari'] : '' }}" class="form-control"
                                                     placeholder="Jumlah Shift Per Hari">
                                             </div>
                                         </div>
@@ -855,7 +872,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Kapasitas
                                                 Produksi Per Hari</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="kapasitas_produksi_per_hari" class="form-control"
+                                                <input type="text" name="kapasitas_produksi_per_hari" value="{{ $getData ? $klien[0]['kapasitas_produksi_per_hari'] : '' }}" class="form-control"
                                                     placeholder="Kapasitas Produksi Per Hari">
                                             </div>
                                         </div>
@@ -864,7 +881,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Line
                                                 Produksi</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="line_produksi" class="form-control" placeholder="Line Produksi">
+                                                <input type="text" name="line_produksi" class="form-control" value="{{ $getData ? $klien[0]['line_produksi'] : '' }}" placeholder="Line Produksi">
                                             </div>
                                         </div>
 
@@ -875,7 +892,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Total Proses
                                                 Sub-Kontrak</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="total_proses_sub_kontrak" class="form-control"
+                                                <input type="text" name="total_proses_sub_kontrak" value="{{ $getData ? $klien[0]['total_proses_sub_kontrak'] : '' }}" class="form-control"
                                                     placeholder="Total Proses Sub-Kontrak">
                                             </div>
                                         </div>
@@ -892,7 +909,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @foreach ($proses_sub_kontrak as $sb)
+                                                    <tr>
+                                                        <td><button type="button" value="Delete" onclick="deleteSubKontrak(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>
+                                                        <td><input type="text" name="post_sub[proses_sub_kontrak][]" value="{{ $sb->proses_sub_kontrak }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_sub[nama_perusahaan][]" value="{{ $sb->nama_perusahaan }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_sub[alamat_perusahaan][]" value="{{ $sb->alamat_perusahaan }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_sub[persentase][]" value="{{ $sb->persentase }}" class="form-control"></td>
+                                                        
+                                                    </tr> 
+                                                @endforeach
                                                 <tr>
                                                     <td>
 
@@ -910,8 +936,9 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Sistem Produksi</label>
                                             <div class="col-sm-8">
                                                 <select name="sistem_produksi" id="" class="form-control">
-                                                    <option value="By Order">By Order</option>
-                                                    <option value="By Continue">By Continue</option>
+                                                    <option value="-">-</option>
+                                                    <option {{ $getData && $klien[0]['sistem_produksi'] == 'By Order' ? 'selected' : '' }} value="By Order">By Order</option>
+                                                    <option {{ $getData && $klien[0]['sistem_produksi'] == 'By Continue' ? 'selected' : '' }} value="By Continue">By Continue</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -920,7 +947,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Bahasa yang
                                                 Digunakan di Pabrik</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="bahasa" class="form-control">
+                                                <input type="text" name="bahasa" value="{{ $getData ? $klien[0]['bahasa'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
@@ -929,8 +956,8 @@
                                                 Menyediakan Penerjemah</label>
                                             <div class="col-sm-8">
                                                 <select name="menyediakan_penerjemah" id="" class="form-control">
-                                                    <option value="Ya">Ya</option>
-                                                    <option value="Tidak">Tidak</option>
+                                                    <option {{ $getData && $klien[0]['menyediakan_penerjemah'] == 'Ya' ? 'selected' : '' }} value="Ya">Ya</option>
+                                                    <option {{ $getData && $klien[0]['menyediakan_penerjemah'] == 'Tidak' ? 'selected' : '' }} value="Tidak">Tidak</option>
                                                 </select>
                                                 Note : Jika Tidak Menggunakan Bahasa Indonesia Maka Diperlukan Penerjemah
                                                 untuk Setiap Auditor dan PPC
@@ -954,6 +981,19 @@
                                             </thead>
                                             <tbody>
 
+                                                @foreach ($transportasi as $item)
+                                                    <tr>
+                                                        <td><button type="button" value="Delete" onclick="deleteRowTransportasi(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>
+                                                        <td><input type="text" name="post_trans[asal][]" value="{{ $item->asal }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_trans[tujuan][]" value="{{ $item->tujuan }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_trans[rute][]" value="{{ $item->rute }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_trans[moda][]" value="{{ $item->moda }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_trans[jarak_tempuh][]" value="{{ $item->jarak_tempuh }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_trans[waktu][]" value="{{ $item->waktu }}" class="form-control"></td>
+                                                    </tr>
+                                                    
+                                                @endforeach
+
                                                 <tr>
                                                     <td>
 
@@ -976,6 +1016,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">SDM dan Struktur Organisasi</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="sdm_dan_struktur_organisasi" onchange="validSdmStruktur()" id="sdmStrukturOrganisasi" class="form-control">
+                                                <input type="hidden" name="sdm_dan_struktur_organisasi_old" value="{{ $getData ? $klien[0]['sdm_dan_struktur_organisasi'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertsdmStrukturOrganisasiExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -995,31 +1036,31 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Tenaga Kerja bagian Mutu/Quality</label>
                                             <div class="col-sm-8">
-                                                <input type="number" name="jml_bag_mutu_quality" class="form-control">
+                                                <input type="number" name="jml_bag_mutu_quality" value="{{ $getData ? $klien[0]['jml_bag_mutu_quality'] : '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Tenaga Kerja Bagian Produksi</label>
                                             <div class="col-sm-8">
-                                                <input type="number" name="jml_bag_produksi" class="form-control">
+                                                <input type="number" name="jml_bag_produksi" value="{{ $getData ? $klien[0]['jml_bag_produksi'] : '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Tenaga Kerja Selain Bagian Mutu dan Produksi</label>
                                             <div class="col-sm-8">
-                                                <input type="number" name="jml_selain_bag_mutu_produksi" class="form-control">
+                                                <input type="number" name="jml_selain_bag_mutu_produksi" value="{{ $getData ? $klien[0]['jml_selain_bag_mutu_produksi'] : '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jumlah Karyawan terkait Produk Disertifikasi</label>
                                             <div class="col-sm-8">
-                                                <input type="number" name="jml_kary_produksi" class="form-control">
+                                                <input type="number" name="jml_kary_produksi" value="{{ $getData ? $klien[0]['jml_kary_produksi'] : '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jam Kerja Per Hari</label>
                                             <div class="col-sm-8">
-                                                <input type="number" name="jml_kerja_per_hari" class="form-control">
+                                                <input type="number" name="jml_kerja_per_hari" value="{{ $getData ? $klien[0]['jml_kerja_per_hari'] : '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <br/>
@@ -1036,7 +1077,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @foreach ($struktur_organisasi as $item)
+                                                    <tr>
+                                                        <td><button type="button" value="Delete" onclick="deleteRowstrukturOrganisasi(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>
+                                                        <td><input type="text" name="post_struktur[nama_divisi][]" value="{{ $item->nama_divisi }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_struktur[tanggung_jawab][]" value="{{ $item->tanggung_jawab }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_struktur[jumlah_personil][]" value="{{ $item->jumlah_personil }}" class="form-control"></td>
+                                                    </tr>
+                                                @endforeach
                                                 <tr>
                                                     <td>
 
@@ -1059,6 +1107,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Pedoman Sistem Manajemen</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="pedoman_sistem_manajemen" onchange="pedomanSm()" id="pedomanSistemManajemen" class="form-control">
+                                                <input type="hidden" name="pedoman_sistem_manajemen_old" value="{{ $getData ? $klien[0]['pedoman_sistem_manajemen'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertSMExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -1105,7 +1154,40 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @foreach ($pedoman_sertifikasi as $item)
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" value="Delete" onclick="deletePedomanSistem(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                        </td>
+                                                        <td><input type="text" name="post_pedoman[jenis_sistem_manajemen][]"  value="{{ $item->jenis_sistem_manajemen }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_pedoman[versi_standar_sistem][]"  value="{{ $item->versi_standar_sistem }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_pedoman[lembaga_sertifikasi][]"  value="{{ $item->lembaga_sertifikasi }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_pedoman[nomor_sertifikat][]" value="{{ $item->nomor_sertifikat }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_pedoman[masa_berlaku][]" value="{{ $item->masa_berlaku }}" class="form-control"></td>
+                                                        <td>
+                                                            <select class="form-control" name="post_pedoman[logo_sertifikat][]">
+                                                                
+                                                                <option {{ $item->logo_sertifikat == 'KAN' ? 'selected':'' }} value="KAN">KAN</option>
+                                                                <option {{ $item->logo_sertifikat == 'IAF' ? 'selected':'' }} value="IAF">IAF</option>
+                                                                <option {{ $item->logo_sertifikat == 'Bukan Keduanya' ? 'selected':'' }} value="Bukan Keduanya">Bukan Keduanya</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="post_pedoman[ruang_lingkup][]" value="{{ $item->ruang_lingkup }}" class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-control" name="post_pedoman[penerapan][]">
+                                                                <option value="-">-</option>
+                                                                <option {{ $item->penerapan == 'Secara Mandiri' ? 'selected':'' }} value="Secara Mandiri">Secara Mandiri</option>
+                                                                <option {{ $item->penerapan == 'Dengan Konsultan' ? 'selected':'' }} value="Dengan Konsultan">Dengan Konsultan</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" name="post_pedoman[nama_konsultan][]" value="{{ $item->nama_konsultan }}" class="form-control"></td>
+                                                        <td><input type="text" name="post_pedoman[tahun_konsultan][]" value="{{ $item->tahun_konsultan }}" class="form-control"></td>
+                                                        <td><input type="file" onchange="sertifikatPSM({{ $loop->iteration }})" id="sertifikatPSMid{{ $loop->iteration }}" name="post_pedoman[sertifikat][]" class="form-control"><input type="hidden" name="post_pedoman[sertifikat_old][]" class="form-control" value="{{ $item->sertifikat }}"></td>
+                                                        
+                                                    </tr>
+                                                @endforeach
                                                 <tr>
                                                     <td>
 
@@ -1126,8 +1208,8 @@
                                             <div class="col-sm-8">
                                                 <select name="kepemilikan_sertifikasi_ll" onchange="kepemilikan(this.value)" class="form-control">
                                                     <option value="-">-</option>
-                                                    <option value="Ya">Ya</option>
-                                                    <option value="Tidak">Tidak</option>
+                                                    <option {{ $getData && $klien[0]['kepemilikan_sertifikasi_ll'] == 'Ya' ? 'selected' : '' }} value="Ya">Ya</option>
+                                                    <option {{ $getData && $klien[0]['kepemilikan_sertifikasi_ll'] == 'Tidak' ? 'selected' : '' }} value="Tidak">Tidak</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -1135,7 +1217,7 @@
                                             <div class="form-group row">
                                                 <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama Lembaga Sertifikasi</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="nama_lembaga" class="form-control">
+                                                    <input type="text" name="nama_lembaga" value="{{ $getData ? $klien[0]['nama_lembaga'] : '' }}" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -1153,7 +1235,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @foreach ($sppt_sni as $item)
+                                                    <tr>
+                                                        <td><button type="button" value="Delete" onclick="deleteSPPT(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>
+                                                        <td><input type="text" name="post_sppt[nomor_sertifikat][]" value="{{ $item->nomor_sertifikat }}" class="form-control"></td>
+                                                        <td><input type="date" name="post_sppt[masa_berlaku][]" value="{{ $item->masa_berlaku }}" class="form-control"></td>
+                                                    </tr>   
+                                                @endforeach
                                                 <tr>
                                                     <td>
 
@@ -1177,6 +1265,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Akta Pendirian Perusahaan</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="akta_pendiri_ppj" onchange="validAktaPendiri()" id="aktaPendirianPerusahaan" class="form-control">
+                                                <input type="hidden" name="akta_pendiri_ppj_old" value="{{ $getData ? $klien[0]['akta_pendiri_ppj'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertAktaPendiriExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -1195,6 +1284,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Salinan Akta Pendirian Perusahaan Terjemahan Tersumpah</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="salinan_akta_pendiri_ppj" onchange="validAktaPendiriSalinan()" id="aktaPendirianPerusahaanSalinan" class="form-control">
+                                                <input type="hidden" name="salinan_akta_pendiri_ppj_old" value="{{ $getData ? $klien[0]['salinan_akta_pendiri_ppj'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertAktaPendiriSalinanExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -1212,28 +1302,28 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama Notaris</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nama_notaris_pendiri_ppj" class="form-control">
+                                                <input type="text" name="nama_notaris_pendiri_ppj" value="{{ $getData ? $klien[0]['nama_notaris_pendiri_ppj'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Kedudukan Notaris</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="kedudukan_pendiri_notaris_ppj" class="form-control">
+                                                <input type="text" name="kedudukan_pendiri_notaris_ppj" value="{{ $getData ? $klien[0]['kedudukan_pendiri_notaris_ppj'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Tanggal Akta Pendirian Perusahaan</label>
                                             <div class="col-sm-8">
-                                                <input type="date" name="tanggal_akta_pendiri_ppj" class="form-control">
+                                                <input type="date" name="tanggal_akta_pendiri_ppj" value="{{ $getData ? $klien[0]['tanggal_akta_pendiri_ppj'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Akta Pendirian Perusahaan</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_akta_pendiri_ppj" class="form-control">
+                                                <input type="text" name="nomor_akta_pendiri_ppj" value="{{ $getData ? $klien[0]['nomor_akta_pendiri_ppj'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
@@ -1246,6 +1336,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Akta Pendirian Perusahaan</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="akta_pendiri_ppj_perubahan" onchange="validAktaPendiriPerubahan()" id="aktaPendirianPerusahaanPerubahan" class="form-control">
+                                                <input type="hidden" name="salinan_akta_perubahan_perusahaan_old" value="{{ $getData ? $klien[0]['akta_pendiri_ppj_perubahan'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertAktaPendiriPerubahanExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -1264,6 +1355,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Salinan Akta Pendirian Perusahaan Terjemahan Tersumpah</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="salinan_akta_pendiri_ppj_perubahan" onchange="validAktaPendiriSalinanPerubahan()" id="aktaPendirianPerusahaanSalinanPerubahan" class="form-control">
+                                                <input type="hidden" name="salinan_akta_pendiri_ppj_perubahan_old" value="{{ $getData ? $klien[0]['salinan_akta_pendiri_ppj_perubahan'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="alertAktaPendiriSalinanPerubahanExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -1281,28 +1373,28 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama Notaris</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nama_notaris_pendiri_ppj_perubahan" class="form-control">
+                                                <input type="text" name="nama_notaris_pendiri_ppj_perubahan" value="{{ $getData ? $klien[0]['nama_notaris_pendiri_ppj_perubahan'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Kedudukan Notaris</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="kedudukan_pendiri_notaris_ppj_perubahan" class="form-control">
+                                                <input type="text" name="kedudukan_pendiri_notaris_ppj_perubahan" value="{{ $getData ? $klien[0]['kedudukan_pendiri_notaris_ppj_perubahan'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Tanggal Akta Pendirian Perusahaan</label>
                                             <div class="col-sm-8">
-                                                <input type="date" name="tanggal_akta_pendiri_ppj_perubahan" class="form-control">
+                                                <input type="date" name="tanggal_akta_pendiri_ppj_perubahan" value="{{ $getData ? $klien[0]['tanggal_akta_pendiri_ppj_perubahan'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Akta Pendirian Perusahaan</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_akta_pendiri_ppj_perubahan" class="form-control">
+                                                <input type="text" name="nomor_akta_pendiri_ppj_perubahan" value="{{ $getData ? $klien[0]['nomor_akta_pendiri_ppj_perubahan'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
@@ -1314,6 +1406,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Salinan Izin Industri</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="salinan_izin_industri_ppj" onchange="validSalinanIzin()" id="salinanIzin" class="form-control">
+                                                <input type="hidden" name="salinan_izin_industri_ppj_old" value="{{ $getData ? $klien[0]['salinan_izin_industri_ppj'] : '' }}" class="form-control">
                                                 <div style="margin-top:10px; display: none;" id="alertSalinanIzinExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -1333,6 +1426,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Salinan Izin Industri Terjemahan Tersumpah</label>
                                             <div class="col-sm-8">
                                                 <input type="file" name="salinan_izin_industri_tersumpah_ppj" onchange="validSalinanIzinTersumpah()" id="salinanIzinTersumpah" class="form-control">
+                                                <input type="hidden" name="salinan_izin_industri_tersumpah_ppj_old" value="{{ $getData ? $klien[0]['salinan_izin_industri_tersumpah_ppj'] : '' }}" class="form-control">
                                                 <div style="margin-top:10px; display: none;" id="alertSalinanIzinTersumpahExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -1350,7 +1444,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Induk Berusaha</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="NIB_ppj" class="form-control">
+                                                <input type="text" name="NIB_ppj" value="{{ $getData ? $klien[0]['NIB_ppj'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
@@ -1358,7 +1452,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Instansi Penerbit NIB</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="instansi_penerbit_ppj" class="form-control">
+                                                <input type="text" name="instansi_penerbit_ppj" value="{{ $getData ? $klien[0]['instansi_penerbit_ppj'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
@@ -1367,8 +1461,8 @@
                                             <div class="col-sm-8">
                                                 <select name="jenis_angka_pengenal_importir_ppj" class="form-control">
                                                     <option value="-">-</option>
-                                                    <option value="Angka Pengenal Importir-Produsen">Angka Pengenal Importir-Produsen</option>
-                                                    <option value="Angka Pengenal Importir-Umum">Angka Pengenal Importir-Umum</option>
+                                                    <option {{ $getData && $klien[0]['jenis_angka_pengenal_importir_ppj'] == 'Angka Pengenal Importir-Produsen' ? 'selected' : '' }} value="Angka Pengenal Importir-Produsen">Angka Pengenal Importir-Produsen</option>
+                                                    <option {{ $getData && $klien[0]['jenis_angka_pengenal_importir_ppj'] == 'Angka Pengenal Importir-Umum' ? 'selected' : '' }} value="Angka Pengenal Importir-Umum">Angka Pengenal Importir-Umum</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -1377,7 +1471,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Status Penanaman Modal</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="status_penanaman_modal_ppj" class="form-control">
+                                                <input type="text" name="status_penanaman_modal_ppj" value="{{ $getData ? $klien[0]['status_penanaman_modal_ppj'] : '' }}" class="form-control">
                                             </div>
                                         </div>
 
@@ -1396,6 +1490,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($kbli as $kl)
+                                                    @if ($kl->tipe == 2)
+                                                        <tr>
+                                                            <td><button type="button" value="Delete" onclick="deleteKBLI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>
+                                                            <td><input type="text" name="data_post[kode_kbli][]" value="{{ $kl->kode_kbli }}" class="form-control"></td>
+                                                            <td><input type="text" name="data_post[nama_kbli][]" value="{{ $kl->nama_kbli }}" class="form-control"></td>
+                                                            <td><input type="text" name="data_post[lokasi_usaha][]" value="{{ $kl->lokasi_usaha }}" class="form-control"><input type="hidden" name="data_post[tipe][]" value="2" class="form-control"></td>
+                                                        </tr> 
+                                                    @endif                                                   
+                                                @endforeach
 
                                                 <tr>
                                                     <td>
@@ -1418,7 +1522,7 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 NPWP</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_npwp_ppj" class="form-control" placeholder="Nomor NPWP">
+                                                <input type="text" name="nomor_npwp_ppj" value="{{ $getData ? $klien[0]['nomor_npwp_ppj'] : '' }}" class="form-control" placeholder="Nomor NPWP">
                                             </div>
                                         </div>
 
@@ -1428,6 +1532,7 @@
                                             <div class="col-sm-8">
                                                 <input type="file" name="salinan_npwp_ppj" class="form-control" onchange="salinanNPWPPPJ()"
                                                     id="salinanNPWP_id">
+                                                <input type="hidden" name="salinan_npwp_ppj_old" value="{{ $getData ? $klien[0]['salinan_npwp_ppj'] : '' }}">
                                                 <div style="margin-top:10px; display: none;" id="salinanNPWPPPJExtention"
                                                     class="alert alert-danger alert-dismissible" role="alert">
                                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa .JPG/
@@ -1449,7 +1554,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat_ppj" class="form-control" placeholder="Alamat Kantor">
+                                                <input type="text" name="alamat_ppj" value="{{ $getData ? $klien[0]['alamat_ppj'] : '' }}" class="form-control" placeholder="Alamat Kantor">
                                             </div>
                                         </div>
 
@@ -1459,7 +1564,7 @@
                                                 <select name="provinsi_ppj" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($provinsi as $p)
-                                                        <option value="{{ $p['name'] }}">{{ $p['name'] }}</option>
+                                                        <option {{ $getData && $klien[0]['provinsi_ppj'] == $p['name'] ? 'selected' : '' }} value="{{ $p['name'] }}">{{ $p['name'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -1471,7 +1576,7 @@
                                                 <select name="negara_ppj" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($country as $p)
-                                                        <option value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
+                                                        <option {{ $getData && $klien[0]['negara_ppj'] == $p['country_name'] ? 'selected' : '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -1481,7 +1586,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Website</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="website_ppj" class="form-control" placeholder="Website">
+                                                <input type="text" name="website_ppj" value="{{ $getData ? $klien[0]['website_ppj'] : '' }}" class="form-control" placeholder="Website">
                                             </div>
                                         </div>
 
@@ -1489,14 +1594,14 @@
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor
                                                 Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon_ppj" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon_ppj" value="{{ $getData ? $klien[0]['nomor_telepon_ppj'] : '' }}" class="form-control" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email_ppj" class="form-control" placeholder="Email">
+                                                <input type="text" name="email_ppj" value="{{ $getData ? $klien[0]['email_ppj'] : '' }}" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
 
@@ -1507,7 +1612,7 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nama</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nama_ppj_kr" class="form-control" placeholder="Nama">
+                                                <input type="text" name="nama_ppj_kr" value="{{ $getData ? $klien[0]['nama_ppj_kr'] : '' }}" class="form-control" placeholder="Nama">
                                             </div>
                                         </div>
 
@@ -1518,7 +1623,7 @@
                                                 <select name="negara_ppj_kr" class="form-control select2" id="">
                                                     <option value=""></option>
                                                     @foreach ($country as $p)
-                                                        <option value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
+                                                        <option {{ $getData && $klien[0]['negara_ppj_kr'] == $p['country_name'] ? 'selected' : '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -1528,28 +1633,28 @@
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Alamat</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="alamat_ppj_kr" class="form-control" placeholder="Alamat">
+                                                <input type="text" name="alamat_ppj_kr" value="{{ $getData ? $klien[0]['alamat_ppj_kr'] : '' }}" class="form-control" placeholder="Alamat">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Nomor Telepon</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="nomor_telepon_ppj_kr" class="form-control" placeholder="Nomor Telepon">
+                                                <input type="text" name="nomor_telepon_ppj_kr" value="{{ $getData ? $klien[0]['nomor_telepon_ppj_kr'] : '' }}" class="form-control" placeholder="Nomor Telepon">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Email</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="email_ppj_kr" class="form-control" placeholder="Email">
+                                                <input type="text" name="email_ppj_kr" value="{{ $getData ? $klien[0]['email_ppj_kr'] : '' }}" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nama_perusahaan" class="col-sm-4 col-form-label">Jabatan</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="jabatan_ppj_kr" class="form-control" placeholder="Jabatan">
+                                                <input type="text" name="jabatan_ppj_kr" value="{{ $getData ? $klien[0]['jabatan_ppj_kr'] : '' }}" class="form-control" placeholder="Jabatan">
                                             </div>
                                         </div>
 
@@ -2202,8 +2307,8 @@
 
 
             cell1L.innerHTML = "<button type='button' value='Delete' onclick='deleteSPPT(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
-            cell2L.innerHTML = '<input type="text" name="data_post[nomor_sertifikat][]" class="form-control">';
-            cell3L.innerHTML = '<input type="date" name="data_post[masa_berlaku][]" class="form-control">';
+            cell2L.innerHTML = '<input type="text" name="post_sppt[nomor_sertifikat][]" class="form-control">';
+            cell3L.innerHTML = '<input type="date" name="post_sppt[masa_berlaku][]" class="form-control">';
             
 
 
@@ -2227,12 +2332,11 @@
             var cell5L = row.insertCell(4);
 
 
-            cell1L.innerHTML =
-                "<button type='button' value='Delete' onclick='deleteSubKontrak(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
-            cell2L.innerHTML = '<input type="text" name="data_post[proses_sub_kontrak][]" class="form-control">';
-            cell3L.innerHTML = '<input type="text" name="data_post[nama_perusahaan][]" class="form-control">';
-            cell4L.innerHTML = '<input type="text" name="data_post[alamat_perusahaan][]" class="form-control">';
-            cell5L.innerHTML = '<input type="text" name="data_post[persentase][]" class="form-control">';
+            cell1L.innerHTML = "<button type='button' value='Delete' onclick='deleteSubKontrak(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
+            cell2L.innerHTML = '<input type="text" name="post_sub[proses_sub_kontrak][]" class="form-control">';
+            cell3L.innerHTML = '<input type="text" name="post_sub[nama_perusahaan][]" class="form-control">';
+            cell4L.innerHTML = '<input type="text" name="post_sub[alamat_perusahaan][]" class="form-control">';
+            cell5L.innerHTML = '<input type="text" name="post_sub[persentase][]" class="form-control">';
 
         }
 
@@ -2257,12 +2361,12 @@
             var cell7L = row.insertCell(6);
 
             cell1L.innerHTML = "<button type='button' value='Delete' onclick='deleteRowTransportasi(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
-            cell2L.innerHTML = '<input type="text" name="data_post[asal][]" class="form-control">';
-            cell3L.innerHTML = '<input type="text" name="data_post[tujuan][]" class="form-control">';
-            cell4L.innerHTML = '<input type="text" name="data_post[rute][]" class="form-control">';
-            cell5L.innerHTML = '<input type="text" name="data_post[moda][]" class="form-control">';
-            cell6L.innerHTML = '<input type="text" name="data_post[jarak_tempuh][]" class="form-control">';
-            cell7L.innerHTML = '<input type="text" name="data_post[waktu][]" class="form-control">';
+            cell2L.innerHTML = '<input type="text" name="post_trans[asal][]" class="form-control">';
+            cell3L.innerHTML = '<input type="text" name="post_trans[tujuan][]" class="form-control">';
+            cell4L.innerHTML = '<input type="text" name="post_trans[rute][]" class="form-control">';
+            cell5L.innerHTML = '<input type="text" name="post_trans[moda][]" class="form-control">';
+            cell6L.innerHTML = '<input type="text" name="post_trans[jarak_tempuh][]" class="form-control">';
+            cell7L.innerHTML = '<input type="text" name="post_trans[waktu][]" class="form-control">';
         }
 
         function deleteRowTransportasi(btn) {
@@ -2290,17 +2394,17 @@
             //var cell13L = row.insertCell(12);
 
             cell1L.innerHTML = "<button type='button' value='Delete' onclick='deletePedomanSistem(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
-            cell2L.innerHTML = '<input type="text" name="data_post[jenis_sistem_manajemen][]" class="form-control">';
-            cell3L.innerHTML = '<input type="text" name="data_post[versi_standar_sistem][]" class="form-control">';
-            cell4L.innerHTML = '<input type="text" name="data_post[lembaga_sertifikasi][]" class="form-control">';
-            cell5L.innerHTML = '<input type="text" name="data_post[nomor_sertifikat][]" class="form-control">';
-            cell6L.innerHTML = '<input type="text" name="data_post[masa_berlaku][]" class="form-control">';
-            cell7L.innerHTML = '<select class="form-control" name="data_post[logo_sertifikat][]"><option="KAN">KAN</option><option="IAF">IAF</option><option="Bukan Keduanya">Bukan Keduanya</option></select>';
-            cell8L.innerHTML = '<input type="text" name="data_post[ruang_lingkup][]" class="form-control">';
-            cell9L.innerHTML = '<select class="form-control" name="data_post[penerapan][]"><option="-">-</option><option="Secara Mandiri">Secara Mandiri</option><option="Dengan Konsultan">Dengan Konsultan</option></select>';
-            cell10L.innerHTML = '<input type="text" name="data_post[nama_konsultan][]" class="form-control">';
-            cell11L.innerHTML = '<input type="text" name="data_post[tahun_konsultan][]" class="form-control">';
-            cell12L.innerHTML = '<input type="file" onchange="sertifikatPSM('+tbodyRowCount+')" id="sertifikatPSMid'+tbodyRowCount+'" name="data_post[sertifikat][]" class="form-control">';
+            cell2L.innerHTML = '<input type="text" name="post_pedoman[jenis_sistem_manajemen][]" class="form-control">';
+            cell3L.innerHTML = '<input type="text" name="post_pedoman[versi_standar_sistem][]" class="form-control">';
+            cell4L.innerHTML = '<input type="text" name="post_pedoman[lembaga_sertifikasi][]" class="form-control">';
+            cell5L.innerHTML = '<input type="text" name="post_pedoman[nomor_sertifikat][]" class="form-control">';
+            cell6L.innerHTML = '<input type="text" name="post_pedoman[masa_berlaku][]" class="form-control">';
+            cell7L.innerHTML = '<select class="form-control" name="post_pedoman[logo_sertifikat][]"><option value="KAN">KAN</option><option value="IAF">IAF</option><option value="Bukan Keduanya">Bukan Keduanya</option></select>';
+            cell8L.innerHTML = '<input type="text" name="post_pedoman[ruang_lingkup][]" class="form-control">';
+            cell9L.innerHTML = '<select class="form-control" name="post_pedoman[penerapan][]"><option value="-">-</option><option value="Secara Mandiri">Secara Mandiri</option><option value="Dengan Konsultan">Dengan Konsultan</option></select>';
+            cell10L.innerHTML = '<input type="text" name="post_pedoman[nama_konsultan][]" class="form-control">';
+            cell11L.innerHTML = '<input type="text" name="post_pedoman[tahun_konsultan][]" class="form-control">';
+            cell12L.innerHTML = '<input type="file" onchange="sertifikatPSM('+tbodyRowCount+')" id="sertifikatPSMid'+tbodyRowCount+'" name="post_pedoman[sertifikat][]" class="form-control"><input type="hidden" name="post_pedoman[sertifikat_old][]" class="form-control">';
             //cell13L.innerHTML = '<input type="text" name="data_post[Presentase][]" class="form-control">';
         }
 
@@ -2352,11 +2456,10 @@
             var cell4L = row.insertCell(3);
             
 
-            cell1L.innerHTML =
-                "<button type='button' value='Delete' onclick='deleteRowstrukturOrganisasi(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
-            cell2L.innerHTML = '<input type="text" name="data_post[nama_divisi][]" class="form-control">';
-            cell3L.innerHTML = '<input type="text" name="data_post[tanggung_jawab][]" class="form-control">';
-            cell4L.innerHTML = '<input type="text" name="data_post[jumlah_personil][]" class="form-control">';
+            cell1L.innerHTML = "<button type='button' value='Delete' onclick='deleteRowstrukturOrganisasi(this)' class='btn btn-danger'><i class='fas fa-times'></i></button>";
+            cell2L.innerHTML = '<input type="text" name="post_struktur[nama_divisi][]" class="form-control">';
+            cell3L.innerHTML = '<input type="text" name="post_struktur[tanggung_jawab][]" class="form-control">';
+            cell4L.innerHTML = '<input type="text" name="post_struktur[jumlah_personil][]" class="form-control">';
            
         }
 
