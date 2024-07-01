@@ -20,8 +20,8 @@ class CreatePerjanjianSertifikasi extends Migration
             $table->string('perjanjian_sertifikasi_klien')->nullable();
             $table->string('perjanjian_sertifikasi_user')->nullable();
             $table->string('nomor')->nullable();
-            $table->date('tanggal_berlaku')->nullable();
-            $table->date('tanggal_berakhir')->nullable();
+            $table->date('tanggal_mulai')->nullable();
+            $table->date('tanggal_akhir')->nullable();
             $table->string('status', 20);
             $table->timestamps();
         });
