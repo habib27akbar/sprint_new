@@ -126,91 +126,100 @@
           { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
         createdRow: function(row, data, dataIndex) {
-          var pageInfo = t.page.info();
-          $('td:eq(0)', row).html(pageInfo.start + dataIndex + 1);
-        },
-        initComplete: function() {
-          var api = this.api();
-          api.columns().every(function() {
-            var column = this;
-            var select = $('<select class="form-control select2"><option value="">All</option></select>')
-              .appendTo($(column.footer()).empty())
-              .on('change', function() {
-                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                column.search(val ? '^' + val + '$' : '', true, false).draw();
-                updateOtherFilters(column.dataSrc(), val);
-              });
+            var pageInfo = t.page.info();
+            $('td:eq(0)', row).html(pageInfo.start + dataIndex + 1);
+            },
+            initComplete: function() {
+            var api = this.api();
+            api.columns().every(function(index) {
+                var column = this;
 
-            var columnName = column.dataSrc();
+                // Skip the "No" and "Action" columns
+                if (index === 0 || column.dataSrc() === 'action') {
+                    return;
+                }
 
-            $.ajax({
-              url: "{{ route('data-klien.getUniqueValues') }}",
-              data: { column: columnName },
-              success: function(data) {
-                data.forEach(function(d) {
-                  select.append('<option value="' + d + '">' + d + '</option>');
+                var select = $('<select class="form-control select2"><option value="">All</option></select>')
+                .appendTo($(column.footer()).empty())
+                .on('change', function() {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                    updateOtherFilters(column.dataSrc(), val);
                 });
-                // Initialize Select2
-                select.select2();
-              }
+
+                var columnName = column.dataSrc();
+
+                $.ajax({
+                url: "{{ route('data-klien.getUniqueValues') }}",
+                data: { column: columnName },
+                success: function(data) {
+                    data.forEach(function(d) {
+                    select.append('<option value="' + d + '">' + d + '</option>');
+                    });
+                    // Initialize Select2
+                    select.select2();
+                }
+                });
             });
-          });
 
-          function updateOtherFilters(currentColumn, selectedValue) {
-            api.columns().every(function() {
-              var column = this;
-              var select = $('select', column.footer());
-              var columnName = column.dataSrc();
+            function updateOtherFilters(currentColumn, selectedValue) {
+                api.columns().every(function(index) {
+                var column = this;
+                var select = $('select', column.footer());
+                var columnName = column.dataSrc();
 
-              if (columnName !== currentColumn) {
+                // Skip the "No" and "Action" columns
+                if (index === 0 || columnName === 'action') {
+                    return;
+                }
+
                 var currentFilterValue = select.val();
                 $.ajax({
-                  url: "{{ route('data-klien.getUniqueValues') }}",
-                  data: {
+                    url: "{{ route('data-klien.getUniqueValues') }}",
+                    data: {
                     column: columnName,
                     filtered: true,
                     filters: getFilters(currentColumn, selectedValue)
-                  },
-                  success: function(data) {
+                    },
+                    success: function(data) {
                     select.empty().append('<option value="">All</option>');
                     data.forEach(function(d) {
-                      select.append('<option value="' + d + '">' + d + '</option>');
+                        select.append('<option value="' + d + '">' + d + '</option>');
                     });
                     if (currentFilterValue) {
-                      select.val(currentFilterValue);
+                        select.val(currentFilterValue);
                     }
                     // Initialize Select2
                     select.select2();
-                  }
+                    }
                 });
-              }
-            });
-          }
-
-          function getFilters(currentColumn, selectedValue) {
-            var filters = {};
-
-            api.columns().every(function() {
-              var column = this;
-              var select = $('select', column.footer());
-              var val = select.val();
-
-              if (val) {
-                filters[column.dataSrc()] = val;
-              }
-            });
-
-            if (selectedValue) {
-              filters[currentColumn] = selectedValue;
+                });
             }
 
-            return filters;
-          }
-        }
-      });
+            function getFilters(currentColumn, selectedValue) {
+                var filters = {};
 
-      // Initialize Select2 for initial filters
-      $('.select2').select2();
+                api.columns().every(function() {
+                var column = this;
+                var select = $('select', column.footer());
+                var val = select.val();
+
+                if (val) {
+                    filters[column.dataSrc()] = val;
+                }
+                });
+
+                if (selectedValue) {
+                filters[currentColumn] = selectedValue;
+                }
+
+                return filters;
+            }
+            }
+        });
+
+    // Initialize Select2 for initial filters
+    $('.select2').select2();
     });
 
 

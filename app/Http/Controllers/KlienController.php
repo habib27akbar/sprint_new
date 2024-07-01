@@ -42,8 +42,12 @@ class KlienController extends Controller
 
         // Apply filters if provided
         if ($request->has('filtered') && $request->get('filtered') == 'true') {
-            foreach ($request->get('filters') as $key => $value) {
-                $query->where($key, $value);
+            if ($request->get('filters')) {
+                foreach ($request->get('filters') as $key => $value) {
+                    if (!empty($value)) {
+                        $query->where($key, $value);
+                    }
+                }
             }
         }
 
