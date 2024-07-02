@@ -60,7 +60,8 @@
 
           <li class="nav-item">
             <a href="{{ route('perjanjian_sertifikasi.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              
+              <i class="nav-icon fas fa-file-contract"></i>
               <p>
                 Perjanjian Sertifikasi
                 
@@ -71,7 +72,8 @@
           @if(Auth::user()->id_unit_kerja != '99')
             <li class="nav-item">
               <a href="{{ route('pemeriksaan_regist.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                <i class="nav-icon fas fa-clipboard-check"></i>
+                
                 <p>
                   Pemeriksaan Registrasi
                   
