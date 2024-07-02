@@ -21,6 +21,8 @@
         </div>
       </div>
 
+      
+
      
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -44,6 +46,7 @@
               
             </ul>
           </li>
+        @if(Auth::user()->id_unit_kerja == '99')
           <li class="nav-item">
             <a href="{{ route('profil-pelanggan.index') }}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -53,7 +56,17 @@
               </p>
             </a>
           </li>
-           
+        @endif
+
+        <li class="nav-item">
+            <a href="{{ route('perjanjian_sertifikasi.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Perjanjian Sertifikasi
+                
+              </p>
+            </a>
+          </li>
           
 
          

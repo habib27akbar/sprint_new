@@ -35,7 +35,7 @@
                         
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Sertifikasi</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                <select name="jenis_sertifikasi" class="form-control" required>
                                     <option value="">-</option>
                                     <option value="Sertifikasi Produk">Sertifikasi Produk</option>
@@ -43,6 +43,17 @@
                                </select>
                             </div>
                         </div>
+
+                      @if(Auth::user()->id_unit_kerja != '99')
+                        <div class="form-group row">
+                            <label for="file" class="col-sm-2 col-form-label">Perusahaan</label>
+                            <div class="col-sm-4">
+                               <select name="id_perusahaan" id="id_perusahaan" class="form-control select2" required>
+                                    <option value="">-</option>
+                               </select>
+                            </div>
+                        </div>
+                      @endif
 
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Perjanjian Sertifikasi</label>
@@ -64,10 +75,36 @@
 
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Nomor</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <input type="text" name="nomor" class="form-control" required>
                             </div>
                         </div>
+                      @if(Auth::user()->id_unit_kerja != '99')
+                        <div class="form-group row">
+                            <label for="file" class="col-sm-2 col-form-label">Tanggal Mulai</label>
+                            <div class="col-sm-4">
+                                <input type="date" name="tanggal_mulai" class="form-control" required>
+                            </div>
+
+                            <label for="file" class="col-sm-2 col-form-label">Tanggal Berakhir</label>
+                            <div class="col-sm-4">
+                                <input type="date" name="tanggal_akhir" class="form-control" required>
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group row">
+                            <label for="file" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-4">
+                                <select name="status" class="form-control" required>
+                                  <option value="-">-</option>
+                                  <option value="Draft">Draft</option>
+                                  <option value="Berlaku">Berlaku</option>
+                                  <option value="Kadaluarsa">Kadaluarsa</option>
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                         
                     </div>
                     <div class="card-footer">
@@ -85,6 +122,22 @@
   @endsection
   @section('js')
     <script>
+      $(document).ready(function() {
+        // Fetch data and populate select dropdown
+          $.ajax({
+              url: '{{url("get-klien-list")}}',
+              method: 'GET',
+              success: function(data) {
+                  $('#id_perusahaan').empty().append('<option value="">-</option>');
+                  $.each(data, function(key, value) {
+                      $('#id_perusahaan').append('<option value="'+ value.id_perusahaan +'">'+ value.nama_perusahaan +'</option>');
+                  });
+                  $('#id_perusahaan').select2();
+              }
+          });
+      });
+
+
         function validateFile() {
             const fileInput = document.getElementById('file');
             const filePath = fileInput.value;

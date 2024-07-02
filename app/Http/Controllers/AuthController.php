@@ -34,9 +34,11 @@ class AuthController extends Controller
 
             // Retrieve the id_perusahaan associated with the authenticated user
             $idPerusahaan = $user->id_perusahaan; // Adjust this line according to your user model
+            $idUnitKerja = $user->id_unit_kerja;
 
             // Store id_perusahaan in the session
             $request->session()->put('id_perusahaan', $idPerusahaan);
+            $request->session()->put('id_unit_kerja', $idUnitKerja);
 
 
             return redirect()->intended('/home');

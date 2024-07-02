@@ -25,4 +25,10 @@ class AjaxController extends Controller
         //echo $klien;
         return response()->json(['status' => true, 'data' => $data_klien, 'data_regist' => $regist_status, 'from_data' => $from_data], 200);
     }
+
+    public function get_klien_list()
+    {
+        $klien = Klien::all(); // Adjust this query as needed
+        return response()->json($klien);
+    }
 }

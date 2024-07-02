@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('perjanjian_sertifikasi', PerjanjianSertifikasiController::class);
     Route::get('perjanjian-sertifikasi/getData', [PerjanjianSertifikasiController::class, 'getData'])->name('perjanjian-sertifikasi.getData');
     Route::get('perjanjian-sertifikasi/getUniqueValues', [PerjanjianSertifikasiController::class, 'getUniqueValues'])->name('perjanjian-sertifikasi.getUniqueValues');
-
+    Route::get('get-klien-list', [AjaxController::class, 'get_klien_list'])->name('get_klien_list');
     //Route::get('/unique-values', [KlienController::class, 'getUniqueValues'])->name('data-klien.getUniqueValues');
 
 });;

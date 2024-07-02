@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Klien;
 use App\Models\PerjanjianSertifikasi;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -64,18 +65,16 @@ class PerjanjianSertifikasiController extends Controller
     public function create()
     {
 
-
-
-        return view('perjanjian_sertifikasi.create');
+        $klien = Klien::all();
+        return view('perjanjian_sertifikasi.create', compact('klien'));
     }
 
     public function edit($id)
     {
 
         $data = PerjanjianSertifikasi::findOrFail($id);
-
-
-        return view('perjanjian_sertifikasi.edit', compact('data'));
+        $klien = Klien::all();
+        return view('perjanjian_sertifikasi.edit', compact('data', 'klien'));
     }
 
     public function store(Request $request)
@@ -87,12 +86,22 @@ class PerjanjianSertifikasiController extends Controller
             $dir = 'doc/draft';
             $file->move(public_path($dir), $nama_file);
         }
+        $status = 'Draft';
+        $id_perusahaan = Session::get('id_perusahaan');
+        if ($request->input('status')) {
+            $status = $request->input('status');
+        }
+        if (Session::get('id_unit_kerja') != '99') {
+            $id_perusahaan = $request->input('id_perusahaan');
+        }
         $storeData = [
-            'id_perusahaan' => Session::get('id_perusahaan'),
+            'id_perusahaan' => $id_perusahaan,
             'jenis_sertifikasi' => $request->input('jenis_sertifikasi'),
             'perjanjian_sertifikasi_klien' => $nama_file,
             'nomor' => $request->input('nomor'),
-            'status' => 'Draft'
+            'tanggal_mulai' => $request->input('tanggal_mulai'),
+            'tanggal_akhir' => $request->input('tanggal_akhir'),
+            'status' => $status
         ];
         PerjanjianSertifikasi::create($storeData);
         return redirect('perjanjian_sertifikasi')->with('alert-success', 'Success Tambah Data');
@@ -108,14 +117,24 @@ class PerjanjianSertifikasiController extends Controller
             $dir = 'doc/draft';
             $file->move(public_path($dir), $nama_file);
         }
+        $id_perusahaan = Session::get('id_perusahaan');
+        $status = 'Draft';
+        if (Session::get('id_unit_kerja') != '99') {
+            $id_perusahaan = $request->input('id_perusahaan');
+            $status = $request->input('status');
+        }
+        if ($request->input('status') != 'Draft') {
+            $status = $request->input('status');
+        }
+
         $updateData = [
-            'id_perusahaan' => Session::get('id_perusahaan'),
+            'id_perusahaan' => $id_perusahaan,
             'jenis_sertifikasi' => $request->input('jenis_sertifikasi'),
             'perjanjian_sertifikasi_klien' => $nama_file,
             'nomor' => $request->input('nomor'),
             'tanggal_mulai' => $request->input('tanggal_mulai'),
             'tanggal_akhir' => $request->input('tanggal_akhir'),
-            'status' => $request->input('status')
+            'status' => $status
         ];
         PerjanjianSertifikasi::where('id', $id)->update($updateData);
         return redirect('perjanjian_sertifikasi')->with('alert-success', 'Success Update Data');
