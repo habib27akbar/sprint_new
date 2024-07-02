@@ -58,7 +58,7 @@
           </li>
         @endif
 
-        <li class="nav-item">
+          <li class="nav-item">
             <a href="{{ route('perjanjian_sertifikasi.index') }}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -67,6 +67,18 @@
               </p>
             </a>
           </li>
+
+          @if(Auth::user()->id_unit_kerja != '99')
+            <li class="nav-item">
+              <a href="{{ route('pemeriksaan_regist.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Pemeriksaan Registrasi
+                  
+                </p>
+              </a>
+            </li>
+          @endif
           
 
          
