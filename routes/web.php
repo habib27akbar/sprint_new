@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KlienController;
+use App\Http\Controllers\PemeriksaanRegistrasiController;
 use App\Http\Controllers\PerjanjianSertifikasiController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegistController;
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('perjanjian-sertifikasi/getData', [PerjanjianSertifikasiController::class, 'getData'])->name('perjanjian-sertifikasi.getData');
     Route::get('perjanjian-sertifikasi/getUniqueValues', [PerjanjianSertifikasiController::class, 'getUniqueValues'])->name('perjanjian-sertifikasi.getUniqueValues');
     Route::get('get-klien-list', [AjaxController::class, 'get_klien_list'])->name('get_klien_list');
-    //Route::get('/unique-values', [KlienController::class, 'getUniqueValues'])->name('data-klien.getUniqueValues');
-
+    Route::resource('pemeriksaan_regist', PemeriksaanRegistrasiController::class);
+    Route::get('pemeriksaan_registrasi/getData', [PemeriksaanRegistrasiController::class, 'getData'])->name('pemeriksaan_registrasi.getData');
+    Route::get('pemeriksaan_registrasi/getUniqueValues', [PemeriksaanRegistrasiController::class, 'getUniqueValues'])->name('pemeriksaan_registrasi.getUniqueValues');
 });;

@@ -16,10 +16,10 @@ class CreateRegistStatus extends Migration
         Schema::create('regist_status', function (Blueprint $table) {
             $table->id();
             $table->string('id_pelanggan');
-            $table->dateTime('tanggal_pengajuan');
-            $table->dateTime('tanggal_selesai')->nullable();
+            $table->date('tanggal_pengajuan');
+            $table->date('tanggal_selesai')->nullable();
             $table->text('catatan')->nullable();
-            $table->integer('status');
+            $table->string('status', 30)->nullable();
             $table->timestamps();
         });
     }
