@@ -7,6 +7,7 @@ use App\Models\PerjanjianSertifikasi;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class PerjanjianSertifikasiController extends Controller
 {
@@ -58,7 +59,19 @@ class PerjanjianSertifikasiController extends Controller
             }
         }
 
-        $uniqueValues = $query->pluck($column);
+        $results = $query->get();
+
+        // Format date fields if they exist in the results
+        foreach ($results as $result) {
+            if (isset($result->tanggal_mulai)) {
+                $result->tanggal_mulai = Carbon::parse($result->tanggal_mulai)->format('d/m/Y');
+            }
+            if (isset($result->tanggal_akhir)) {
+                $result->tanggal_akhir = Carbon::parse($result->tanggal_akhir)->format('d/m/Y');
+            }
+        }
+
+        $uniqueValues = $results->pluck($column);
         return response()->json($uniqueValues);
     }
 

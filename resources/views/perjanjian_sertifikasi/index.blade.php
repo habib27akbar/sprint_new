@@ -100,6 +100,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script>
         // $(function () {
         //     //Initialize Select2 Elements
@@ -120,8 +121,29 @@
             },
             { data: 'jenis_sertifikasi', name: 'jenis_sertifikasi' },
             { data: 'nomor', name: 'nomor' },
-            { data: 'tanggal_mulai', name: 'tanggal_mulai' },
-            { data: 'tanggal_akhir', name: 'tanggal_akhir' },
+            { 
+                data: 'tanggal_mulai', 
+                name: 'tanggal_mulai',
+                render: function(data, type, row) {
+                   if (data) {
+                    return moment(data).format('DD/MM/YYYY');
+                   }else{
+                    return '';
+                   }
+                }
+            },
+            { 
+                data: 'tanggal_akhir', 
+                name: 'tanggal_akhir',
+                render: function(data, type, row) {
+                    if (data) {
+                        return moment(data).format('DD/MM/YYYY');
+                    }else{
+                        return '';
+                    }
+                    
+                }
+            },
             { data: 'status', name: 'status' },
             { data: 'dokumen', name: 'dokumen', orderable: false, searchable: false },
             { data: 'action', name: 'action', orderable: false, searchable: false }

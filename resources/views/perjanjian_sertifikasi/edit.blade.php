@@ -31,7 +31,7 @@
                 <form action="{{ route('perjanjian_sertifikasi.update', ['perjanjian_sertifikasi' => $data['id']]) }}" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
-                        
+                        @method('PUT')
                         
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Sertifikasi</label>
