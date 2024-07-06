@@ -38,6 +38,7 @@ class AuthController extends Controller
 
             // Store id_perusahaan in the session
             $request->session()->put('id_perusahaan', $idPerusahaan);
+            $request->session()->put('id_user', $user->id);
             $request->session()->put('id_unit_kerja', $idUnitKerja);
 
 
