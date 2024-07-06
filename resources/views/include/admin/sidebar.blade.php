@@ -43,6 +43,20 @@
                   <p>Skema Sertifikasi</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{ route('tujuan_audit.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tujuan Audit</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('proses_lain.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Proses Lain</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{ route('data_klien') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

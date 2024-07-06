@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Tujuan Audit')
+@section('title','Proses Lain')
 @section('css')
   
   <!-- DataTables -->
@@ -14,11 +14,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tujuan Audit</h1>
+            <h1>Proses Lain</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Tujuan Audit</a></li>
+              <li class="breadcrumb-item"><a href="#">Proses Lain</a></li>
               <li class="breadcrumb-item active">List</li>
             </ol>
           </div>
@@ -35,15 +35,14 @@
               
               <div class="card-body">
                 @include('include.admin.alert')
-                <a href="{{ route('tujuan_audit.create') }}" class="btn btn-primary">Tambah</a>
+                <a href="{{ route('proses_lain.create') }}" class="btn btn-primary">Tambah</a>
                 <br/><br/>
                     <table class="table table-bordered" id="dataTable">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Tujuan Audit</th>
-                                <th>Kode Audit</th>
-                                <th>Order</th>
+                                <th>Tujuan Audit</th>
+                                <th>Nama Proses</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -54,7 +53,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
+                                   
                                 </tr>
                             </tfoot>
                         </thead>
@@ -99,7 +98,7 @@
         var t = $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('tujuan-audit.getData') }}",
+            ajax: "{{ route('proses-lain.getData') }}",
             columns: [
             {
                 data: null,
@@ -108,8 +107,7 @@
                 searchable: false
             },
             { data: 'nama_tujuan_audit', name: 'nama_tujuan_audit' },
-            { data: 'kode_audit', name: 'kode_audit' },
-            { data: 'order', name: 'order'},
+            { data: 'nama_proses', name: 'nama_proses' },
             { data: 'status', name: 'status'},
             { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
@@ -138,7 +136,7 @@
                 var columnName = column.dataSrc();
 
                 $.ajax({
-                url: "{{ route('tujuan-audit.getUniqueValues') }}",
+                url: "{{ route('proses-lain.getUniqueValues') }}",
                 data: { column: columnName },
                 success: function(data) {
                     data.forEach(function(d) {
@@ -163,7 +161,7 @@
 
                 var currentFilterValue = select.val();
                 $.ajax({
-                    url: "{{ route('tujuan-audit.getUniqueValues') }}",
+                    url: "{{ route('proses-lain.getUniqueValues') }}",
                     data: {
                     column: columnName,
                     filtered: true,

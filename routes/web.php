@@ -9,6 +9,7 @@ use App\Http\Controllers\KlienController;
 use App\Http\Controllers\PemeriksaanRegistrasiController;
 use App\Http\Controllers\PerjanjianSertifikasiController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ProsesLainController;
 use App\Http\Controllers\RegistController;
 use App\Http\Controllers\SkemaSertifikasiController;
 use App\Http\Controllers\TujuanAuditController;
@@ -72,4 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('tujuan_audit', TujuanAuditController::class);
     Route::get('tujuan-audit/getData', [TujuanAuditController::class, 'getData'])->name('tujuan-audit.getData');
     Route::get('tujuan-audit/getUniqueValues', [TujuanAuditController::class, 'getUniqueValues'])->name('tujuan-audit.getUniqueValues');
+    Route::resource('proses_lain', ProsesLainController::class);
+    Route::get('proses-lain/getData', [ProsesLainController::class, 'getData'])->name('proses-lain.getData');
+    Route::get('proses-lain/getUniqueValues', [ProsesLainController::class, 'getUniqueValues'])->name('proses-lain.getUniqueValues');
 });;
