@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Skema Sertifikasi')
+@section('title','Tujuan Audit')
 @section('css')
 
 @endsection
@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Skema Sertifikasi</h1>
+            <h1>Tujuan Audit</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Skema Sertifikasi</a></li>
-              <li class="breadcrumb-item active">Update</li>
+              <li class="breadcrumb-item"><a href="#">Tujuan Audit</a></li>
+              <li class="breadcrumb-item active">Create</li>
             </ol>
           </div>
         </div>
@@ -28,52 +28,48 @@
         <div class="row">
           <div class="col-12">
             <div class="card card-primary"> 
-                <form action="{{ route('skema_sertifikasi.update', ['skema_sertifikasi' => $data['id']])  }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('tujuan_audit.store') }}" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
-                        @method('PUT')
+                        
                         
                         <div class="form-group row">
-                            <label for="file" class="col-sm-2 col-form-label">Kode Skema Sertifikasi</label>
+                            <label for="file" class="col-sm-2 col-form-label">Kode Tujuan Audit</label>
                             <div class="col-sm-4">
-                               <input type="text" name="kode_skema_sertifikasi" class="form-control" value="{{ $data['kode_skema_sertifikasi'] }}" required>
+                               <input type="text" name="kode_audit" class="form-control" required>
                             </div>
 
-                            <label for="file" class="col-sm-2 col-form-label">Nama Skema Sertifikasi</label>
+                            <label for="file" class="col-sm-2 col-form-label">Nama Tujuan Audit</label>
                             <div class="col-sm-4">
-                                <input type="text" name="nama_skema_sertifikasi" class="form-control" value="{{ $data['nama_skema_sertifikasi'] }}" required>
+                                <input type="text" name="nama_tujuan_audit" class="form-control" required>
                             </div>
                         </div>
 
                     
                         <div class="form-group row">
-                            <label for="file" class="col-sm-2 col-form-label">Kode No Order</label>
-                            <div class="col-sm-4">
-                                <input type="text" name="kode_no_order" class="form-control" value="{{ $data['kode_no_order'] }}" required>
-                            </div>
+                            
 
                             <label for="file" class="col-sm-2 col-form-label">Order</label>
                             <div class="col-sm-4">
-                                <input type="text" name="order" class="form-control" value="{{ $data['order'] }}" required>
+                                <input type="text" name="order" class="form-control" required>
+                            </div>
+
+                            <label for="file" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-4">
+                                <select name="status" class="form-control" required>
+                                  <option value="Aktif">Aktif</option>
+                                  <option value="Non Aktif">Non Aktif</option>
+                                </select>
                             </div>
                         </div>
 
                         
-                        <div class="form-group row">
-                            <label for="file" class="col-sm-2 col-form-label">Status</label>
-                            <div class="col-sm-4">
-                                <select name="status" class="form-control" required>
-                                  <option {{ $data['status'] == 'Aktif' ? 'selected':'' }} value="Aktif">Aktif</option>
-                                  <option {{ $data['status'] == 'Non Aktif' ? 'selected':'' }} value="Non Aktif">Non Aktif</option>
-                                </select>
-                            </div>
-                        </div>
-                    
+                        
                         
                     </div>
                     <div class="card-footer">
                         <button id="btnSave" type="submit" class="btn btn-info">Simpan</button>
-                        <a href="{{ route('skema_sertifikasi.index') }}" class="btn btn-default">Batal</a>
+                        <a href="{{ route('tujuan_audit.index') }}" class="btn btn-default">Batal</a>
                     </div>
                 </form>
             </div>
@@ -86,6 +82,18 @@
   @endsection
   @section('js')
     <script>
-     
+      function checkKodeOrder(value) {
+        //console.log(value);
+        $.ajax({
+            url: '{{url("cek-no-order")}}',
+            method: 'GET',
+            data:{   
+                    kode_no_order: value,
+                },
+            success: function(data) {
+                //console.log(data);
+            }
+        });
+      }
     </script>
   @endsection
