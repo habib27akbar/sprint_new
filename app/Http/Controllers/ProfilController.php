@@ -65,7 +65,7 @@ class ProfilController extends Controller
         $id_perusahaan = Session::get('id_perusahaan');
         $klien = Klien::where('id_perusahaan', $id_perusahaan)->get();
         $id = '';
-        if (isset($klien)) {
+        if ($klien->isNotEmpty()) {
             $id = $klien[0]['id'];
         }
 
@@ -341,7 +341,7 @@ class ProfilController extends Controller
 
         if (isset($_POST['data_post'])) {
             $kbli = KBLI::where('id_perusahaan', $id_perusahaan)->get();
-            if (count($kbli)) {
+            if ($kbli->isNotEmpty()) {
                 foreach ($kbli as $k) {
                     KBLI::findOrFail($k['id'])->delete();
                 }
@@ -364,7 +364,7 @@ class ProfilController extends Controller
 
         if (isset($_POST['post_sub'])) {
             $proses_sub_kontrak = ProsesSubKontrak::where('id_perusahaan', $id_perusahaan)->get();
-            if (count($proses_sub_kontrak)) {
+            if ($proses_sub_kontrak->isNotEmpty()) {
                 foreach ($proses_sub_kontrak as $s) {
                     ProsesSubKontrak::findOrFail($s['id'])->delete();
                 }
@@ -387,7 +387,7 @@ class ProfilController extends Controller
         }
         if (isset($_POST['post_trans'])) {
             $transportasi = Transportasi::where('id_perusahaan', $id_perusahaan)->get();
-            if (count($transportasi)) {
+            if ($transportasi->isNotEmpty()) {
                 foreach ($transportasi as $st) {
                     Transportasi::findOrFail($st['id'])->delete();
                 }
@@ -412,7 +412,7 @@ class ProfilController extends Controller
         }
         if (isset($_POST['post_struktur'])) {
             $struktur_organisasi = StrukturOrganisasi::where('id_perusahaan', $id_perusahaan)->get();
-            if (count($struktur_organisasi)) {
+            if ($struktur_organisasi->isNotEmpty()) {
                 foreach ($struktur_organisasi as $st) {
                     StrukturOrganisasi::findOrFail($st['id'])->delete();
                 }
@@ -434,7 +434,7 @@ class ProfilController extends Controller
         }
         if (isset($_POST['post_pedoman'])) {
             $pedoman_sertifikasi = PedomanSertifikasi::where('id_perusahaan', $id_perusahaan)->get();
-            if (count($pedoman_sertifikasi)) {
+            if ($pedoman_sertifikasi->isNotEmpty()) {
                 foreach ($pedoman_sertifikasi as $st) {
                     PedomanSertifikasi::findOrFail($st['id'])->delete();
                 }
@@ -474,7 +474,7 @@ class ProfilController extends Controller
 
         if (isset($_POST['post_sppt'])) {
             $sppt_sni = SPPTSNI::where('id_perusahaan', $id_perusahaan)->get();
-            if (count($sppt_sni)) {
+            if ($sppt_sni->isNotEmpty()) {
                 foreach ($sppt_sni as $st) {
                     SPPTSNI::findOrFail($st['id'])->delete();
                 }
