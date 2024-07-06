@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Klien;
 use App\Models\RegistKlien;
 use App\Models\RegistStatus;
+use App\Models\SkemaSertifikasi;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -30,5 +31,12 @@ class AjaxController extends Controller
     {
         $klien = Klien::all(); // Adjust this query as needed
         return response()->json($klien);
+    }
+
+    public function cek_no_order(Request $request)
+    {
+        $skema = SkemaSertifikasi::where('kode_no_order', $request->kode_no_order); // Adjust this query as needed
+        var_dump($skema);
+        //return response()->json($skema);
     }
 }
