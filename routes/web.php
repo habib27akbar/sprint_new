@@ -10,6 +10,7 @@ use App\Http\Controllers\PemeriksaanRegistrasiController;
 use App\Http\Controllers\PerjanjianSertifikasiController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegistController;
+use App\Http\Controllers\SkemaSertifikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('pemeriksaan_regist', PemeriksaanRegistrasiController::class);
     Route::get('pemeriksaan_registrasi/getData', [PemeriksaanRegistrasiController::class, 'getData'])->name('pemeriksaan_registrasi.getData');
     Route::get('pemeriksaan_registrasi/getUniqueValues', [PemeriksaanRegistrasiController::class, 'getUniqueValues'])->name('pemeriksaan_registrasi.getUniqueValues');
+    Route::resource('skema_sertifikasi', SkemaSertifikasiController::class);
+    Route::get('skema-sertifikasi/getData', [SkemaSertifikasiController::class, 'getData'])->name('skema-sertifikasi.getData');
+    Route::get('skema-sertifikasi/getUniqueValues', [SkemaSertifikasiController::class, 'getUniqueValues'])->name('skema-sertifikasi.getUniqueValues');
+    Route::get('cek-no-order', [AjaxController::class, 'cek_no_order'])->name('cek_no_order');
 });;

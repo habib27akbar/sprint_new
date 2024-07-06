@@ -38,6 +38,12 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="{{ route('skema_sertifikasi.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Skema Sertifikasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('data_klien') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Klien</p>
