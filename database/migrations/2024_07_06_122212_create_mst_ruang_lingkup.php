@@ -26,7 +26,8 @@ class CreateMstRuangLingkup extends Migration
             $table->string('lab')->nullable();
             $table->string('status_regulasi')->nullable();
             $table->string('ruang_lingkup')->nullable();
-            $table->string('penjabatan_iaf')->nullable();
+            $table->string('kode_iaf')->nullable();
+            $table->string('penjabaran_iaf')->nullable();
             $table->string('id_user', 20);
             $table->string('id_user_update', 20)->nullable();
             $table->string('status', 20)->nullable();
