@@ -14,12 +14,94 @@ use Illuminate\Http\Request;
 use App\Models\SkemaSertifikasi;
 use App\Models\SertifikatReferensi;
 use Illuminate\Support\Facades\Session;
+use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class PermohonanController extends Controller
 {
     public function index()
     {
         return view('permohonan.index');
+    }
+
+    public function getData(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Permohonan::select('permohonan.*', 'mst_ruang_lingkup.nomor_standar', 'mst_ruang_lingkup.judul_standar', 'mst_tujuan_audit.nama_tujuan_audit', 'mst_proses_lain.nama_proses')
+                ->leftJoin('mst_ruang_lingkup', 'permohonan.id_standar', '=', 'mst_ruang_lingkup.id')
+                ->leftJoin('mst_tujuan_audit', 'permohonan.tujuan_audit', '=', 'mst_tujuan_audit.id')
+                ->leftJoin('mst_proses_lain', 'permohonan.proses_lain', '=', 'mst_proses_lain.id')
+                ->get();
+            return Datatables::of($data)
+                ->addColumn('action', function ($row) {
+                    $editRoute = route('permohonan.edit', ['permohonan' => $row->id]);
+                    $deleteRoute = route('permohonan.destroy', ['permohonan' => $row->id]);
+
+                    $btn = '<a href="' . $editRoute . '" class="btn btn-warning"><i class="fas fa-edit"></i></a>';
+                    $btn .= '<form method="POST" action="' . $deleteRoute . '" style="display: inline-block; margin-left: 10px;" onsubmit="return confirm(\'Apakah anda yakin?\')">';
+                    $btn .= '<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
+                    $btn .= csrf_field(); // Blade directive for CSRF token
+                    $btn .= method_field("DELETE"); // Blade directive for HTTP method spoofing
+                    $btn .= '</form>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function getUniqueValues(Request $request)
+    {
+        $column = $request->get('column');
+
+        // Periksa dan tambahkan alias jika kolom yang diminta ambigu
+        $column = $this->qualifyColumn($column);
+
+        $query = Permohonan::select($column)->distinct()
+            ->leftJoin('mst_ruang_lingkup', 'permohonan.id_standar', '=', 'mst_ruang_lingkup.id')
+            ->leftJoin('mst_tujuan_audit', 'permohonan.tujuan_audit', '=', 'mst_tujuan_audit.id')
+            ->leftJoin('mst_proses_lain', 'permohonan.proses_lain', '=', 'mst_proses_lain.id');
+
+        // Apply filters if provided
+        if ($request->has('filtered') && $request->get('filtered') == 'true') {
+            if ($request->get('filters')) {
+                foreach ($request->get('filters') as $key => $value) {
+                    if (!empty($value)) {
+                        $query->where($key, $value);
+                    }
+                }
+            }
+        }
+
+        $results = $query->get();
+
+        // Format date fields if they exist in the results
+        foreach ($results as $result) {
+            if (isset($result->tgl_surat_permohonan)) {
+                $result->tgl_surat_permohonan = Carbon::parse($result->tgl_surat_permohonan)->format('d/m/Y');
+            }
+            if (isset($result->tanggal_terima)) {
+                $result->tanggal_terima = Carbon::parse($result->tanggal_terima)->format('d/m/Y');
+            }
+            if (isset($result->tanggal_input)) {
+                $result->tanggal_input = Carbon::parse($result->tanggal_input)->format('d/m/Y');
+            }
+        }
+
+        $uniqueValues = $results->pluck($column);
+        return response()->json($uniqueValues);
+    }
+
+    private function qualifyColumn($column)
+    {
+        $ambiguousColumns = ['status', 'id']; // Tambahkan nama kolom lain yang mungkin ambigu di sini
+
+        if (in_array($column, $ambiguousColumns)) {
+            return 'mst_ruang_lingkup.' . $column;
+        }
+
+        return $column;
     }
 
     public function create()
@@ -53,7 +135,7 @@ class PermohonanController extends Controller
 
         $nama_illustrasi_penandaan_standar = null;
         if ($request->file('illustrasi_penandaan_standar')) {
-            $illustrasi_penandaan_standar = $request->file('formulir_pendaftaran');
+            $illustrasi_penandaan_standar = $request->file('illustrasi_penandaan_standar');
             $nama_illustrasi_penandaan_standar = 'sp-' . uniqid() . '-' . $illustrasi_penandaan_standar->getClientOriginalName();
             $illustrasi_penandaan_standar->move(public_path($dir), $nama_illustrasi_penandaan_standar);
         }
@@ -75,9 +157,8 @@ class PermohonanController extends Controller
             'illustrasi_penandaan_standar' => $nama_illustrasi_penandaan_standar,
             'status_penerapan_smm' => $request->input('status_penerapan_smm'),
             'akreditasi_lssm' => $request->input('akreditasi_lssm'),
-            'keterangan' => $request->input('no_surat_permohonan'),
-            'no_surat_permohonan' => $request->input('keterangan'),
-
+            'keterangan' => $request->input('keterangan'),
+            'sts_permohonan' => $request->input('status'),
         ];
         $permohonan = Permohonan::create($storeData);
         // Mendapatkan ID dari entri yang baru saja dibuat
@@ -175,5 +256,7 @@ class PermohonanController extends Controller
                 DataFile::create($store);
             }
         }
+
+        return redirect('permohonan')->with('alert-success', 'Success Tambah Data');
     }
 }

@@ -75,7 +75,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card card-primary"> 
-                <form action="{{ route('permohonan.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('permohonan.store') }}" id="formPOST" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
                         <h4 style="text-align: center">{{ $klien[0]['id_perusahaan'].' '.$klien[0]['nama_perusahaan'] }}</h4>
@@ -163,7 +163,7 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Nomor Sertifikat Referensi</label>
                             <div class="col-sm-10">
-                               <select name="no_sertifikat_referensi" class="form-control" required>
+                               <select name="no_sertifikat_referensi" id="no_sertifikat_referensi" onchange="noSertifikat()" class="form-control" required>
                                 <option value="">-</option>
                                 @foreach ($mst_sertifikat as $item)
                                     <option value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->menu.' '.$item->no_standar.' '.$item->judul_standar }}</option>
@@ -175,24 +175,25 @@
                         </div>
 
 
-
+                        
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Masa Berlaku</label>
                             <div class="col-sm-4">
-                              <input type="date" name="masa_berlaku" class="form-control">
+                            <input type="date" name="masa_berlaku" id="tanggal_terbit" class="form-control">
                             </div>
 
                             <label for="file" class="col-sm-2 col-form-label">Sampai</label>
                             <div class="col-sm-4">
-                              <input type="date" name="masa_berlaku_akhir" class="form-control">
+                            <input type="date" name="masa_berlaku_akhir" id="tanggal_berakhir" class="form-control">
                             </div>
 
                         </div>
+                        
 
                          <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Nomor Standar</label>
                             <div class="col-sm-10">
-                               <select name="id_standar" class="form-control select2" required>
+                               <select name="id_standar" onchange="checkSNI()" id="id_standar" class="form-control select2" required>
                                 <option value="">-</option>
                                 @foreach ($ruang_lingkup as $item)
                                     <option value="{{ $item->id }}">{{ $item->nomor_standar.' - '.$item->judul_standar }}</option>
@@ -243,6 +244,10 @@
                             <div class="col-sm-4">
                                <input type="text" class="form-control" name="akreditasi_lssm" placeholder="Akreditasi LSSM">
                             </div>
+
+                        </div>
+
+                        <div id="detailStandar">
 
                         </div>
 
@@ -349,12 +354,24 @@
                         </div>
                         
 
-                      
+                      <input type="hidden" name="status" id="status" value="Draft">
                         
                     </div>
                     <div class="card-footer">
-                        <button id="btnSave" type="submit" class="btn btn-info">Simpan</button>
-                        <a href="{{ route('permohonan.index') }}" class="btn btn-default">Batal</a>
+                        <div id="btnSimpan">
+                            <button id="btnSave" type="submit" value="simpan" class="btn btn-primary">Simpan</button>
+                            <button id="ajukanPermohonan" type="submit" value="ajukan_permohonan" class="btn btn-success">Ajukan Permohonan</button>
+                            <a href="{{ route('permohonan.index') }}" class="btn btn-default">Kembali</a>
+                        </div>
+
+                        <div id="btnAjuan" style="display: none;">
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                PERMOHONAN YANG SUDAH DIAJUKAN TIDAK DAPAT DI UBAH <i class="fas fa-exclamation-triangle"></i> 
+	                        </div>
+                            <button type="submit" value="simpan" id="simpan" class="btn btn-success">Simpan</button>
+                            <button type="submit" value="batalAjuan" id="batalAjuan" class="btn btn-default">Batal</a>
+                        </div>
+                        
                     </div>
                 </form>
             </div>
@@ -363,12 +380,68 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    
     <!-- /.content -->
   @endsection
   @section('js')
     <script>
         $('.select2').select2();
 
+        document.getElementById("formPOST").addEventListener("submit", function(event) {
+            
+            const submitButton = event.submitter;
+            if (submitButton.value == 'ajukan_permohonan') {
+                event.preventDefault();
+                $('#btnAjuan').show();
+                $('#btnSimpan').hide();
+                document.getElementById("status").value = "Pengajuan";
+                
+            }else if(submitButton.value == 'batalAjuan'){
+                event.preventDefault();
+                $('#btnAjuan').hide();
+                $('#btnSimpan').show();
+                document.getElementById("status").value = "Draft";
+            }else{
+                $('#btnAjuan').hide();
+                //document.getElementById("status").value = "Draft";
+            }
+            //console.log(submitButton.value);
+        });
+
+        function checkSNI() {
+            $.ajax({
+                method: 'POST',
+                url: '{{url("get-no-standar")}}',
+                data:{
+                        _token: '{{csrf_token()}}', 
+                        id_standar: $('#id_standar').find(":selected").val(),
+                },
+                success: function(data) {
+                    //console.log(data);
+                    $("#detailStandar").html(data);
+                }
+
+            });
+        }
+
+        function noSertifikat() {
+            $.ajax({
+                method: 'POST',
+                url: '{{url("get-no-sertifikat")}}',
+                data:{
+                        _token: '{{csrf_token()}}', 
+                        no_sertifikat_referensi: $('#no_sertifikat_referensi').find(":selected").val(),
+                },
+                success: function(data) {
+                    var dataSertifikat = data.data;
+                    document.getElementById("tanggal_terbit").value = dataSertifikat.tanggal_terbit;
+                    document.getElementById("tanggal_berakhir").value = dataSertifikat.tanggal_berakhir;
+                    //console.log(data);
+                    //$("#no_sertifikat_masa_berlaku").html(data);
+                }
+
+            });
+        }
 
         function validateFile() {
             const fileInput = document.getElementById('surat_permohonan');

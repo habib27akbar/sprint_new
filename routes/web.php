@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('proses-lain/getData', [ProsesLainController::class, 'getData'])->name('proses-lain.getData');
     Route::get('proses-lain/getUniqueValues', [ProsesLainController::class, 'getUniqueValues'])->name('proses-lain.getUniqueValues');
     Route::resource('permohonan', PermohonanController::class);
-    Route::get('permohonan-data/getData', [ProsesLainController::class, 'getData'])->name('permohonan-data.getData');
-    Route::get('permohonan-data/getUniqueValues', [ProsesLainController::class, 'getUniqueValues'])->name('permohonan-data.getUniqueValues');
+    Route::get('permohonan-data/getData', [PermohonanController::class, 'getData'])->name('permohonan-data.getData');
+    Route::get('permohonan-data/getUniqueValues', [PermohonanController::class, 'getUniqueValues'])->name('permohonan-data.getUniqueValues');
+    Route::post('get-no-standar', [AjaxController::class, 'get_standar_sni'])->name('get_standar_sni');
+    Route::post('get-no-sertifikat', [AjaxController::class, 'get_no_sertifikat'])->name('get_no_sertifikat');
 });;

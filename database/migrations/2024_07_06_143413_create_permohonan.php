@@ -20,6 +20,8 @@ class CreatePermohonan extends Migration
             $table->string('formulir_pendaftaran')->nullable();
             $table->string('no_surat_permohonan');
             $table->date('tgl_surat_permohonan');
+            $table->string('no_order', 50)->nullable();
+            $table->string('no_proses', 50)->nullable();
             $table->string('menu', 50);
             $table->string('tujuan_audit', 50);
             $table->string('proses_lain', 50);
@@ -34,6 +36,8 @@ class CreatePermohonan extends Migration
             $table->string('keterangan')->nullable();
             $table->date('tanggal_terima')->nullable();
             $table->date('tanggal_input')->nullable();
+            $table->date('tanggal_order')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
