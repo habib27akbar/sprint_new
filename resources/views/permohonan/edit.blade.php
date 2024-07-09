@@ -75,16 +75,18 @@
         <div class="row">
           <div class="col-12">
             <div class="card card-primary"> 
-                <form action="{{ route('permohonan.store') }}" id="formPOST" method="post" enctype="multipart/form-data">
+                <form action="{{ route('perjanjian_sertifikasi.update', ['perjanjian_sertifikasi' => $data['id']]) }}" id="formPOST" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
+                        @method('PUT')
                         <h4 style="text-align: center">{{ $klien[0]['id_perusahaan'].' '.$klien[0]['nama_perusahaan'] }}</h4>
+                        <input type="hidden" name="id_perusahaan" value="{{ $klien[0]['id_perusahaan'] }}">
                         <br/>
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Surat Permohonan</label>
                             <div class="col-sm-4">
                                <input type="file" name="surat_permohonan"  onchange="validateFile()" id="surat_permohonan" class="form-control">
-                               
+                               <input type="hidden" name="surat_permohonan_old" value="{{ $data['surat_permohonan'] }}">
                                 <div style="margin-top:10px; display: none;" id="alertSp"
                                     class="alert alert-danger alert-dismissible" role="alert">
                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -99,6 +101,7 @@
                             <label for="file" class="col-sm-2 col-form-label">Formulir Pendaftaran</label>
                             <div class="col-sm-4">
                                <input type="file" name="formulir_pendaftaran" id="formulir_pendaftaran" onchange="validFormFile()" class="form-control">
+                               <input type="hidden" name="formulir_pendaftaran_old" value="{{ $data['formulir_pendaftaran'] }}">
                                <div style="margin-top:10px; display: none;" id="alertPendaftaran"
                                     class="alert alert-danger alert-dismissible" role="alert">
                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -114,12 +117,12 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Nomor Surat Permohonan</label>
                             <div class="col-sm-4">
-                               <input type="text" name="no_surat_permohonan" class="form-control" placeholder="Nomor Surat Permohonan" required>
+                               <input type="text" name="no_surat_permohonan" class="form-control" placeholder="Nomor Surat Permohonan" value="{{ $data['no_surat_permohonan'] }}" required>
                             </div>
 
                             <label for="file" class="col-sm-2 col-form-label">Tanggal Surat Permohonan</label>
                             <div class="col-sm-4">
-                               <input type="date" name="tgl_surat_permohonan" class="form-control" value="{{ date('Y-m-d') }}">
+                               <input type="date" name="tgl_surat_permohonan" class="form-control" value="{{ $data['tgl_surat_permohonan'] }}">
                             </div>
                         </div>
 
@@ -129,7 +132,7 @@
                                <select name="menu" onchange="selectMenu(this.value)" class="form-control" required>
                                 <option value="">-</option>
                                 @foreach ($skema as $item)
-                                    <option value="{{ $item->kode_skema_sertifikasi }}">{{ $item->nama_skema_sertifikasi }}</option>
+                                    <option {{ $data['menu'] == $item->kode_skema_sertifikasi?'selected':'' }} value="{{ $item->kode_skema_sertifikasi }}">{{ $item->nama_skema_sertifikasi }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -142,7 +145,7 @@
                                <select name="tujuan_audit" class="form-control" required>
                                 
                                 @foreach ($tujuan_audit as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama_tujuan_audit }}</option>
+                                    <option {{ $data['tujuan_audit'] == $item->id?'selected':'' }} value="{{ $item->id }}">{{ $item->nama_tujuan_audit }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -152,7 +155,7 @@
                                <select name="proses_lain" class="form-control select2" required>
                                 <option value="-">-</option>
                                 @foreach ($proses_lain as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama_proses }}</option>
+                                    <option {{ $data['proses_lain'] == $item->id?'selected':'' }} value="{{ $item->id }}">{{ $item->nama_proses }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -166,7 +169,7 @@
                                <select name="no_sertifikat_referensi" id="no_sertifikat_referensi" onchange="noSertifikat()" class="form-control" required>
                                 <option value="">-</option>
                                 @foreach ($mst_sertifikat as $item)
-                                    <option value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->menu.' '.$item->no_standar.' '.$item->judul_standar }}</option>
+                                    <option {{ $data['no_sertifikat_referensi'] == $item->id ? 'selected':'' }} value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->menu.' '.$item->no_standar.' '.$item->judul_standar }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -179,12 +182,12 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Masa Berlaku</label>
                             <div class="col-sm-4">
-                            <input type="date" name="masa_berlaku" id="tanggal_terbit" class="form-control">
+                            <input type="date" name="masa_berlaku" id="tanggal_terbit" value="{{ $data['masa_berlaku'] }}" class="form-control">
                             </div>
 
                             <label for="file" class="col-sm-2 col-form-label">Sampai</label>
                             <div class="col-sm-4">
-                            <input type="date" name="masa_berlaku_akhir" id="tanggal_berakhir" class="form-control">
+                            <input type="date" name="masa_berlaku_akhir" id="tanggal_berakhir" value="{{ $data['masa_berlaku_akhir'] }}" class="form-control">
                             </div>
 
                         </div>
@@ -196,7 +199,7 @@
                                <select name="id_standar" onchange="checkSNI()" id="id_standar" class="form-control select2" required>
                                 <option value="">-</option>
                                 @foreach ($ruang_lingkup as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nomor_standar.' - '.$item->judul_standar }}</option>
+                                    <option {{ $data['id_standar'] == $item->id ? 'selected':'' }} value="{{ $item->id }}">{{ $item->nomor_standar.' - '.$item->judul_standar }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -210,16 +213,17 @@
                             <div class="col-sm-4">
                                <select name="status_komoditi" class="form-control" required>
                                 <option value="">-</option>
-                                <option value="Wajib Kemenperin">Wajib Kemenperin</option>
-                                <option value="Wajib ESDM">Wajib ESDM</option>
-                                <option value="Wajib Kemendag">Wajib Kemendag</option>
-                                <option value="Sukarela">Sukarela</option>
+                                <option {{ $data['id_standar'] == 'Wajib Kemenperin'? 'selected':'' }} value="Wajib Kemenperin">Wajib Kemenperin</option>
+                                <option {{ $data['id_standar'] == 'Wajib ESDM'? 'selected':'' }} value="Wajib ESDM">Wajib ESDM</option>
+                                <option {{ $data['id_standar'] == 'Wajib Kemendag'? 'selected':'' }} value="Wajib Kemendag">Wajib Kemendag</option>
+                                <option {{ $data['id_standar'] == 'Sukarela'? 'selected':'' }} value="Sukarela">Sukarela</option>
                                </select>
                             </div>
 
                             <label for="file" class="col-sm-2 col-form-label">Ilustrasi Penandaan Standar</label>
                             <div class="col-sm-4">
                                <input type="file" class="form-control" name="illustrasi_penandaan_standar" id="illustrasi_penandaan_standar" onchange="validIllustrasi()">
+                               <input type="hidden" name="illustrasi_penandaan_standar_old" value="{{ $data['illustrasi_penandaan_standar'] }}">
                                <div style="margin-top:10px; display: none;" id="alertIllustrasi"
                                     class="alert alert-danger alert-dismissible" role="alert">
                                     <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -237,12 +241,12 @@
                         <div class="form-group row">
                             <label for="text" class="col-sm-2 col-form-label">Status Penerapan Sistem Manajemen Mutu</label>
                             <div class="col-sm-4">
-                               <input type="text" class="form-control" name="status_penerapan_smm" placeholder="Status Penerapan Sistem Manajemen Mutu">
+                               <input type="text" class="form-control" name="status_penerapan_smm" value="{{ $data['status_penerapan_smm'] }}" placeholder="Status Penerapan Sistem Manajemen Mutu">
                             </div>
 
                             <label for="text" class="col-sm-2 col-form-label">Akreditasi LSSM</label>
                             <div class="col-sm-4">
-                               <input type="text" class="form-control" name="akreditasi_lssm" placeholder="Akreditasi LSSM">
+                               <input type="text" class="form-control" name="akreditasi_lssm" value="{{ $data['akreditasi_lssm'] }}" placeholder="Akreditasi LSSM">
                             </div>
 
                         </div>
@@ -255,12 +259,12 @@
                         <div class="form-group row">
                             <label for="text" class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">
-                               <input type="text" class="form-control" name="status_penerapan_smm" placeholder="Keterangan">
+                               <input type="text" class="form-control" name="status_penerapan_smm" value="{{ $data['status_penerapan_smm'] }}" placeholder="Keterangan">
                             </div>
 
                         </div>
 
-                        <div id="SPRO" style="display: none">
+                        <div id="SPRO" style="{{ $data['menu'] == 'SPRO' ? '':'display: none;' }}">
                             <div style="margin-top:10px; display: none;" id="alertEx"
                                 class="alert alert-danger alert-dipenghubungissible" role="alert">
                                 <i class="fas fa-exclamation-circle"></i> File Harus berupa PDF
@@ -272,7 +276,11 @@
                             </div>
                             <div class="table-responsive">
                                 <select style="display: none;" name="" id="selectMerek">
-                                    
+                                    @foreach ($data_merek as $item)
+                                        @if ($item['merek'])
+                                            <option value="{{ $item['merek'] }}">{{ $item['merek'] }}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                                 <table id="tableSNI" style="width:200%;" class="table table-bordered table-striped freeze-table">
                                     <thead>
@@ -292,19 +300,83 @@
                                             <th>Alamat</th>
                                             <th>Pelimpahan Merek</th>
                                             <th>Tgl. Berakhir Pelimpahan merek</th>
-                                            <th>Dokumen Perlimpahan merek</th>
+                                            <th>Dokumen Pelimpahan merek</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                         $i = 0;   
+                                        @endphp
+                                        @foreach ($data_merek as $item)
+                                        @php
+                                         $i++;   
+                                        @endphp
+                                            <tr>
+                                                <td class="col-id-no bg-abu">
+                                                    <button type="button" value="Delete" onclick="deleteSNI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                </td>
+                                                <td class="col-second bg-abu">
+                                                    <input type="text" name="data_post[merek][]" id="merek{{ $i }}" value="{{ $item['merek'] }}" class="form-control">
+                                                </td>
+                                                <td class="col-third bg-abu">
+                                                    <input type="text" name="data_post[illustrasi_merek][]" class="form-control" value="{{ $item['illustrasi_merek'] }}">
+                                                </td>
+                                                <td class="col-fourth bg-abu">
+                                                    <input type="text" name="data_post[no_pendaftaran][]" class="form-control" value="{{ $item['no_pendaftaran'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="date" name="data_post[tgl_pendaftaran][]" class="form-control" value="{{ $item['tgl_pendaftaran'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="data_post[dokumen_pendaftaran_merek][]" onchange="validDocPendaftaran({{ $i }})" id="dokumen_pendaftaran_merek{{ $i }}" class="form-control">
+                                                    <input type="hidden" name="data_post[dokumen_pendaftaran_merek_old][]" value="{{ $item['dokumen_pendaftaran_merek'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="data_post[no_permohonan_merek][]" class="form-control" value="{{ $item['no_permohonan_merek'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="date" name="data_post[tgl_penerimaan][]" class="form-control" value="{{ $item['tgl_penerimaan'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="date" name="data_post[tgl_dimulai_perlindungan][]" class="form-control" value="{{ $item['tgl_dimulai_perlindungan'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="date" name="data_post[tgl_berakhir_perlindungan][]" class="form-control" value="{{ $item['tgl_berakhir_perlindungan'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="data_post[sertifikat_merek][]" class="form-control" value="{{ $item['sertifikat_merek'] }}">
+                                                </td>
+                                                <td>
+                                                    <select name="data_post[status_pemilik_merek][]" class="form-control">
+                                                        <option value="-">-</option>
+                                                        <option value="Milik Sendiri">Milik Sendiri</option>
+                                                        <option value="Pelimpahan Merek">Pelimpahan Merek</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="data_post[alamat][]" class="form-control" value="{{ $item['alamat'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="data_post[pelimpahan_merek][]" class="form-control" value="{{ $item['pelimpahan_merek'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="date" name="data_post[tgl_berakhir_pelimpahan_merek][]" class="form-control" value="{{ $item['tgl_berakhir_pelimpahan_merek'] }}">
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="data_post[dokumen_pelimpahan_merek][]" onchange="validDocPelimpahan({{ $i }})" id="dokumen_pelimpahan_merek{{ $i }}" class="form-control" value="{{ $item['dokumen_pelimpahan_merek'] }}">
+                                                    <input type="hidden" name="data_post[dokumen_pelimpahan_merek_old][]" value="{{ $item['dokumen_pelimpahan_merek'] }}">
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         <tr>
                                             <td>
                                                 <a onclick="createSNI()" class="btn btn-success"><i class="fas fa-plus"></i></a>
                                             </td>
                                             <td colspan="15"></td>
-
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
 
                             <div style="margin-top: 20px" class="table-responsive">
@@ -318,7 +390,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        @php
+                                         $i = 0;   
+                                        @endphp
+                                        @foreach ($data_tipe as $item)
+                                        @php
+                                         $i++;   
+                                        @endphp
+                                            <tr>
+                                                <td>
+                                                    
+                                                     <button type="button" value="Delete" onclick="deleteTipe(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                </td>
+                                                <td>
+                                                    <select name="post_merek[merek][]" id="m{{ $i }}" class="form-control select2">
+                                                        @foreach ($data_merek as $items)
+                                                            @if ($items['merek'])
+                                                                <option value="{{ $items['merek'] }}">{{ $items['merek'] }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="post_merek[tipe][]" value="{{ $item['tipe'] }}" class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="post_merek[foto][]" class="form-control">
+                                                    <input type="hidden" name="post_merek[foto_old][]" value="{{ $item['foto'] }}">
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         <tr>
                                             <td>
                                                 <a onclick="createTipe()" class="btn btn-success"><i class="fas fa-plus"></i></a>
@@ -342,7 +443,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    @php
+                                        $i = 0;   
+                                    @endphp
+                                    @foreach ($data_file as $item)
+                                    @php
+                                        $i++;   
+                                    @endphp
+                                        <tr>
+                                            <td>
+                                                <button type="button" value="Delete" onclick="deleteSNI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="post_file[nama_file][]" class="form-control" value="{{ $item['nama_file'] }}">
+                                            </td>
+                                            <td>
+                                                <input type="file" name="post_file[file][]" class="form-control"><input type="hidden" name="tipe" value="1">
+                                                <input type="hidden" name="post_file[file_old][]" value="{{ $item['file'] }}">
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     <tr>
                                         <td>
                                             <a onclick="createFile()" class="btn btn-success"><i class="fas fa-plus"></i></a>
@@ -354,8 +474,8 @@
                         </div>
                         
 
-                      <input type="hidden" name="status" id="status" value="Draft">
-                      <input type="hidden" name="sts" id="sts" value="1">
+                      <input type="hidden" name="status" id="status" value="{{ $data['sts_permohonan'] }}">
+                      <input type="hidden" name="sts" id="sts" value="{{ $data['sts'] }}">
                         
                     </div>
                     <div class="card-footer">
