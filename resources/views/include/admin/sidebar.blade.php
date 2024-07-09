@@ -101,6 +101,16 @@
               </a>
             </li>
           @endif
+
+          <li class="nav-item">
+              <a href="{{ route('permohonan.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+               
+                <p>
+                  Permohonan
+                </p>
+              </a>
+            </li>
           
 
          
