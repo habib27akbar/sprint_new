@@ -38,9 +38,12 @@
               <div class="card-body">
                 
                @include('include.admin.alert')
+              @if(Auth::user()->id_unit_kerja == '99')
                 <a href="{{ route('permohonan.create') }}" class="btn btn-primary">Tambah</a>
                 <br/><br/>
-                <table class="table table-bordered" id="dataTable">
+              @endif
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -76,6 +79,8 @@
                             </tfoot>
                         </thead>
                     </table>
+                </div>
+                
 
               </div>
             </div>
