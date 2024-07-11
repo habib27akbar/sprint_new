@@ -100,8 +100,19 @@
                 </p>
               </a>
             </li>
-          @endif
 
+             <li class="nav-item">
+              <a href="{{ route('permohonan_user.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+               
+                <p>
+                  Permohonan
+                </p>
+              </a>
+            </li>
+          @endif
+          
+          @if(Auth::user()->id_unit_kerja == '99')
           <li class="nav-item">
               <a href="{{ route('permohonan.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
@@ -111,6 +122,7 @@
                 </p>
               </a>
             </li>
+          @endif
           
 
          

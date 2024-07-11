@@ -63,7 +63,8 @@ class PermohonanUserController extends Controller
         $query = Permohonan::select($column)->distinct()
             ->leftJoin('mst_ruang_lingkup', 'permohonan.id_standar', '=', 'mst_ruang_lingkup.id')
             ->leftJoin('mst_tujuan_audit', 'permohonan.tujuan_audit', '=', 'mst_tujuan_audit.id')
-            ->leftJoin('mst_proses_lain', 'permohonan.proses_lain', '=', 'mst_proses_lain.id');
+            ->leftJoin('mst_proses_lain', 'permohonan.proses_lain', '=', 'mst_proses_lain.id')
+            ->where('permohonan.sts', '>', 1);
 
         // Apply filters if provided
         if ($request->has('filtered') && $request->get('filtered') == 'true') {
@@ -153,7 +154,8 @@ class PermohonanUserController extends Controller
             'menu' => $request->input('menu'),
             'tujuan_audit' => $request->input('tujuan_audit'),
             'proses_lain' => $request->input('proses_lain'),
-            'no_sertifikat_referensi' => $request->input('no_sertifikat_referensi'),
+            'no_order' => $request->input('no_order'),
+            'tanggal_order' => $request->input('tanggal_order'),
             'tanggal_order' => $request->input('tanggal_order'),
             'tanggal_terima' => $request->input('tanggal_terima'),
             'sts_permohonan' => $sts_permohonan,
