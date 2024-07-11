@@ -27,21 +27,12 @@ class PermohonanController extends Controller
     public function getData(Request $request)
     {
         if ($request->ajax()) {
-            if (Session::get('id_unit_kerja') == '99') {
-                $data = Permohonan::select('permohonan.*', 'mst_ruang_lingkup.nomor_standar', 'mst_ruang_lingkup.judul_standar', 'mst_tujuan_audit.nama_tujuan_audit', 'mst_proses_lain.nama_proses')
-                    ->leftJoin('mst_ruang_lingkup', 'permohonan.id_standar', '=', 'mst_ruang_lingkup.id')
-                    ->leftJoin('mst_tujuan_audit', 'permohonan.tujuan_audit', '=', 'mst_tujuan_audit.id')
-                    ->leftJoin('mst_proses_lain', 'permohonan.proses_lain', '=', 'mst_proses_lain.id')
-                    ->where('permohonan.id_perusahaan', '=', Session::get('id_perusahaan'))
-                    ->get();
-            } else {
-                $data = Permohonan::select('permohonan.*', 'mst_ruang_lingkup.nomor_standar', 'mst_ruang_lingkup.judul_standar', 'mst_tujuan_audit.nama_tujuan_audit', 'mst_proses_lain.nama_proses')
-                    ->leftJoin('mst_ruang_lingkup', 'permohonan.id_standar', '=', 'mst_ruang_lingkup.id')
-                    ->leftJoin('mst_tujuan_audit', 'permohonan.tujuan_audit', '=', 'mst_tujuan_audit.id')
-                    ->leftJoin('mst_proses_lain', 'permohonan.proses_lain', '=', 'mst_proses_lain.id')
-                    ->where('permohonan.sts', '>', 1)
-                    ->get();
-            }
+            $data = Permohonan::select('permohonan.*', 'mst_ruang_lingkup.nomor_standar', 'mst_ruang_lingkup.judul_standar', 'mst_tujuan_audit.nama_tujuan_audit', 'mst_proses_lain.nama_proses')
+                ->leftJoin('mst_ruang_lingkup', 'permohonan.id_standar', '=', 'mst_ruang_lingkup.id')
+                ->leftJoin('mst_tujuan_audit', 'permohonan.tujuan_audit', '=', 'mst_tujuan_audit.id')
+                ->leftJoin('mst_proses_lain', 'permohonan.proses_lain', '=', 'mst_proses_lain.id')
+                ->where('permohonan.id_perusahaan', '=', Session::get('id_perusahaan'))
+                ->get();
 
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
@@ -49,11 +40,16 @@ class PermohonanController extends Controller
                     $deleteRoute = route('permohonan.destroy', ['permohonan' => $row->id]);
 
                     $btn = '<div class="btn-group"><a href="' . $editRoute . '" class="btn btn-warning"><i class="fas fa-edit"></i></a>';
-                    $btn .= '<form method="POST" action="' . $deleteRoute . '" style="display: inline-block; margin-left: 10px;" onsubmit="return confirm(\'Apakah anda yakin?\')">';
-                    $btn .= '<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
-                    $btn .= csrf_field(); // Blade directive for CSRF token
-                    $btn .= method_field("DELETE"); // Blade directive for HTTP method spoofing
-                    $btn .= '</div></form>';
+
+                    if ($row->sts == 1) {
+                        $btn .= '<form method="POST" action="' . $deleteRoute . '" style="display: inline-block; margin-left: 10px;" onsubmit="return confirm(\'Apakah anda yakin?\')">';
+                        $btn .= '<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
+                        $btn .= csrf_field(); // Blade directive for CSRF token
+                        $btn .= method_field("DELETE"); // Blade directive for HTTP method spoofing
+                        $btn .= '</form>';
+                    }
+
+                    $btn .= '</div>';
 
                     return $btn;
                 })

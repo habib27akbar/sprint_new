@@ -13,11 +13,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ ucfirst(request()->segment(1)) }}</h1>
+            <h1>{{ ucfirst('Permohonan User') }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">{{ ucfirst(request()->segment(1)) }}</a></li>
+              <li class="breadcrumb-item"><a href="#">{{ ucfirst('Permohonan User') }}</a></li>
               <li class="breadcrumb-item active">List</li>
             </ol>
           </div>
@@ -48,11 +48,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Action</th>
-                                <th>Nomor Proses</th>
+                                
                                 <th>Nomor Order</th>
                                 <th>Tanggal Permohonan</th>
                                 <th>Tanggal Diterima</th>
-                                <th>Tanggal Rekomendasi</th>
                                 <th>Menu</th>
                                 <th>Tujuan</th>
                                 <th>Proses Lain</th>
@@ -74,8 +73,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    
                                 </tr>
                             </tfoot>
                         </thead>
@@ -115,7 +113,7 @@
         var t = $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('permohonan-data.getData') }}",
+            ajax: "{{ route('permohonan-user.getData') }}",
             columns: [
             {
                 data: null,
@@ -123,8 +121,12 @@
                 orderable: false,
                 searchable: false
             },
-            { data: 'action', name: 'action', orderable: false, searchable: false },
-            { data: 'no_proses', name: 'no_proses' },
+            { data: 'action', 
+              name: 'action', 
+              orderable: false,
+              searchable: false 
+            },
+            
             { data: 'no_order', name: 'no_order' },
             { 
                 data: 'tgl_surat_permohonan', 
@@ -149,18 +151,7 @@
                     
                 }
             },
-            { 
-                data: 'tanggal_input', 
-                name: 'tanggal_input',
-                render: function(data, type, row) {
-                    if (data) {
-                        return moment(data).format('DD/MM/YYYY');
-                    }else{
-                        return '';
-                    }
-                    
-                }
-            },
+            
             { data: 'menu', name: 'menu' },
             { data: 'nama_tujuan_audit', name: 'nama_tujuan_audit' },
             { data: 'nama_proses', name: 'nama_proses' },
@@ -179,7 +170,7 @@
                 var column = this;
 
                 // Skip the "No" and "Action" columns
-                if (index === 0 || column.dataSrc() === 'action' || column.dataSrc() === 'dokumen') {
+                if (index === 0 || column.dataSrc() === 'action') {
                     return;
                 }
 
@@ -194,7 +185,7 @@
                 var columnName = column.dataSrc();
 
                 $.ajax({
-                url: "{{ route('permohonan-data.getUniqueValues') }}",
+                url: "{{ route('permohonan-user.getUniqueValues') }}",
                 data: { column: columnName },
                 success: function(data) {
                     data.forEach(function(d) {
@@ -219,7 +210,7 @@
 
                 var currentFilterValue = select.val();
                 $.ajax({
-                    url: "{{ route('permohonan-data.getUniqueValues') }}",
+                    url: "{{ route('permohonan-user.getUniqueValues') }}",
                     data: {
                     column: columnName,
                     filtered: true,

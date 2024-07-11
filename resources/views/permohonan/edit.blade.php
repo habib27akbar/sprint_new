@@ -75,7 +75,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card card-primary"> 
-                <form action="{{ route('perjanjian_sertifikasi.update', ['perjanjian_sertifikasi' => $data['id']]) }}" id="formPOST" method="post" enctype="multipart/form-data">
+                <form action="{{ route('permohonan.update', ['permohonan' => $data['id']]) }}" id="formPOST" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
                         @method('PUT')
