@@ -26,8 +26,6 @@ class SeritifikatController extends Controller
                 ->get()
                 ->map(function ($item) {
                     $item->full_nama_perusahaan = "{$item->id_perusahaan} {$item->jenis_badan_usaha} {$item->nama_perusahaan}";
-                    $item->tanggal_terbit_raw = $item->tanggal_terbit ? \Carbon\Carbon::parse($item->tanggal_terbit)->format('Y-m-d') : null;
-                    $item->tanggal_berakhir_raw = $item->tanggal_berakhir ? \Carbon\Carbon::parse($item->tanggal_berakhir)->format('Y-m-d') : null;
                     $item->tanggal_terbit = $item->tanggal_terbit ? \Carbon\Carbon::parse($item->tanggal_terbit)->format('d/m/Y') : null;
                     $item->tanggal_berakhir = $item->tanggal_berakhir ? \Carbon\Carbon::parse($item->tanggal_berakhir)->format('d/m/Y') : null;
                     return $item;

@@ -132,28 +132,14 @@
                 data: 'tanggal_terbit', 
                 name: 'tanggal_terbit',
                 render: function(data, type, row) {
-                   if (data) {
-                    if (type === 'display') {
-                        return data ? moment(data).format('DD/MM/YYYY') : '';
-                    }
-                    return data;
-                   }else{
-                    return '';
-                   }
+                    return data ? data : '';
                 }
             },
             { 
                 data: 'tanggal_berakhir', 
                 name: 'tanggal_berakhir',
                 render: function(data, type, row) {
-                   if (data) {
-                    if (type === 'display') {
-                        return data ? moment(data).format('DD/MM/YYYY') : '';
-                    }
-                    return data;
-                   }else{
-                    return '';
-                   }
+                    return data ? data : '';
                 }
             },
             { data: 'nama_skema_sertifikasi', name: 'nama_skema_sertifikasi'},
