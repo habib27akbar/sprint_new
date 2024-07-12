@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\AjaxController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KlienController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\RegistController;
+use App\Http\Controllers\PermohonanController;
+use App\Http\Controllers\ProsesLainController;
+use App\Http\Controllers\SeritifikatController;
+use App\Http\Controllers\TujuanAuditController;
+use App\Http\Controllers\PermohonanUserController;
+use App\Http\Controllers\SkemaSertifikasiController;
 use App\Http\Controllers\PemeriksaanRegistrasiController;
 use App\Http\Controllers\PerjanjianSertifikasiController;
-use App\Http\Controllers\PermohonanController;
-use App\Http\Controllers\PermohonanUserController;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\ProsesLainController;
-use App\Http\Controllers\RegistController;
-use App\Http\Controllers\SkemaSertifikasiController;
-use App\Http\Controllers\TujuanAuditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,4 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('permohonan_user', PermohonanUserController::class);
     Route::get('permohonan-user/getData', [PermohonanUserController::class, 'getData'])->name('permohonan-user.getData');
     Route::get('permohonan-user/getUniqueValues', [PermohonanUserController::class, 'getUniqueValues'])->name('permohonan-user.getUniqueValues');
+    Route::resource('sertifikat', SeritifikatController::class);
+    Route::get('sertifikat-data/getData', [SeritifikatController::class, 'getData'])->name('sertifikat-data.getData');
+    Route::get('sertifikat-data/getUniqueValues', [SeritifikatController::class, 'getUniqueValues'])->name('sertifikat-data.getUniqueValues');
 });;

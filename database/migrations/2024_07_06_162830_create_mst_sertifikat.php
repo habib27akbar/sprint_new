@@ -18,13 +18,11 @@ class CreateMstSertifikat extends Migration
             $table->string('id_perusahaan', 25);
             $table->string('no_sertifikat')->nullable();
             $table->string('menu', 100)->nullable();
-            $table->string('no_standar')->nullable();
-            $table->string('judul_standar')->nullable();
+            $table->string('id_ruang_lingkup', 20)->nullable();
             $table->string('dua_digit')->nullable();
             $table->string('sub_kelompok')->nullable();
             $table->string('nace')->nullable();
             $table->string('lingkup')->nullable();
-            $table->string('produk')->nullable();
             $table->string('penerapan_sni')->nullable();
             $table->string('tersertifikasi_sejak')->nullable();
             $table->string('tanggal_terbit')->nullable();
