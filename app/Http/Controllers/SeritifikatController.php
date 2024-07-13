@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Sertifikat;
+use App\Models\SkemaSertifikasi;
 use Carbon\Carbon;
 
 class SeritifikatController extends Controller
@@ -132,16 +133,16 @@ class SeritifikatController extends Controller
     public function create()
     {
 
-
-        return view('master.sertifikat.create');
+        $skema = SkemaSertifikasi::where('status', 'Aktif')->get();
+        return view('master.sertifikat.create', compact('skema'));
     }
 
     public function edit($id)
     {
 
         $data = Sertifikat::findOrFail($id);
-
-        return view('master.sertifikat.edit', compact('data'));
+        $skema = SkemaSertifikasi::where('status', 'Aktif')->get();
+        return view('master.sertifikat.edit', compact('data', 'skema'));
     }
 
     public function store(Request $request)
@@ -149,10 +150,22 @@ class SeritifikatController extends Controller
 
         $storeData = [
 
-            'nama_tujuan_audit' => $request->input('nama_tujuan_audit'),
-            'kode_audit' => $request->input('kode_audit'),
-            'order' => $request->input('order'),
-            'status' => $request->input('status'),
+            'id_perusahaan' => $request->input('id_perusahaan'),
+            'no_sertifikat' => $request->input('no_sertifikat'),
+            'menu' => $request->input('menu'),
+            'id_ruang_lingkup' => $request->input('id_ruang_lingkup'),
+            'dua_digit' => $request->input('dua_digit'),
+            'sub_kelompok' => $request->input('sub_kelompok'),
+            'nace' => $request->input('nace'),
+            'lingkup' => $request->input('lingkup'),
+            'penerapan_sni' => $request->input('penerapan_sni'),
+            'tersertifikasi_sejak' => $request->input('tersertifikasi_sejak'),
+            'tanggal_terbit' => $request->input('tanggal_terbit'),
+            'tanggal_berakhir' => $request->input('tanggal_berakhir'),
+            'merek' => $request->input('merek'),
+            'tipe' => $request->input('tipe'),
+            'status_sertifikat' => $request->input('status_sertifikat'),
+            'keterangan' => $request->input('keterangan'),
             'id_user' => Session::get('id_user'),
 
         ];
@@ -164,10 +177,22 @@ class SeritifikatController extends Controller
     {
 
         $updateData = [
-            'nama_tujuan_audit' => $request->input('nama_tujuan_audit'),
-            'kode_audit' => $request->input('kode_audit'),
-            'order' => $request->input('order'),
-            'status' => $request->input('status'),
+            'id_perusahaan' => $request->input('id_perusahaan'),
+            'no_sertifikat' => $request->input('no_sertifikat'),
+            'menu' => $request->input('menu'),
+            'id_ruang_lingkup' => $request->input('id_ruang_lingkup'),
+            'dua_digit' => $request->input('dua_digit'),
+            'sub_kelompok' => $request->input('sub_kelompok'),
+            'nace' => $request->input('nace'),
+            'lingkup' => $request->input('lingkup'),
+            'penerapan_sni' => $request->input('penerapan_sni'),
+            'tersertifikasi_sejak' => $request->input('tersertifikasi_sejak'),
+            'tanggal_terbit' => $request->input('tanggal_terbit'),
+            'tanggal_berakhir' => $request->input('tanggal_berakhir'),
+            'merek' => $request->input('merek'),
+            'tipe' => $request->input('tipe'),
+            'status_sertifikat' => $request->input('status_sertifikat'),
+            'keterangan' => $request->input('keterangan'),
             'id_user_update' => Session::get('id_user'),
         ];
         Sertifikat::where('id', $id)->update($updateData);

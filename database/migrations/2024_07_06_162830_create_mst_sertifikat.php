@@ -31,6 +31,8 @@ class CreateMstSertifikat extends Migration
             $table->string('tipe')->nullable();
             $table->string('status_sertifikat')->nullable();
             $table->string('keterangan')->nullable();
+            $table->string('id_user', 20);
+            $table->string('id_user_update', 20)->nullable();
             $table->timestamps();
         });
     }

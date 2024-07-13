@@ -31,7 +31,7 @@ class AjaxController extends Controller
 
     public function get_klien_list()
     {
-        $klien = Klien::all(); // Adjust this query as needed
+        $klien = Klien::select('id', 'id_perusahaan', 'nama_perusahaan', 'jenis_badan_usaha')->get(); // Adjust this query as needed
         return response()->json($klien);
     }
 
@@ -78,5 +78,11 @@ class AjaxController extends Controller
         //$data = response()->json($ruang_lingkup);
         //echo $data['id_skema'];
 
+    }
+
+    public function get_ruang_lingkup()
+    {
+        $ruang_lingkup = RuangLingkup::where('status', 'Aktif')->get(); // Adjust this query as needed
+        return response()->json($ruang_lingkup);
     }
 }

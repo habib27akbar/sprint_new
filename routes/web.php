@@ -90,4 +90,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('sertifikat', SeritifikatController::class);
     Route::get('sertifikat-data/getData', [SeritifikatController::class, 'getData'])->name('sertifikat-data.getData');
     Route::get('sertifikat-data/getUniqueValues', [SeritifikatController::class, 'getUniqueValues'])->name('sertifikat-data.getUniqueValues');
+    Route::get('get-ruang-lingkup', [AjaxController::class, 'get_ruang_lingkup'])->name('get_ruang_lingkup');
 });;

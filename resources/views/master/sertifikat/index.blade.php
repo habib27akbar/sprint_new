@@ -35,7 +35,7 @@
               
               <div class="card-body">
                 @include('include.admin.alert')
-                <a href="{{ route('proses_lain.create') }}" class="btn btn-primary">Tambah</a>
+                <a href="{{ route('sertifikat.create') }}" class="btn btn-primary">Tambah</a>
                 <br/><br/>
                 <div class="table-responsive">
                      <table class="table table-bordered" id="dataTable">
