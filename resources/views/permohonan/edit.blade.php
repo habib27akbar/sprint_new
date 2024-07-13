@@ -79,13 +79,27 @@
                     <div class="card-body">
                         @csrf
                         @method('PUT')
+                        @php
+                            $readonly = false;
+                        @endphp
+                         
+                        
+                        @if ($data['sts'] >= 2)
+                            @if ($data['sts'] == 3)
+                                
+                            @else
+                                @php
+                                    $readonly = true;
+                                @endphp
+                            @endif
+                        @endif
                         <h4 style="text-align: center">{{ $klien[0]['id_perusahaan'].' '.$klien[0]['nama_perusahaan'] }}</h4>
                         <input type="hidden" name="id_perusahaan" value="{{ $klien[0]['id_perusahaan'] }}">
                         <br/>
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Surat Permohonan</label>
                             <div class="col-sm-4">
-                               <input type="file" name="surat_permohonan"  onchange="validateFile()" id="surat_permohonan" class="form-control">
+                               <input type="file" name="surat_permohonan"  onchange="validateFile()" id="surat_permohonan" {{ $readonly ? 'disabled':'' }} class="form-control">
                                <input type="hidden" name="surat_permohonan_old" value="{{ $data['surat_permohonan'] }}">
                                 <div style="margin-top:10px; display: none;" id="alertSp"
                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -100,7 +114,7 @@
 
                             <label for="file" class="col-sm-2 col-form-label">Formulir Pendaftaran</label>
                             <div class="col-sm-4">
-                               <input type="file" name="formulir_pendaftaran" id="formulir_pendaftaran" onchange="validFormFile()" class="form-control">
+                               <input type="file" name="formulir_pendaftaran" id="formulir_pendaftaran" {{ $readonly ? 'disabled':'' }} onchange="validFormFile()" class="form-control">
                                <input type="hidden" name="formulir_pendaftaran_old" value="{{ $data['formulir_pendaftaran'] }}">
                                <div style="margin-top:10px; display: none;" id="alertPendaftaran"
                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -117,19 +131,19 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Nomor Surat Permohonan</label>
                             <div class="col-sm-4">
-                               <input type="text" name="no_surat_permohonan" class="form-control" placeholder="Nomor Surat Permohonan" value="{{ $data['no_surat_permohonan'] }}" required>
+                               <input type="text" name="no_surat_permohonan" class="form-control" {{ $readonly ? 'readonly':'' }} placeholder="Nomor Surat Permohonan" value="{{ $data['no_surat_permohonan'] }}" required>
                             </div>
 
                             <label for="file" class="col-sm-2 col-form-label">Tanggal Surat Permohonan</label>
                             <div class="col-sm-4">
-                               <input type="date" name="tgl_surat_permohonan" class="form-control" value="{{ $data['tgl_surat_permohonan'] }}">
+                               <input type="date" name="tgl_surat_permohonan" class="form-control" {{ $readonly ? 'readonly':'' }} value="{{ $data['tgl_surat_permohonan'] }}">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Menu</label>
                             <div class="col-sm-4">
-                               <select name="menu" onchange="selectMenu(this.value)" class="form-control" required>
+                               <select name="menu" onchange="selectMenu(this.value)" class="form-control" {{ $readonly ? 'disabled':'' }} required>
                                 <option value="">-</option>
                                 @foreach ($skema as $item)
                                     <option {{ $data['menu'] == $item->kode_skema_sertifikasi?'selected':'' }} value="{{ $item->kode_skema_sertifikasi }}">{{ $item->nama_skema_sertifikasi }}</option>
@@ -142,7 +156,7 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Tujuan Audit</label>
                             <div class="col-sm-4">
-                               <select name="tujuan_audit" class="form-control" required>
+                               <select name="tujuan_audit" class="form-control" {{ $readonly ? 'disabled':'' }} required>
                                 
                                 @foreach ($tujuan_audit as $item)
                                     <option {{ $data['tujuan_audit'] == $item->id?'selected':'' }} value="{{ $item->id }}">{{ $item->nama_tujuan_audit }}</option>
@@ -152,7 +166,7 @@
 
                             <label for="file" class="col-sm-2 col-form-label">Proses Lain</label>
                             <div class="col-sm-4">
-                               <select name="proses_lain" class="form-control select2" required>
+                               <select name="proses_lain" class="form-control select2" {{ $readonly ? 'disabled':'' }} required>
                                 <option value="-">-</option>
                                 @foreach ($proses_lain as $item)
                                     <option {{ $data['proses_lain'] == $item->id?'selected':'' }} value="{{ $item->id }}">{{ $item->nama_proses }}</option>
@@ -166,10 +180,10 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Nomor Sertifikat Referensi</label>
                             <div class="col-sm-10">
-                               <select name="no_sertifikat_referensi" id="no_sertifikat_referensi" onchange="noSertifikat()" class="form-control" required>
+                               <select name="no_sertifikat_referensi" id="no_sertifikat_referensi" onchange="noSertifikat()" {{ $readonly ? 'disabled':'' }} class="form-control" required>
                                 <option value="">-</option>
                                 @foreach ($mst_sertifikat as $item)
-                                    <option {{ $data['no_sertifikat_referensi'] == $item->id ? 'selected':'' }} value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->menu.' '.$item->no_standar.' '.$item->judul_standar }}</option>
+                                    <option {{ $data['no_sertifikat_referensi'] == $item->id ? 'selected':'' }} value="{{ $item->id }}">{{  $item->no_sertifikat.' '.$item->nama_skema_sertifikasi.' '.$item->no_standar.' '.$item->judul_standar }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -182,12 +196,12 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Masa Berlaku</label>
                             <div class="col-sm-4">
-                            <input type="date" name="masa_berlaku" id="tanggal_terbit" value="{{ $data['masa_berlaku'] }}" class="form-control">
+                            <input type="date" name="masa_berlaku" id="tanggal_terbit" value="{{ $data['masa_berlaku'] }}" {{ $readonly ? 'disabled':'' }} class="form-control">
                             </div>
 
                             <label for="file" class="col-sm-2 col-form-label">Sampai</label>
                             <div class="col-sm-4">
-                            <input type="date" name="masa_berlaku_akhir" id="tanggal_berakhir" value="{{ $data['masa_berlaku_akhir'] }}" class="form-control">
+                            <input type="date" name="masa_berlaku_akhir" id="tanggal_berakhir" value="{{ $data['masa_berlaku_akhir'] }}" {{ $readonly ? 'disabled':'' }} class="form-control">
                             </div>
 
                         </div>
@@ -196,7 +210,7 @@
                          <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Nomor Standar</label>
                             <div class="col-sm-10">
-                               <select name="id_standar" onchange="checkSNI()" id="id_standar" class="form-control select2" required>
+                               <select name="id_standar" onchange="checkSNI()" id="id_standar" class="form-control select2" {{ $readonly ? 'disabled':'' }} required>
                                 <option value="">-</option>
                                 @foreach ($ruang_lingkup as $item)
                                     <option {{ $data['id_standar'] == $item->id ? 'selected':'' }} value="{{ $item->id }}">{{ $item->nomor_standar.' - '.$item->judul_standar }}</option>
@@ -211,7 +225,7 @@
                         <div class="form-group row">
                             <label for="file" class="col-sm-2 col-form-label">Status Komoditi</label>
                             <div class="col-sm-4">
-                               <select name="status_komoditi" class="form-control" required>
+                               <select name="status_komoditi" class="form-control" {{ $readonly ? 'disabled':'' }} required>
                                 <option value="">-</option>
                                 <option {{ $data['id_standar'] == 'Wajib Kemenperin'? 'selected':'' }} value="Wajib Kemenperin">Wajib Kemenperin</option>
                                 <option {{ $data['id_standar'] == 'Wajib ESDM'? 'selected':'' }} value="Wajib ESDM">Wajib ESDM</option>
@@ -222,7 +236,7 @@
 
                             <label for="file" class="col-sm-2 col-form-label">Ilustrasi Penandaan Standar</label>
                             <div class="col-sm-4">
-                               <input type="file" class="form-control" name="illustrasi_penandaan_standar" id="illustrasi_penandaan_standar" onchange="validIllustrasi()">
+                               <input type="file" class="form-control" name="illustrasi_penandaan_standar" {{ $readonly ? 'disabled':'' }} id="illustrasi_penandaan_standar" onchange="validIllustrasi()">
                                <input type="hidden" name="illustrasi_penandaan_standar_old" value="{{ $data['illustrasi_penandaan_standar'] }}">
                                <div style="margin-top:10px; display: none;" id="alertIllustrasi"
                                     class="alert alert-danger alert-dismissible" role="alert">
@@ -241,12 +255,12 @@
                         <div class="form-group row">
                             <label for="text" class="col-sm-2 col-form-label">Status Penerapan Sistem Manajemen Mutu</label>
                             <div class="col-sm-4">
-                               <input type="text" class="form-control" name="status_penerapan_smm" value="{{ $data['status_penerapan_smm'] }}" placeholder="Status Penerapan Sistem Manajemen Mutu">
+                               <input type="text" class="form-control" name="status_penerapan_smm" {{ $readonly ? 'disabled':'' }} value="{{ $data['status_penerapan_smm'] }}" placeholder="Status Penerapan Sistem Manajemen Mutu">
                             </div>
 
                             <label for="text" class="col-sm-2 col-form-label">Akreditasi LSSM</label>
                             <div class="col-sm-4">
-                               <input type="text" class="form-control" name="akreditasi_lssm" value="{{ $data['akreditasi_lssm'] }}" placeholder="Akreditasi LSSM">
+                               <input type="text" class="form-control" name="akreditasi_lssm" {{ $readonly ? 'disabled':'' }} value="{{ $data['akreditasi_lssm'] }}" placeholder="Akreditasi LSSM">
                             </div>
 
                         </div>
@@ -259,7 +273,7 @@
                         <div class="form-group row">
                             <label for="text" class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">
-                               <input type="text" class="form-control" name="status_penerapan_smm" value="{{ $data['status_penerapan_smm'] }}" placeholder="Keterangan">
+                               <input type="text" class="form-control" name="status_penerapan_smm" {{ $readonly ? 'disabled':'' }} value="{{ $data['status_penerapan_smm'] }}" placeholder="Keterangan">
                             </div>
 
                         </div>
@@ -313,67 +327,71 @@
                                         @endphp
                                             <tr>
                                                 <td class="col-id-no bg-abu">
-                                                    <button type="button" value="Delete" onclick="deleteSNI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                    @if ($readonly == false)
+                                                        <button type="button" value="Delete" onclick="deleteSNI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                    @endif
                                                 </td>
                                                 <td class="col-second bg-abu">
-                                                    <input type="text" name="data_post[merek][]" id="merek{{ $i }}" value="{{ $item['merek'] }}" class="form-control">
+                                                    <input type="text" name="data_post[merek][]" {{ $readonly ? 'disabled':'' }} id="merek{{ $i }}" value="{{ $item['merek'] }}" class="form-control">
                                                 </td>
                                                 <td class="col-third bg-abu">
-                                                    <input type="text" name="data_post[illustrasi_merek][]" class="form-control" value="{{ $item['illustrasi_merek'] }}">
+                                                    <input type="text" name="data_post[illustrasi_merek][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['illustrasi_merek'] }}">
                                                 </td>
                                                 <td class="col-fourth bg-abu">
-                                                    <input type="text" name="data_post[no_pendaftaran][]" class="form-control" value="{{ $item['no_pendaftaran'] }}">
+                                                    <input type="text" name="data_post[no_pendaftaran][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['no_pendaftaran'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="date" name="data_post[tgl_pendaftaran][]" class="form-control" value="{{ $item['tgl_pendaftaran'] }}">
+                                                    <input type="date" name="data_post[tgl_pendaftaran][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['tgl_pendaftaran'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="file" name="data_post[dokumen_pendaftaran_merek][]" onchange="validDocPendaftaran({{ $i }})" id="dokumen_pendaftaran_merek{{ $i }}" class="form-control">
+                                                    <input type="file" name="data_post[dokumen_pendaftaran_merek][]" {{ $readonly ? 'disabled':'' }} onchange="validDocPendaftaran({{ $i }})" id="dokumen_pendaftaran_merek{{ $i }}" class="form-control">
                                                     <input type="hidden" name="data_post[dokumen_pendaftaran_merek_old][]" value="{{ $item['dokumen_pendaftaran_merek'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="data_post[no_permohonan_merek][]" class="form-control" value="{{ $item['no_permohonan_merek'] }}">
+                                                    <input type="text" name="data_post[no_permohonan_merek][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['no_permohonan_merek'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="date" name="data_post[tgl_penerimaan][]" class="form-control" value="{{ $item['tgl_penerimaan'] }}">
+                                                    <input type="date" name="data_post[tgl_penerimaan][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['tgl_penerimaan'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="date" name="data_post[tgl_dimulai_perlindungan][]" class="form-control" value="{{ $item['tgl_dimulai_perlindungan'] }}">
+                                                    <input type="date" name="data_post[tgl_dimulai_perlindungan][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['tgl_dimulai_perlindungan'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="date" name="data_post[tgl_berakhir_perlindungan][]" class="form-control" value="{{ $item['tgl_berakhir_perlindungan'] }}">
+                                                    <input type="date" name="data_post[tgl_berakhir_perlindungan][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['tgl_berakhir_perlindungan'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="data_post[sertifikat_merek][]" class="form-control" value="{{ $item['sertifikat_merek'] }}">
+                                                    <input type="text" name="data_post[sertifikat_merek][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['sertifikat_merek'] }}">
                                                 </td>
                                                 <td>
-                                                    <select name="data_post[status_pemilik_merek][]" class="form-control">
+                                                    <select name="data_post[status_pemilik_merek][]" {{ $readonly ? 'disabled':'' }} class="form-control">
                                                         <option value="-">-</option>
                                                         <option value="Milik Sendiri">Milik Sendiri</option>
                                                         <option value="Pelimpahan Merek">Pelimpahan Merek</option>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="data_post[alamat][]" class="form-control" value="{{ $item['alamat'] }}">
+                                                    <input type="text" name="data_post[alamat][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['alamat'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="data_post[pelimpahan_merek][]" class="form-control" value="{{ $item['pelimpahan_merek'] }}">
+                                                    <input type="text" name="data_post[pelimpahan_merek][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['pelimpahan_merek'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="date" name="data_post[tgl_berakhir_pelimpahan_merek][]" class="form-control" value="{{ $item['tgl_berakhir_pelimpahan_merek'] }}">
+                                                    <input type="date" name="data_post[tgl_berakhir_pelimpahan_merek][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['tgl_berakhir_pelimpahan_merek'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="file" name="data_post[dokumen_pelimpahan_merek][]" onchange="validDocPelimpahan({{ $i }})" id="dokumen_pelimpahan_merek{{ $i }}" class="form-control" value="{{ $item['dokumen_pelimpahan_merek'] }}">
+                                                    <input type="file" name="data_post[dokumen_pelimpahan_merek][]" {{ $readonly ? 'disabled':'' }} onchange="validDocPelimpahan({{ $i }})" id="dokumen_pelimpahan_merek{{ $i }}" class="form-control" value="{{ $item['dokumen_pelimpahan_merek'] }}">
                                                     <input type="hidden" name="data_post[dokumen_pelimpahan_merek_old][]" value="{{ $item['dokumen_pelimpahan_merek'] }}">
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @if ($readonly == false)
                                         <tr>
                                             <td>
                                                 <a onclick="createSNI()" class="btn btn-success"><i class="fas fa-plus"></i></a>
                                             </td>
                                             <td colspan="15"></td>
                                         </tr>
+                                        @endif
                                     </tbody>
                                 </table>
 
@@ -399,11 +417,12 @@
                                         @endphp
                                             <tr>
                                                 <td>
-                                                    
+                                                    @if ($readonly == false)
                                                      <button type="button" value="Delete" onclick="deleteTipe(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                    <select name="post_merek[merek][]" id="m{{ $i }}" class="form-control select2">
+                                                    <select name="post_merek[merek][]" {{ $readonly ? 'disabled':'' }} id="m{{ $i }}" class="form-control select2">
                                                         @foreach ($data_merek as $items)
                                                             @if ($items['merek'])
                                                                 <option value="{{ $items['merek'] }}">{{ $items['merek'] }}</option>
@@ -412,20 +431,22 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="post_merek[tipe][]" value="{{ $item['tipe'] }}" class="form-control">
+                                                    <input type="text" name="post_merek[tipe][]" {{ $readonly ? 'disabled':'' }} value="{{ $item['tipe'] }}" class="form-control">
                                                 </td>
                                                 <td>
-                                                    <input type="file" name="post_merek[foto][]" class="form-control">
+                                                    <input type="file" name="post_merek[foto][]" {{ $readonly ? 'disabled':'' }} class="form-control">
                                                     <input type="hidden" name="post_merek[foto_old][]" value="{{ $item['foto'] }}">
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @if ($readonly == false)
                                         <tr>
                                             <td>
                                                 <a onclick="createTipe()" class="btn btn-success"><i class="fas fa-plus"></i></a>
                                             </td>
                                             <td colspan="3"></td>
                                         </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -451,24 +472,29 @@
                                         $i++;   
                                     @endphp
                                         <tr>
+                                            
                                             <td>
-                                                <button type="button" value="Delete" onclick="deleteSNI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                @if ($readonly == false)
+                                                    <button type="button" value="Delete" onclick="deleteSNI(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                @endif
                                             </td>
                                             <td>
-                                                <input type="text" name="post_file[nama_file][]" class="form-control" value="{{ $item['nama_file'] }}">
+                                                <input type="text" name="post_file[nama_file][]" {{ $readonly ? 'disabled':'' }} class="form-control" value="{{ $item['nama_file'] }}">
                                             </td>
                                             <td>
-                                                <input type="file" name="post_file[file][]" class="form-control"><input type="hidden" name="tipe" value="1">
-                                                <input type="hidden" name="post_file[file_old][]" value="{{ $item['file'] }}">
+                                                <input type="file" name="post_file[file][]" {{ $readonly ? 'disabled':'' }} class="form-control"><input type="hidden" name="tipe" value="1">
+                                                <input type="hidden" name="post_file[file_old][]" {{ $readonly ? 'disabled':'' }} value="{{ $item['file'] }}">
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @if ($readonly == false)
                                     <tr>
                                         <td>
                                             <a onclick="createFile()" class="btn btn-success"><i class="fas fa-plus"></i></a>
                                         </td>
                                         <td colspan="2"></td>
                                     </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -480,8 +506,12 @@
                     </div>
                     <div class="card-footer">
                         <div id="btnSimpan">
-                            <button id="btnSave" type="submit" value="simpan" class="btn btn-primary">Simpan</button>
-                            <button id="ajukanPermohonan" type="submit" value="ajukan_permohonan" class="btn btn-success">Ajukan Permohonan</button>
+                            @if ($readonly == false)
+                                <button id="btnSave" type="submit" value="simpan" class="btn btn-primary">Simpan</button>
+                                @if ($data['sts'] == 1)
+                                    <button id="ajukanPermohonan" type="submit" value="ajukan_permohonan" class="btn btn-success">Ajukan Permohonan</button>
+                                @endif
+                            @endif
                             <a href="{{ route('permohonan.index') }}" class="btn btn-default">Kembali</a>
                         </div>
 

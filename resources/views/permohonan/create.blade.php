@@ -166,7 +166,7 @@
                                <select name="no_sertifikat_referensi" id="no_sertifikat_referensi" onchange="noSertifikat()" class="form-control" required>
                                 <option value="">-</option>
                                 @foreach ($mst_sertifikat as $item)
-                                    <option value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->menu.' '.$item->no_standar.' '.$item->judul_standar }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->nama_skema_sertifikasi.' '.$item->no_standar.' '.$item->judul_standar }}</option>
                                 @endforeach
                                </select>
                             </div>

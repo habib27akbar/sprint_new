@@ -117,7 +117,13 @@ class PermohonanController extends Controller
         $tujuan_audit = TujuanAudit::where('status', 'Aktif')->get();
         $proses_lain = ProsesLain::where('status', 'Aktif')->get();
         $ruang_lingkup = RuangLingkup::where('status', 'Aktif')->get();
-        $mst_sertifikat = SertifikatReferensi::where('id_perusahaan', Session::get('id_perusahaan'))->get();
+        $mst_sertifikat = SertifikatReferensi::select('mst_sertifikat.*', 'mst_klien.id_perusahaan', 'mst_klien.jenis_badan_usaha', 'mst_klien.nama_perusahaan', 'mst_ruang_lingkup.nomor_standar', 'mst_ruang_lingkup.judul_standar', 'mst_skema_sertifikasi.nama_skema_sertifikasi', 'mst_produk.nama_produk')
+            ->leftJoin('mst_klien', 'mst_sertifikat.id_perusahaan', '=', 'mst_klien.id_perusahaan')
+            ->leftJoin('mst_ruang_lingkup', 'mst_sertifikat.id_ruang_lingkup', '=', 'mst_ruang_lingkup.id')
+            ->leftJoin('mst_produk', 'mst_ruang_lingkup.id_produk', '=', 'mst_produk.id')
+            ->leftJoin('mst_skema_sertifikasi', 'mst_sertifikat.menu', '=', 'mst_skema_sertifikasi.id')
+            ->where('mst_sertifikat.id_perusahaan', '=', Session::get('id_perusahaan'))
+            ->get();
         $klien = Klien::where('id_perusahaan', Session::get('id_perusahaan'))->get();
         return view('permohonan.create', compact('skema', 'tujuan_audit', 'proses_lain', 'mst_sertifikat', 'ruang_lingkup', 'klien'));
     }
@@ -130,7 +136,13 @@ class PermohonanController extends Controller
         $tujuan_audit = TujuanAudit::where('status', 'Aktif')->get();
         $proses_lain = ProsesLain::where('status', 'Aktif')->get();
         $ruang_lingkup = RuangLingkup::where('status', 'Aktif')->get();
-        $mst_sertifikat = SertifikatReferensi::where('id_perusahaan', $data['id_perusahaan'])->get();
+        $mst_sertifikat = SertifikatReferensi::select('mst_sertifikat.*', 'mst_klien.id_perusahaan', 'mst_klien.jenis_badan_usaha', 'mst_klien.nama_perusahaan', 'mst_ruang_lingkup.nomor_standar', 'mst_ruang_lingkup.judul_standar', 'mst_skema_sertifikasi.nama_skema_sertifikasi', 'mst_produk.nama_produk')
+            ->leftJoin('mst_klien', 'mst_sertifikat.id_perusahaan', '=', 'mst_klien.id_perusahaan')
+            ->leftJoin('mst_ruang_lingkup', 'mst_sertifikat.id_ruang_lingkup', '=', 'mst_ruang_lingkup.id')
+            ->leftJoin('mst_produk', 'mst_ruang_lingkup.id_produk', '=', 'mst_produk.id')
+            ->leftJoin('mst_skema_sertifikasi', 'mst_sertifikat.menu', '=', 'mst_skema_sertifikasi.id')
+            ->where('mst_sertifikat.id_perusahaan', '=', $data['id_perusahaan'])
+            ->get();;
         $klien = Klien::where('id_perusahaan', $data['id_perusahaan'])->get();
         $data_merek = DataMerek::where('id_permohonan', $id)->get();
         $data_tipe = DataTipe::where('id_permohonan', $id)->get();
