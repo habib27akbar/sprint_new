@@ -138,7 +138,7 @@
                                <select name="no_sertifikat_referensi" id="no_sertifikat_referensi" class="form-control" required>
                                 <option value="">-</option>
                                 @foreach ($mst_sertifikat as $item)
-                                    <option {{ $data['no_sertifikat_referensi'] == $item->id ? 'selected':'' }} value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->menu.' '.$item->no_standar.' '.$item->judul_standar }}</option>
+                                    <option {{ $data['no_sertifikat_referensi'] == $item->id ? 'selected':'' }} value="{{ $item->id }}">{{ $item->no_sertifikat.' '.$item->nama_skema_sertifikasi.' '.$item->no_standar.' '.$item->judul_standar }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -175,7 +175,7 @@
                             <div class="col-sm-4">
                                 <select name="sts" class="form-control" required>
                                     <option value="">-</option>
-                                    <option {{ $data['sts'] == 2 ? 'selected':'' }} value="2">Dilanjutkan</option>
+                                    <option {{ $data['sts'] == 2 ? 'selected':'' }} value="2">Diproses</option>
                                     <option {{ $data['sts'] == 3 ? 'selected':'' }} value="3">Perlu Perbaikan</option>
                                     <option {{ $data['sts'] == 4 ? 'selected':'' }} value="4">Ditolak</option>
                                 </select>

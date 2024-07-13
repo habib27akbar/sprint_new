@@ -142,7 +142,7 @@ class PermohonanController extends Controller
             ->leftJoin('mst_produk', 'mst_ruang_lingkup.id_produk', '=', 'mst_produk.id')
             ->leftJoin('mst_skema_sertifikasi', 'mst_sertifikat.menu', '=', 'mst_skema_sertifikasi.id')
             ->where('mst_sertifikat.id_perusahaan', '=', $data['id_perusahaan'])
-            ->get();;
+            ->get();
         $klien = Klien::where('id_perusahaan', $data['id_perusahaan'])->get();
         $data_merek = DataMerek::where('id_permohonan', $id)->get();
         $data_tipe = DataTipe::where('id_permohonan', $id)->get();
