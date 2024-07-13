@@ -37,8 +37,15 @@ class CreatePermohonan extends Migration
             $table->date('tanggal_terima')->nullable();
             $table->date('tanggal_input')->nullable();
             $table->date('tanggal_order')->nullable();
-            $table->string('sts_permohonan', 100);
             $table->string('sts', 1);
+            $table->string('sts_permohonan', 100);
+            $table->string('id_perencanaan', 20)->nullable();
+            $table->string('id_tinjauan', 20)->nullable();
+            $table->string('id_la', 20)->nullable();
+            $table->string('id_lk', 20)->nullable();
+            $table->string('id_lhu', 20)->nullable();
+            $table->string('id_pembayaran', 20)->nullable();
+            $table->string('id_keputusan', 20)->nullable();
             $table->timestamps();
         });
     }
