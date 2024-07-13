@@ -15,6 +15,7 @@ use App\Http\Controllers\TujuanAuditController;
 use App\Http\Controllers\PermohonanUserController;
 use App\Http\Controllers\SkemaSertifikasiController;
 use App\Http\Controllers\PemeriksaanRegistrasiController;
+use App\Http\Controllers\PerencanaanController;
 use App\Http\Controllers\PerjanjianSertifikasiController;
 
 /*
@@ -91,4 +92,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('sertifikat-data/getData', [SeritifikatController::class, 'getData'])->name('sertifikat-data.getData');
     Route::get('sertifikat-data/getUniqueValues', [SeritifikatController::class, 'getUniqueValues'])->name('sertifikat-data.getUniqueValues');
     Route::get('get-ruang-lingkup', [AjaxController::class, 'get_ruang_lingkup'])->name('get_ruang_lingkup');
+    Route::resource('perencanaan', PerencanaanController::class);
+    Route::get('perencanaan-data/getData', [PerencanaanController::class, 'getData'])->name('perencanaan-data.getData');
+    Route::get('perencanaan-data/getUniqueValues', [PerencanaanController::class, 'getUniqueValues'])->name('perencanaan-data.getUniqueValues');
+    Route::post('get-permohonan-client', [AjaxController::class, 'get_permohonan_client'])->name('get_permohonan_client');
+    Route::post('get-permohonan-no-proses', [AjaxController::class, 'get_permohonan_no_proses'])->name('get_permohonan_no_proses');
+    Route::post('no-proses-client-null', [AjaxController::class, 'no_proses_client_null'])->name('no_proses_client_null');
+    Route::post('get-klien-where', [AjaxController::class, 'get_klien_where'])->name('get_klien_where');
 });;
