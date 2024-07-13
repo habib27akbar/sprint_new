@@ -106,22 +106,33 @@
                 <i class="nav-icon fas fa-edit"></i>
                
                 <p>
-                  Permohonan
+                 Modul Permohonan
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('sertifikat.index') }}" class="nav-link">
+              
+               <i class="nav-icon fas fa-bell"></i>
+                <p>
+                  Modul Pemberitahuan
                 </p>
               </a>
             </li>
           @endif
           
           @if(Auth::user()->id_unit_kerja == '99')
-          <li class="nav-item">
+            <li class="nav-item">
               <a href="{{ route('permohonan.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
                
                 <p>
-                  Permohonan
+                  Modul Permohonan
                 </p>
               </a>
             </li>
+            
           @endif
           
 
