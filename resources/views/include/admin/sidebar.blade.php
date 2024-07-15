@@ -120,6 +120,16 @@
                 </p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="{{ route('perencanaan.index') }}" class="nav-link">
+              
+               <i class="nav-icon fas fa-bell"></i>
+                <p>
+                  Modul Perencanaan
+                </p>
+              </a>
+            </li>
           @endif
           
           @if(Auth::user()->id_unit_kerja == '99')
