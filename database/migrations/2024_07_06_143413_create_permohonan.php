@@ -40,7 +40,7 @@ class CreatePermohonan extends Migration
             $table->string('sts', 1);
             $table->string('sts_permohonan', 100);
             $table->string('id_perencanaan', 20)->nullable();
-            $table->string('id_tinjauan', 20)->nullable();
+            $table->string('id_penugasan_personil', 20)->nullable();
             $table->string('id_la', 20)->nullable();
             $table->string('id_lk', 20)->nullable();
             $table->string('id_lhu', 20)->nullable();
