@@ -124,12 +124,33 @@
             <li class="nav-item">
               <a href="{{ route('perencanaan.index') }}" class="nav-link">
               
-               <i class="nav-icon fas fa-bell"></i>
+               <i class="nav-icon fas fa-file"></i>
                 <p>
                   Modul Perencanaan
                 </p>
               </a>
             </li>
+
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+               Tinjauan Permohonan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('penugasan_personil.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Penugasan Personil</p>
+                </a>
+              </li>
+
+             
+              
+            </ul>
+          </li>
           @endif
           
           @if(Auth::user()->id_unit_kerja == '99')

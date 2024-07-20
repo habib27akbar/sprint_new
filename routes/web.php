@@ -15,6 +15,7 @@ use App\Http\Controllers\TujuanAuditController;
 use App\Http\Controllers\PermohonanUserController;
 use App\Http\Controllers\SkemaSertifikasiController;
 use App\Http\Controllers\PemeriksaanRegistrasiController;
+use App\Http\Controllers\PenugasanPersonilController;
 use App\Http\Controllers\PerencanaanController;
 use App\Http\Controllers\PerjanjianSertifikasiController;
 
@@ -99,4 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('get-permohonan-no-proses', [AjaxController::class, 'get_permohonan_no_proses'])->name('get_permohonan_no_proses');
     Route::post('no-proses-client-null', [AjaxController::class, 'no_proses_client_null'])->name('no_proses_client_null');
     Route::post('get-klien-where', [AjaxController::class, 'get_klien_where'])->name('get_klien_where');
+    Route::resource('penugasan_personil', PenugasanPersonilController::class);
+    Route::get('penugasan-data/getData', [PenugasanPersonilController::class, 'getData'])->name('penugasan-data.getData');
+    Route::get('penugasan-data/getUniqueValues', [PenugasanPersonilController::class, 'getUniqueValues'])->name('penugasan-data.getUniqueValues');
+    Route::get('get-mst-personil', [AjaxController::class, 'get_mst_personil'])->name('get_mst_personil');
+    //Route::get('/penugasan_personil/{id}/edit', [PenugasanPersonilController::class, 'edit'])->name('penugasan_personil.edit');
 });;
