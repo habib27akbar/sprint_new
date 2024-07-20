@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Klien;
+use App\Models\MstPersonil;
 use App\Models\Permohonan;
 use App\Models\RegistKlien;
 use App\Models\RegistStatus;
@@ -37,6 +38,15 @@ class AjaxController extends Controller
 
 
         return response()->json($klien);
+    }
+
+    public function get_mst_personil()
+    {
+
+        $personil = MstPersonil::where('status', 'Aktif')->get(); // Adjust this query as needed
+
+
+        return response()->json($personil);
     }
 
     public function get_klien_where(Request $request)
